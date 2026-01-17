@@ -105,7 +105,7 @@ function loadQuestion() {
   const data = quizData[currentQuestion];
   questionEl.textContent = data.question;
   
-  // Update progress
+// Update progress
   const progress = ((currentQuestion + 1) / quizData.length) * 100;
   progressText.textContent = `Întrebarea ${currentQuestion + 1} din ${quizData.length}`;
   progressPercentage.textContent = `${Math.round(progress)}%`;
@@ -114,30 +114,30 @@ function loadQuestion() {
   // Clear previous options
   optionsEl.innerHTML = "";
   nextBtn.disabled = true;
-  nextBtn.classList.remove('bg-primary', 'hover:bg-[#20e06e]', 'text-background-dark');
-  nextBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+  nextBtn.classList.remove('bg-primary', 'hover:bg-primary-light', 'text-white', 'shadow-lg', 'shadow-primary/30', 'hover:scale-105');
+  nextBtn.classList.add('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
 
   data.options.forEach((opt, index) => {
     const label = document.createElement("label");
     label.className = "group relative cursor-pointer w-full";
     label.innerHTML = `
       <input class="peer sr-only" name="answer" type="radio" value="${opt.type}"/>
-      <div class="h-full min-h-[240px] p-6 rounded-2xl bg-white dark:bg-surface-dark border-2 border-slate-200 dark:border-[#234833] hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary/5 dark:peer-checked:bg-primary/5 peer-checked:shadow-glow transition-all duration-300 flex flex-col items-center justify-center text-center gap-4 relative overflow-hidden">
+      <div class="h-full min-h-[240px] p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-primary/20 transition-all duration-300 flex flex-col items-center justify-center text-center gap-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div class="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 peer-checked:scale-110 peer-checked:bg-primary peer-checked:text-background-dark shadow-sm">
-          <span class="material-symbols-outlined text-4xl">${opt.icon}</span>
+        <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 peer-checked:scale-110 peer-checked:bg-primary peer-checked:text-white shadow-sm">
+          <span class="material-symbols-rounded text-4xl">${opt.icon}</span>
         </div>
-        <h3 class="text-lg font-bold text-slate-800 dark:text-white relative z-10 group-hover:text-primary transition-colors">${opt.text}</h3>
-        <div class="absolute top-4 right-4 w-6 h-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
-          <span class="material-symbols-outlined text-sm text-background-dark opacity-0 peer-checked:opacity-100 font-bold">check</span>
+        <h3 class="text-lg font-bold text-slate-900 relative z-10 group-hover:text-primary transition-colors">${opt.text}</h3>
+        <div class="absolute top-4 right-4 w-6 h-6 rounded-full border-2 border-slate-200 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
+          <span class="material-symbols-rounded text-sm text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
         </div>
       </div>
     `;
     
     label.querySelector('input').addEventListener('change', () => {
       nextBtn.disabled = false;
-        nextBtn.classList.add('bg-primary', 'hover:bg-[#20e06e]', 'text-background-dark');
-        nextBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+        nextBtn.classList.add('bg-primary', 'hover:bg-primary-light', 'text-white', 'shadow-lg', 'shadow-primary/30', 'hover:scale-105');
+        nextBtn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
     });
     
     optionsEl.appendChild(label);
@@ -180,28 +180,28 @@ function showResults() {
       desc: "Ai o imaginație bogată și îți place să te exprimi prin artă, design sau idei inovatoare.",
       careers: "Designer Grafic, Arhitect, Director de Creație, UX/UI Designer, Content Creator",
       icon: "palette",
-      color: "text-purple-500"
+      color: "text-accent-pink"
     },
     technical: {
       title: "Ești un Tehnician!",
       desc: "Îți place să înțelegi cum funcționează lucrurile și să rezolvi probleme complexe prin logică.",
       careers: "Programator, Inginer, Analist de Date, Specialist Cyber Security, Mecanic",
       icon: "terminal",
-      color: "text-blue-500"
+      color: "text-primary"
     },
     social: {
       title: "Ești un Helper!",
       desc: "Empatia este superputerea ta. Îți place să lucrezi cu oamenii și să îi ajuți să se dezvolte.",
       careers: "Psiholog, Profesor, Medic, Specialist HR, Asistent Social",
       icon: "volunteer_activism",
-      color: "text-pink-500"
+      color: "text-accent-pink"
     },
     organizational: {
       title: "Ești un Lider!",
       desc: "Ești organizat, eficient și îți place să pui lucrurile în mișcare. Ai stofă de antreprenor.",
       careers: "Manager de Proiect, Antreprenor, Contabil, Consultant Business, Event Planner",
       icon: "trending_up",
-      color: "text-green-500"
+      color: "text-accent-cyan"
     }
   };
 
@@ -211,7 +211,7 @@ function showResults() {
   document.getElementById('result-desc').textContent = result.desc;
   document.getElementById('result-careers').textContent = result.careers;
   document.getElementById('result-icon').textContent = result.icon;
-  document.getElementById('result-icon-container').className = `w-24 h-24 rounded-full bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center mb-6 animate-[fadeIn_0.5s_ease-out] mx-auto ${result.color}`;
+  document.getElementById('result-icon-container').className = `w-24 h-24 rounded-full bg-white shadow-xl flex items-center justify-center mb-6 animate-[fadeIn_0.5s_ease-out] mx-auto ${result.color}`;
 }
 
 // Initial load

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html class="light" lang="ro">
+<html class="scroll-smooth" lang="ro">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Pachete & Prețuri - QOrienta</title>
+    <title>Prețuri și Pachete - QOrienta</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
         rel="stylesheet" />
+    <!-- Tailwind CSS with Config -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -20,259 +22,375 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#2bee7c",
-                        "background-light": "#f6f8f7",
-                        "background-dark": "#102218",
-                        "brand-blue": "#3b82f6",
+                        "primary": "#4f46e5", // Indigo-600
+                        "primary-light": "#818cf8", // Indigo-400
+                        "accent-pink": "#ec4899", // Pink-500
+                        "accent-cyan": "#06b6d4", // Cyan-500
+                        "surface-light": "#ffffff",
+                        "surface-off": "#f8fafc", // Slate-50
                     },
                     fontFamily: {
-                        "display": ["Lexend", "sans-serif"],
-                        "body": ["Noto Sans", "sans-serif"],
+                        "display": ["Outfit", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
                     },
+                    borderRadius: { "3xl": "1.5rem", "4xl": "2.5rem" },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        }
+                    }
                 },
             },
         }
     </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            /* Slate-900 */
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            /* Slate-200 */
+        }
+
+        .aurora-bg {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+            background: #f8fafc;
+        }
+
+        .aurora-blob {
+            position: absolute;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 1000px;
+            height: 1000px;
+            border-radius: 50%;
+            top: -300px;
+            left: -200px;
+            filter: blur(80px);
+        }
+
+        .aurora-blob-2 {
+            position: absolute;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            bottom: -200px;
+            right: -100px;
+            filter: blur(80px);
+        }
+    </style>
 </head>
 
 <body
-    class="bg-white dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased flex flex-col min-h-screen">
+    class="font-body antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden flex flex-col min-h-screen">
+
+    <div class="aurora-bg">
+        <div class="aurora-blob animate-float" style="animation-delay: 0s;"></div>
+        <div class="aurora-blob-2 animate-float" style="animation-delay: -3s;"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav
-        class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#234833] bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-background-dark">
-                        <span class="material-symbols-outlined text-[20px]">explore</span>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">QOrienta</span>
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
+                    <span class="material-symbols-rounded">explore</span>
+                </div>
+                <span
+                    class="font-display font-bold text-xl tracking-tight text-slate-800 group-hover:text-primary transition-colors">QOrienta</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-1 bg-white/50 px-2 py-1.5 rounded-full border border-slate-200">
+                <a href="quiz.html"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Test
+                    Vocacional</a>
+                <a href="pricing.html"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-primary bg-white shadow-sm transition-all">Pachete</a>
+                <a href="team.html"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Mentori</a>
+                <a href="about.html"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Despre
+                    Noi</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="#"
+                    class="hidden sm:block text-sm font-bold text-slate-600 hover:text-primary transition-colors">Login</a>
+                <a href="quiz.html"
+                    class="bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    Începe Gratuit
                 </a>
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex flex-1 justify-center gap-8">
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
-                        href="index.html">Acasă</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
-                        href="quiz.html">Test Orientare</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
-                        href="team.html">Echipa</a>
-                    <a class="text-sm font-medium text-primary dark:text-primary transition-colors"
-                        href="pricing.html">Pachete</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors"
-                        href="about.html">Despre Noi</a>
-                </div>
-                <!-- Auth Buttons -->
-                <div class="flex items-center gap-4">
-                    <a class="hidden sm:block text-sm font-bold text-slate-700 hover:text-primary dark:text-white dark:hover:text-primary transition-colors"
-                        href="#">Login</a>
-                    <a href="quiz.html"
-                        class="flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-bold text-[#112218] transition-transform hover:scale-105 hover:bg-[#25d36d]">
-                        Începe Acum
-                    </a>
-                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="py-20 bg-background-light dark:bg-[#112218] text-center">
-        <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-brand-blue font-bold text-sm tracking-widest uppercase mb-4">Investește în tine</p>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6">
-                Alege pachetul care îți deschide <span class="text-primary">drumul.</span>
-            </h1>
-            <p class="text-xl text-slate-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-                Indiferent dacă ești la început de drum sau vrei să atingi excelența, avem un plan personalizat pentru
-                ambițiile tale.
-            </p>
-        </div>
+    <!-- Pricing Header -->
+    <section class="relative pt-36 pb-20 px-6 text-center">
+        <h1 class="font-display text-5xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Investește în <span class="text-gradient">viitorul tău.</span>
+        </h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Alege pachetul care ți se potrivește. Fără costuri ascunse. Fără angajamente pe termen lung. Doar claritate.
+        </p>
     </section>
 
-    <!-- Pricing Tiers -->
-    <section class="py-20 bg-white dark:bg-[#102218]">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Pricing Cards -->
+    <section class="pb-32 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 
-                <!-- Explorer Package -->
+            <!-- Tier 1: Explorer -->
+            <div
+                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 relative group">
                 <div
-                    class="relative bg-white dark:bg-[#193324] rounded-3xl border border-gray-200 dark:border-[#234833] p-8 hover:shadow-xl transition-shadow flex flex-col">
-                    <div class="mb-6">
-                        <div
-                            class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-brand-blue rounded-xl flex items-center justify-center mb-6">
-                            <span class="material-symbols-outlined text-2xl">bolt</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Explorer</h3>
-                        <p class="text-sm text-slate-500 dark:text-gray-400 mb-6 min-h-[60px]">
-                            Pentru cei care își caută o primă direcție. Un pachet pentru a trezi curiozitatea despre
-                            tine.
-                        </p>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-4xl font-black text-slate-900 dark:text-white">350</span>
-                            <span class="text-xl font-bold text-slate-500 dark:text-gray-400">RON</span>
-                        </div>
-                    </div>
-
-                    <ul class="space-y-4 mb-8 flex-1">
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Testare psihologică de bază (interese)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Hartă inițială a punctelor forte</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>O primă discuție de ghidare (45 min)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Rezultat: Eliminarea confuziei</span>
-                        </li>
-                    </ul>
-
-                    <a href="#"
-                        class="block w-full py-4 rounded-xl border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white font-bold text-center hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-[#102218] transition-all">
-                        Alege Explorer
-                    </a>
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center border-4 border-white shadow-sm text-slate-500">
+                    <span class="material-symbols-rounded text-3xl">hiking</span>
                 </div>
 
-                <!-- Navigator Package -->
-                <div
-                    class="relative bg-white dark:bg-[#193324] rounded-3xl border-2 border-brand-blue p-8 shadow-xl shadow-brand-blue/10 flex flex-col transform md:-translate-y-4">
-                    <div
-                        class="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-lg">
-                        POPULAR
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-2xl font-bold text-slate-900">Explorer</h3>
+                    <p class="text-slate-500 text-sm mb-6">Perfect pentru început.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-4xl font-bold text-slate-900">Gratuit</span>
                     </div>
-                    <div class="mb-6">
-                        <div
-                            class="w-12 h-12 bg-brand-blue text-white rounded-xl flex items-center justify-center mb-6">
-                            <span class="material-symbols-outlined text-2xl">map</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Navigator</h3>
-                        <p class="text-sm text-slate-500 dark:text-gray-400 mb-6 min-h-[60px]">
-                            Pentru cei gata să își definească drumul. Orientare educațională și profesională la
-                            următorul nivel.
-                        </p>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-5xl font-black text-slate-900 dark:text-white">650</span>
-                            <span class="text-xl font-bold text-slate-500 dark:text-gray-400">RON</span>
-                        </div>
-                    </div>
-
-                    <ul class="space-y-4 mb-8 flex-1">
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-brand-blue text-lg">check_circle</span>
-                            <span>**Profil complet** (cognitiv + personalitate)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-brand-blue text-lg">check_circle</span>
-                            <span>Sesiune de strategie dedicată (90 min)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-brand-blue text-lg">check_circle</span>
-                            <span>Analiză stiluri de decizie</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-brand-blue text-lg">check_circle</span>
-                            <span>Rezultat: Strategie vocațională clară</span>
-                        </li>
-                    </ul>
-
-                    <a href="#"
-                        class="block w-full py-4 rounded-xl bg-brand-blue text-white font-bold text-center hover:bg-blue-600 transition-all shadow-lg shadow-brand-blue/25">
-                        Alege Navigator
-                    </a>
                 </div>
 
-                <!-- Future Leader Package -->
-                <div
-                    class="relative bg-white dark:bg-[#193324] rounded-3xl border border-gray-200 dark:border-[#234833] p-8 hover:shadow-xl transition-shadow flex flex-col">
-                    <div class="mb-6">
-                        <div
-                            class="w-12 h-12 bg-primary/20 text-primary-dark rounded-xl flex items-center justify-center mb-6">
-                            <span
-                                class="material-symbols-outlined text-2xl text-green-600 dark:text-primary">rocket_launch</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Future Leader</h3>
-                        <p class="text-sm text-slate-500 dark:text-gray-400 mb-6 min-h-[60px]">
-                            Pentru cei care vor să-și maximizeze potențialul. Pachet premium pentru ambiții mari.
-                        </p>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-4xl font-black text-slate-900 dark:text-white">1200</span>
-                            <span class="text-xl font-bold text-slate-500 dark:text-gray-400">RON</span>
-                        </div>
-                    </div>
+                <ul class="space-y-4 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Acces complet la testul vocațional
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Profil de personalitate de bază
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        3 Sugestii de domenii de carieră
+                    </li>
+                </ul>
 
-                    <ul class="space-y-4 mb-8 flex-1">
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Include tot din Pachetele 1 și 2</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Plan de dezvoltare personală & leadership</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Coaching 1:1 și Follow-up pe termen lung</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-gray-300">
-                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-                            <span>Rezultat: Roadmap complet pentru viitor</span>
-                        </li>
-                    </ul>
-
-                    <a href="#"
-                        class="block w-full py-4 rounded-xl border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white font-bold text-center hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-[#102218] transition-all">
-                        Vreau Excelență
-                    </a>
-                </div>
-
+                <a href="quiz.html"
+                    class="block w-full py-3.5 rounded-xl bg-slate-50 text-slate-900 font-bold text-center hover:bg-slate-100 transition-colors">
+                    Începe Acum
+                </a>
             </div>
+
+            <!-- Tier 2: Navigator (Highlighted) -->
+            <div
+                class="bg-slate-900 p-8 pt-12 rounded-[2.5rem] shadow-2xl shadow-primary/20 hover:-translate-y-2 transition-transform duration-300 relative z-10 md:-mt-8 text-white">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-primary rounded-2xl flex items-center justify-center border-8 border-white dark:border-slate-900 shadow-lg text-white">
+                    <span class="material-symbols-rounded text-4xl">sailing</span>
+                </div>
+                <div
+                    class="absolute top-6 right-6 px-3 py-1 bg-gradient-to-r from-primary to-accent-pink rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    Popular
+                </div>
+
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-3xl font-bold text-white">Navigator</h3>
+                    <p class="text-slate-300 text-sm mb-6">Pentru cei care vor claritate totală.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-5xl font-bold text-white">149</span>
+                        <span class="text-xl text-slate-400">RON</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-10 text-sm text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        <span class="text-white">Tot ce include Explorer</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Raport detaliat (20+ pagini)
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Analiză SWOT personală
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Ghid pas cu pas pentru universități
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Acces la comunitatea privată QOrienta
+                    </li>
+                </ul>
+
+                <button
+                    class="block w-full py-4 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary-light shadow-lg shadow-primary/25 transition-all hover:scale-105">
+                    Alege Pachetul
+                </button>
+            </div>
+
+            <!-- Tier 3: Future Leader -->
+            <div
+                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 relative group">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-2xl flex items-center justify-center border-4 border-white shadow-sm text-accent-cyan">
+                    <span class="material-symbols-rounded text-3xl">rocket_launch</span>
+                </div>
+
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-2xl font-bold text-slate-900">Future Leader</h3>
+                    <p class="text-slate-500 text-sm mb-6">Expertiză umană dedicată.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-4xl font-bold text-slate-900">499</span>
+                        <span class="text-xl text-slate-400">RON</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Tot ce include Navigator
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        <span class="font-bold text-slate-900">1-la-1 cu un mentor (60 min)</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Plan de carieră personalizat
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Suport WhatsApp prioritar
+                    </li>
+                </ul>
+
+                <button
+                    class="block w-full py-3.5 rounded-xl bg-slate-50 text-slate-900 font-bold text-center hover:bg-slate-100 transition-colors">
+                    Contactează-ne
+                </button>
+            </div>
+
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-20 bg-slate-50 dark:bg-[#0d1a12]">
-        <div class="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-10 text-center">Întrebări Frecvente</h2>
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="font-display text-3xl font-bold text-slate-900 text-center mb-12">Întrebări Frecvente</h2>
 
             <div class="space-y-4">
-                <div class="bg-white dark:bg-[#193324] p-6 rounded-2xl border border-gray-100 dark:border-[#234833]">
-                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Cum știu ce pachet să aleg?</h3>
-                    <p class="text-slate-600 dark:text-gray-400">Dacă ești complet indecis, Explorer este un punct bun
-                        de start. Dacă ai câteva idei dar ai nevoie de confirmare și strategie, Navigator este ideal.
+                <details
+                    class="group bg-slate-50 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden open:bg-white open:shadow-lg open:shadow-slate-200/50 transition-all duration-300">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg p-2 font-bold text-slate-900">
+                        <span>Cum pot plăti?</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                            <span class="material-symbols-rounded">expand_more</span>
+                        </span>
+                    </summary>
+                    <p class="mt-4 px-2 text-sm leading-relaxed text-slate-600">
+                        Acceptăm toate cardurile bancare majore (Visa, Mastercard) prin procesatorul nostru securizat de
+                        plăți Stripe.
                     </p>
-                </div>
-                <div class="bg-white dark:bg-[#193324] p-6 rounded-2xl border border-gray-100 dark:border-[#234833]">
-                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Se pot face sesiunile online?</h3>
-                    <p class="text-slate-600 dark:text-gray-400">Da, absolut. Toate sesiunile de consiliere și
-                        discuțiile se pot desfășura online, pe Zoom sau Google Meet.</p>
-                </div>
-                <div class="bg-white dark:bg-[#193324] p-6 rounded-2xl border border-gray-100 dark:border-[#234833]">
-                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Pot face upgrade mai târziu?</h3>
-                    <p class="text-slate-600 dark:text-gray-400">Desigur. Dacă începi cu Explorer și simți nevoia de mai
-                        multă aprofundare, poți trece oricând la Navigator sau Future Leader plătind diferența.</p>
-                </div>
+                </details>
+
+                <details
+                    class="group bg-slate-50 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden open:bg-white open:shadow-lg open:shadow-slate-200/50 transition-all duration-300">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg p-2 font-bold text-slate-900">
+                        <span>Pot face upgrade mai târziu?</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                            <span class="material-symbols-rounded">expand_more</span>
+                        </span>
+                    </summary>
+                    <p class="mt-4 px-2 text-sm leading-relaxed text-slate-600">
+                        Absolut. Poți începe cu pachetul Explorer (Gratuit) și poți trece oricând la Navigator sau
+                        Future Leader direct din contul tău.
+                    </p>
+                </details>
+
+                <details
+                    class="group bg-slate-50 rounded-2xl p-4 [&_summary::-webkit-details-marker]:hidden open:bg-white open:shadow-lg open:shadow-slate-200/50 transition-all duration-300">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg p-2 font-bold text-slate-900">
+                        <span>Cât durează o sesiune de mentorat?</span>
+                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                            <span class="material-symbols-rounded">expand_more</span>
+                        </span>
+                    </summary>
+                    <p class="mt-4 px-2 text-sm leading-relaxed text-slate-600">
+                        Sesiunile standard incluse în pachetul Future Leader durează 60 de minute și se desfășoară
+                        online, pe Google Meet sau Zoom.
+                    </p>
+                </details>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="mt-auto border-t border-gray-200 dark:border-[#234833] bg-white dark:bg-[#102218] pt-12 pb-8">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-2">
-                    <div class="flex h-6 w-6 items-center justify-center rounded bg-primary text-background-dark">
-                        <span class="material-symbols-outlined text-[14px]">explore</span>
+    <footer class="border-t border-slate-200 bg-white py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
+            <div class="col-span-1 md:col-span-1">
+                <a href="index.html" class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                        <span class="material-symbols-rounded text-sm">explore</span>
                     </div>
-                    <span class="text-lg font-bold text-slate-900 dark:text-white">QOrienta</span>
-                </div>
-                <p class="text-slate-500 text-sm">© 2023 QOrienta. Construit pentru viitorul tău.</p>
+                    <span class="font-display font-bold text-lg text-slate-800">QOrienta</span>
+                </a>
+                <p class="text-slate-500 mb-6 leading-relaxed">Ghidăm tinerii către cariere de succes prin tehnologie,
+                    educație și comunitate.</p>
             </div>
+
+            <div>
+                <h4 class="font-bold text-slate-900 mb-6">Produs</h4>
+                <ul class="space-y-4 text-slate-500">
+                    <li><a href="quiz.html" class="hover:text-primary transition-colors">Test Vocacional</a></li>
+                    <li><a href="pricing.html" class="hover:text-primary transition-colors">Prețuri</a></li>
+                    <li><a href="team.html" class="hover:text-primary transition-colors">Mentori</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Pentru Școli</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-slate-900 mb-6">Resurse</h4>
+                <ul class="space-y-4 text-slate-500">
+                    <li><a href="#" class="hover:text-primary transition-colors">Blog Cariere</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Ghid Facultăți</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Webinarii</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-slate-900 mb-6">Legal</h4>
+                <ul class="space-y-4 text-slate-500">
+                    <li><a href="#" class="hover:text-primary transition-colors">Termeni și Condiții</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Politica de Confidențialitate</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
+            <p>© 2024 QOrienta. Toate drepturile rezervate.</p>
+            <p>Designed with <span class="text-red-500">♥</span> for students everywhere.</p>
         </div>
     </footer>
 
