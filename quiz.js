@@ -167,6 +167,11 @@ const insightScreens = {
     image: "puzzle_progress.png",
     title: "Ultimii pași spre claritate",
     text: "<span class='font-bold text-slate-900'>Profilul tău e aproape gata.</span> Mai sunt doar câteva întrebări și vei descoperi ce tip de carieră ți se potrivește cel mai bine!"
+  },
+  finalStretch: {
+    image: "celebration_trophy.png",
+    title: "Profilul tău e 92% gata!",
+    text: "<span class='font-bold text-slate-900'>Excelent!</span> Doar încă 2 întrebări rapide și vom genera raportul tău personalizat de carieră."
   }
 };
 
@@ -232,7 +237,7 @@ function continueAfterIntro() {
 }
 
 // Track which insight screens have been shown
-let shownInsights = { midpoint: false, beforeResults: false };
+let shownInsights = { midpoint: false, beforeResults: false, finalStretch: false };
 
 function showEducationalInsight(type) {
   const data = insightScreens[type];
@@ -518,6 +523,17 @@ function handleNext() {
     return;
   }
 
+  // Show final celebration insight at question 11 (before scale questions)
+  if (currentQuestion === 11 && !shownInsights.finalStretch) {
+    optionsEl.classList.add('opacity-0', '-translate-x-2');
+    questionEl.classList.add('opacity-0');
+
+    setTimeout(() => {
+      showEducationalInsight('finalStretch');
+    }, 250);
+    return;
+  }
+
   if (currentQuestion < quizData.length - 1) {
     optionsEl.classList.add('opacity-0', '-translate-x-2');
     questionEl.classList.add('opacity-0');
@@ -565,9 +581,56 @@ function calculateAndShowResults() {
     }
   }
 
+  // Hide quiz, show loading screen first
   quizContainer.classList.add('hidden');
   quizNav.classList.add('hidden');
   quizFooter.classList.add('hidden');
+
+  const loadingScreen = document.getElementById('loading-screen');
+  loadingScreen.classList.remove('hidden');
+  loadingScreen.classList.add('flex');
+
+  // Animate the loading steps
+  animateLoadingStep(1, 0, () => {
+    animateLoadingStep(2, 0, () => {
+      animateLoadingStep(3, 0, () => {
+        animateLoadingStep(4, 0, () => {
+          // All done, show results after short delay
+          setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            loadingScreen.classList.remove('flex');
+            showFinalResults(finalScores);
+          }, 500);
+        });
+      });
+    });
+  });
+}
+
+function animateLoadingStep(stepNum, currentPercent, onComplete) {
+  const bar = document.getElementById(`loading-step${stepNum}-bar`);
+  const percent = document.getElementById(`loading-step${stepNum}-percent`);
+  const check = document.getElementById(`loading-step${stepNum}-check`);
+
+  if (currentPercent < 100) {
+    const increment = Math.min(100 - currentPercent, Math.floor(Math.random() * 15) + 5);
+    const newPercent = currentPercent + increment;
+
+    bar.style.width = newPercent + '%';
+    percent.textContent = newPercent + '%';
+
+    setTimeout(() => animateLoadingStep(stepNum, newPercent, onComplete), 100);
+  } else {
+    bar.style.width = '100%';
+    percent.textContent = '100%';
+    percent.classList.add('hidden');
+    check.classList.remove('hidden');
+
+    setTimeout(onComplete, 200);
+  }
+}
+
+function showFinalResults(finalScores) {
   resultsContainer.classList.remove('hidden');
 
   const maxScore = Math.max(...Object.values(finalScores));
@@ -578,25 +641,41 @@ function calculateAndShowResults() {
       title: "Ești un Creator!",
       desc: "Ai o imaginație bogată și îți place să te exprimi prin artă, design sau idei inovatoare.",
       careers: "Designer Grafic, Arhitect, Director de Creație, UX/UI Designer",
-      emoji: "🎨"
+      emoji: "🎨",
+      skillType: "Abilități Creative",
+      goal: "Carieră Creativă",
+      motivation: "Foarte Mare",
+      potential: "Ridicat"
     },
     technical: {
       title: "Ești un Tehnician!",
       desc: "Îți place să înțelegi cum funcționează lucrurile și să rezolvi probleme complexe prin logică.",
       careers: "Programator, Inginer, Analist de Date, Specialist IT",
-      emoji: "💻"
+      emoji: "💻",
+      skillType: "Abilități Tehnice",
+      goal: "Dezvoltare Tehnică",
+      motivation: "Ridicată",
+      potential: "Ridicat"
     },
     social: {
       title: "Ești un Helper!",
       desc: "Empatia este superputerea ta. Îți place să lucrezi cu oamenii și să îi ajuți să crească.",
       careers: "Psiholog, Profesor, Medic, Specialist HR",
-      emoji: "❤️"
+      emoji: "❤️",
+      skillType: "Abilități Sociale",
+      goal: "Impact Social",
+      motivation: "Foarte Mare",
+      potential: "Ridicat"
     },
     organizational: {
       title: "Ești un Lider!",
       desc: "Ești organizat, eficient și îți place să pui lucrurile în mișcare. Ai stofă de antreprenor.",
       careers: "Manager, Antreprenor, Consultant, Event Planner",
-      emoji: "📈"
+      emoji: "📈",
+      skillType: "Abilități de Leadership",
+      goal: "Succes Antreprenorial",
+      motivation: "Ridicată",
+      potential: "Foarte Ridicat"
     }
   };
 
@@ -609,6 +688,17 @@ function calculateAndShowResults() {
   document.getElementById('result-desc').textContent = result.desc;
   document.getElementById('result-careers').textContent = result.careers;
   document.getElementById('result-icon').textContent = result.emoji;
+
+  // Populate profile summary
+  const skillTypeEl = document.getElementById('result-skill-type');
+  const goalEl = document.getElementById('result-goal');
+  const motivationEl = document.getElementById('result-motivation');
+  const potentialEl = document.getElementById('result-potential');
+
+  if (skillTypeEl) skillTypeEl.textContent = result.skillType || 'Abilități Mixte';
+  if (goalEl) goalEl.textContent = result.goal || 'Dezvoltare Personală';
+  if (motivationEl) motivationEl.textContent = result.motivation || 'Ridicată';
+  if (potentialEl) potentialEl.textContent = result.potential || 'Ridicat';
 
   // Animate circular graph
   const progressCircle = document.getElementById('progress-circle');

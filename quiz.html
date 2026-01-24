@@ -273,6 +273,79 @@
       </div>
     </div>
 
+    <!-- LOADING SCREEN (shows before results) -->
+    <div id="loading-screen"
+      class="w-full hidden flex-col items-center text-center pt-20 pb-10 animate-[fadeIn_0.5s_ease-out]">
+      <h2 class="text-2xl font-black text-slate-900 mb-1">Generăm</h2>
+      <h2 class="text-2xl font-black text-primary mb-10">Planul tău de Carieră...</h2>
+
+      <div class="w-full max-w-sm px-6 space-y-4 mb-12">
+        <!-- Step 1 -->
+        <div class="flex items-center justify-between">
+          <span class="text-slate-700 text-sm font-medium">Analizăm răspunsurile</span>
+          <div class="flex items-center gap-2">
+            <span id="loading-step1-percent" class="text-sm font-bold text-slate-500">0%</span>
+            <span id="loading-step1-check" class="text-lg hidden">✅</span>
+          </div>
+        </div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="loading-step1-bar" class="h-full bg-primary rounded-full transition-all duration-700"
+            style="width: 0%"></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex items-center justify-between mt-4">
+          <span class="text-slate-700 text-sm font-medium">Identificăm punctele forte</span>
+          <div class="flex items-center gap-2">
+            <span id="loading-step2-percent" class="text-sm font-bold text-slate-500">0%</span>
+            <span id="loading-step2-check" class="text-lg hidden">✅</span>
+          </div>
+        </div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="loading-step2-bar" class="h-full bg-primary rounded-full transition-all duration-700"
+            style="width: 0%"></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex items-center justify-between mt-4">
+          <span class="text-slate-700 text-sm font-medium">Selectăm carierele potrivite</span>
+          <div class="flex items-center gap-2">
+            <span id="loading-step3-percent" class="text-sm font-bold text-slate-500">0%</span>
+            <span id="loading-step3-check" class="text-lg hidden">✅</span>
+          </div>
+        </div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="loading-step3-bar" class="h-full bg-primary rounded-full transition-all duration-700"
+            style="width: 0%"></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex items-center justify-between mt-4">
+          <span class="text-slate-700 text-sm font-medium">Personalizăm raportul</span>
+          <div class="flex items-center gap-2">
+            <span id="loading-step4-percent" class="text-sm font-bold text-slate-500">0%</span>
+            <span id="loading-step4-check" class="text-lg hidden">✅</span>
+          </div>
+        </div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="loading-step4-bar" class="h-full bg-primary rounded-full transition-all duration-700"
+            style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Social proof -->
+      <div class="mt-8 px-6">
+        <p class="text-lg font-bold text-slate-800 mb-4">1.5M+ utilizatori ne-au ales</p>
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-lg text-left">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-2xl">⭐⭐⭐⭐⭐</span>
+          </div>
+          <p class="text-slate-600 text-sm italic">"Acesta a fost unul dintre cele mai bune instrumente pentru carieră
+            pe care le-am folosit."</p>
+        </div>
+      </div>
+    </div>
+
     <!-- RESULTS VIEW (Hidden Initially) -->
     <div id="results-container" class="w-full hidden text-center animate-bg-fade pt-16 pb-10">
 
@@ -305,6 +378,54 @@
         Ai o imaginație bogată și îți place să te exprimi prin artă, design sau idei inovatoare.
       </p>
 
+      <!-- Profile Summary Card -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-lg mb-6 mx-4">
+        <h4 class="font-bold text-slate-900 text-lg mb-1">Sumar al profilului tău</h4>
+        <p id="result-skill-type" class="text-slate-500 text-sm mb-4">Abilități Creative</p>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-1 space-y-3">
+            <!-- Main Goal -->
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                <span class="text-lg">🎯</span>
+              </div>
+              <div class="text-left">
+                <p class="text-slate-400 text-xs">Obiectiv Principal</p>
+                <p id="result-goal" class="font-bold text-slate-800 text-sm">Carieră Creativă</p>
+              </div>
+            </div>
+
+            <!-- Motivation -->
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                <span class="text-lg">🔥</span>
+              </div>
+              <div class="text-left">
+                <p class="text-slate-400 text-xs">Motivație</p>
+                <p id="result-motivation" class="font-bold text-slate-800 text-sm">Ridicată</p>
+              </div>
+            </div>
+
+            <!-- Potential -->
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                <span class="text-lg">📈</span>
+              </div>
+              <div class="text-left">
+                <p class="text-slate-400 text-xs">Potențial</p>
+                <p id="result-potential" class="font-bold text-slate-800 text-sm">Ridicat</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar -->
+          <div class="w-28 h-28 rounded-xl overflow-hidden flex-shrink-0">
+            <img src="profile_avatar.png" alt="Profile Avatar" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+
       <!-- Score breakdown -->
       <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-lg mb-6 mx-4">
         <h4 class="font-bold text-slate-400 text-xs uppercase tracking-wider mb-4">Profilul Tău</h4>
@@ -318,6 +439,125 @@
         <p id="result-careers" class="text-sm font-semibold text-slate-700">
           Designer Grafic, Arhitect, Director de Creație
         </p>
+      </div>
+
+      <!-- Benefits Card -->
+      <div class="bg-primary/5 p-5 rounded-2xl border border-primary/20 mb-6 mx-4">
+        <h4 class="font-bold text-slate-900 text-lg mb-4 text-center">Cu QOrienta poți:</h4>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <span class="text-primary text-lg">✓</span>
+            <p class="text-slate-700 text-sm text-left">Descoperi cariere care se potrivesc cu personalitatea ta</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary text-lg">✓</span>
+            <p class="text-slate-700 text-sm text-left">Vedea ce competențe să dezvolți pentru succes</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary text-lg">✓</span>
+            <p class="text-slate-700 text-sm text-left">Primi ghidare personalizată de la mentori</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-primary text-lg">✓</span>
+            <p class="text-slate-700 text-sm text-left">Lua decizii de carieră cu încredere</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Chart -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-lg mb-8 mx-4">
+        <h4 class="font-bold text-slate-900 text-lg mb-2 text-center">Traiectoria ta de carieră</h4>
+        <p class="text-slate-500 text-sm mb-6 text-center">Am analizat răspunsurile și am creat planul tău</p>
+
+        <div class="relative h-40 flex items-end justify-between px-4">
+          <!-- Chart bars -->
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <div class="bg-slate-200 rounded-t-lg w-10 h-12"></div>
+            <span class="bg-slate-700 text-white text-xs px-2 py-1 rounded-full">Acum</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <div class="bg-primary/30 rounded-t-lg w-10 h-20"></div>
+            <span class="text-slate-500 text-xs">Luna 1</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <div class="bg-primary/50 rounded-t-lg w-10 h-28"></div>
+            <span class="text-slate-500 text-xs">Luna 3</span>
+          </div>
+
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <div class="bg-primary rounded-t-lg w-10 h-36"></div>
+            <span class="bg-primary text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">Cu QOrienta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="bg-slate-50 p-5 rounded-2xl mb-6 mx-4">
+        <h4 class="font-bold text-slate-900 text-lg mb-4 text-center">Suntem gata să răspundem la întrebări</h4>
+
+        <div class="space-y-2">
+          <details class="bg-white rounded-xl">
+            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-slate-800 text-sm">
+              Cum mă poate ajuta QOrienta?
+              <span class="text-slate-400">▼</span>
+            </summary>
+            <div class="px-4 pb-4 text-slate-600 text-sm">
+              QOrienta te ajută să descoperi cariere care se potrivesc cu personalitatea și interesele tale, oferindu-ți
+              un raport detaliat și acces la mentori profesioniști.
+            </div>
+          </details>
+
+          <details class="bg-white rounded-xl">
+            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-slate-800 text-sm">
+              Cum pot accesa raportul complet?
+              <span class="text-slate-400">▼</span>
+            </summary>
+            <div class="px-4 pb-4 text-slate-600 text-sm">
+              După finalizarea quiz-ului, poți accesa raportul complet prin butonul "Vezi Raportul Detaliat" care te va
+              direcționa către opțiunile disponibile.
+            </div>
+          </details>
+
+          <details class="bg-white rounded-xl">
+            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-slate-800 text-sm">
+              Pot vorbi cu un mentor real?
+              <span class="text-slate-400">▼</span>
+            </summary>
+            <div class="px-4 pb-4 text-slate-600 text-sm">
+              Da! Echipa noastră include mentori profesioniști cu care poți programa o sesiune de consiliere
+              personalizată.
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Testimonials Section -->
+      <div class="bg-primary/5 p-5 rounded-2xl mb-8 mx-4">
+        <h4 class="font-bold text-slate-900 text-lg mb-4 text-center">Povești de succes de la utilizatori</h4>
+
+        <div class="space-y-4">
+          <!-- Testimonial 1 -->
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xl">⭐⭐⭐⭐⭐</span>
+            </div>
+            <p class="text-slate-600 text-sm italic mb-2">"QOrienta m-a ajutat să îmi găsesc direcția în carieră.
+              Recomand cu încredere!"</p>
+            <p class="text-slate-400 text-xs">— Maria D., Student</p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xl">⭐⭐⭐⭐⭐</span>
+            </div>
+            <p class="text-slate-600 text-sm italic mb-2">"Mentorii sunt incredibili! Am primit sfaturi practice și
+              aplicabile imediat."</p>
+            <p class="text-slate-400 text-xs">— Andrei P., Angajat</p>
+          </div>
+        </div>
       </div>
 
       <div class="flex flex-col gap-3 px-4 pb-12">
