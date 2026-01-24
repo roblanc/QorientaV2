@@ -23,90 +23,90 @@ const quizData = [
     question: "Ce activitate te atrage cel mai mult?",
     category: "INTERESE",
     options: [
-      { text: "Să creez conținut vizual sau artistic", type: "creative", icon: "palette" },
-      { text: "Să repar sau să construiesc obiecte", type: "technical", icon: "handyman" },
-      { text: "Să ajut prietenii cu sfaturi", type: "social", icon: "diversity_3" }
+      { text: "Să creez conținut vizual sau artistic", type: "creative", icon: "palette", insight: "Creativitatea ta este o superputere! Lumea are nevoie de vizionari ca tine." },
+      { text: "Să repar sau să construiesc obiecte", type: "technical", icon: "handyman", insight: "Mâinile tale pot transforma idei în realitate. Asta e rar și valoros!" },
+      { text: "Să ajut prietenii cu sfaturi", type: "social", icon: "diversity_3", insight: "Empatia ta face diferența în viețile altora. E un dar autentic!" }
     ]
   },
   {
     question: "În timpul liber, preferi să...",
     category: "HOBBY-URI",
     options: [
-      { text: "Organizezi evenimente sau planuri", type: "organizational", icon: "calendar_month" },
-      { text: "Rezolvi puzzle-uri sau probleme logice", type: "technical", icon: "extension" },
-      { text: "Scrii povești sau să desenezi", type: "creative", icon: "edit" }
+      { text: "Organizezi evenimente sau planuri", type: "organizational", icon: "calendar_month", insight: "Talentul tău de organizare poate schimba modul în care echipele funcționează!" },
+      { text: "Rezolvi puzzle-uri sau probleme logice", type: "technical", icon: "extension", insight: "Mintea ta analitică e perfectă pentru provocări complexe!" },
+      { text: "Scrii povești sau să desenezi", type: "creative", icon: "edit", insight: "Arta ta poate inspira și transforma! Continuă să creezi." }
     ]
   },
   {
     question: "Ce materie ți-a plăcut cel mai mult la școală?",
     category: "EDUCAȚIE",
     options: [
-      { text: "Matematica sau Informatica", type: "technical", icon: "terminal" },
-      { text: "Psihologia sau Științele Sociale", type: "social", icon: "psychology" },
-      { text: "Artele sau Literatura", type: "creative", icon: "brush" }
+      { text: "Matematica sau Informatica", type: "technical", icon: "terminal", insight: "Gândirea ta logică e fundația inovațiilor de mâine!" },
+      { text: "Psihologia sau Științele Sociale", type: "social", icon: "psychology", insight: "Înțelegerea oamenilor e cheia pentru liderii adevărați!" },
+      { text: "Artele sau Literatura", type: "creative", icon: "brush", insight: "Expresia ta artistică poate atinge inimi și minți!" }
     ]
   },
   {
     question: "Cum te descriu prietenii tăi?",
     category: "PERSONALITATE",
     options: [
-      { text: "O persoană organizată și lider", type: "organizational", icon: "groups" },
-      { text: "O persoană empatică și săritooare", type: "social", icon: "volunteer_activism" },
-      { text: "O persoană originală și creativă", type: "creative", icon: "lightbulb" }
+      { text: "O persoană organizată și lider", type: "organizational", icon: "groups", insight: "Liderii naturali ca tine inspiră pe cei din jur!" },
+      { text: "O persoană empatică și săritooare", type: "social", icon: "volunteer_activism", insight: "Generozitatea ta creează conexiuni autentice!" },
+      { text: "O persoană originală și creativă", type: "creative", icon: "lightbulb", insight: "Originalitatea ta e o valoare rară pe piața muncii!" }
     ]
   },
   {
     question: "Ce fel de probleme îți place să rezolvi?",
     category: "ABILITĂȚI",
     options: [
-      { text: "Probleme tehnice sau de funcționare", type: "technical", icon: "settings" },
-      { text: "Conflicte între oameni", type: "social", icon: "handshake" },
-      { text: "Probleme de eficiență și organizare", type: "organizational", icon: "trending_up" }
+      { text: "Probleme tehnice sau de funcționare", type: "technical", icon: "settings", insight: "Rezolvitorii de probleme tehnice sunt mereu căutați!" },
+      { text: "Conflicte între oameni", type: "social", icon: "handshake", insight: "Abilitatea ta de mediere e esențială în orice echipă!" },
+      { text: "Probleme de eficiență și organizare", type: "organizational", icon: "trending_up", insight: "Optimizatorii ca tine fac companiile să exceleze!" }
     ]
   },
   {
     question: "Dacă ai lansa o afacere, ce rol ți-ar plăcea?",
     category: "CARIERĂ",
     options: [
-      { text: "Să creezi brandul și designul", type: "creative", icon: "design_services" },
-      { text: "Să gestionezi echipa și bugetul", type: "organizational", icon: "attach_money" },
-      { text: "Să dezvolți produsul tehnic", type: "technical", icon: "code" }
+      { text: "Să creezi brandul și designul", type: "creative", icon: "design_services", insight: "Viziunea ta poate defini identitatea unui business!" },
+      { text: "Să gestionezi echipa și bugetul", type: "organizational", icon: "attach_money", insight: "Managementul e coloana vertebrală a oricărei afaceri!" },
+      { text: "Să dezvolți produsul tehnic", type: "technical", icon: "code", insight: "Constructorii tehnici transformă visele în produse reale!" }
     ]
   },
   {
     question: "Ce te motivează cel mai mult?",
     category: "MOTIVAȚIE",
     options: [
-      { text: "Să înțelegi cum funcționează lucrurile", type: "technical", icon: "search" },
-      { text: "Să ai un impact pozitiv în viața altora", type: "social", icon: "favorite" },
-      { text: "Să îți exprimi ideile liber", type: "creative", icon: "campaign" }
+      { text: "Să înțelegi cum funcționează lucrurile", type: "technical", icon: "search", insight: "Curiozitatea ta deblocează descoperiri importante!" },
+      { text: "Să ai un impact pozitiv în viața altora", type: "social", icon: "favorite", insight: "Dorința ta de a ajuta e cea mai nobilă motivație!" },
+      { text: "Să îți exprimi ideile liber", type: "creative", icon: "campaign", insight: "Libertatea de expresie e motorul inovației!" }
     ]
   },
   {
     question: "Ce mediu de lucru preferi?",
     category: "MEDIU",
     options: [
-      { text: "Un mediu structurat și clar", type: "organizational", icon: "apartment" },
-      { text: "Un mediu flexibil și artistic", type: "creative", icon: "draw" },
-      { text: "Un mediu unde lucrezi direct cu oamenii", type: "social", icon: "people" }
+      { text: "Un mediu structurat și clar", type: "organizational", icon: "apartment", insight: "Structura îți permite să excelezi și să planifici!" },
+      { text: "Un mediu flexibil și artistic", type: "creative", icon: "draw", insight: "Flexibilitatea îți hrănește creativitatea!" },
+      { text: "Un mediu unde lucrezi direct cu oamenii", type: "social", icon: "people", insight: "Conexiunile umane îți dau energie și sens!" }
     ]
   },
   {
     question: "Când ai o sarcină nouă, cum o abordezi?",
     category: "STIL DE LUCRU",
     options: [
-      { text: "Fac un plan detaliat înainte", type: "organizational", icon: "list_alt" },
-      { text: "Mă apuc direct și experimentez", type: "creative", icon: "science" },
-      { text: "Cer sfatul celorlalți", type: "social", icon: "forum" }
+      { text: "Fac un plan detaliat înainte", type: "organizational", icon: "list_alt", insight: "Planificarea ta previne haosul și asigură succesul!" },
+      { text: "Mă apuc direct și experimentez", type: "creative", icon: "science", insight: "Spiritul tău experimental duce la descoperiri unice!" },
+      { text: "Cer sfatul celorlalți", type: "social", icon: "forum", insight: "Colaborarea ta amplifică rezultatele echipei!" }
     ]
   },
   {
     question: "Ce gadget sau unealtă preferi?",
     category: "PREFERINȚE",
     options: [
-      { text: "Un laptop performant", type: "technical", icon: "laptop_mac" },
-      { text: "O agendă sau planner", type: "organizational", icon: "event_note" },
-      { text: "O cameră foto sau tabletă grafică", type: "creative", icon: "camera_alt" }
+      { text: "Un laptop performant", type: "technical", icon: "laptop_mac", insight: "Tehnologia e extensia minții tale!" },
+      { text: "O agendă sau planner", type: "organizational", icon: "event_note", insight: "Organizarea fizică îți clarifică mintea!" },
+      { text: "O cameră foto sau tabletă grafică", type: "creative", icon: "camera_alt", insight: "Uneltele creative îți capturează viziunea!" }
     ]
   }
 ];
@@ -129,8 +129,30 @@ const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
 const backBtn = document.getElementById("back-btn");
 
-
 const introMessageEl = document.getElementById("intro-message");
+const insightContainer = document.getElementById("insight-container");
+const insightMessageEl = document.getElementById("insight-message");
+
+// Insight screen elements
+const insightScreen = document.getElementById("insight-screen");
+const insightScreenImage = document.getElementById("insight-screen-image");
+const insightScreenTitle = document.getElementById("insight-screen-title");
+const insightScreenText = document.getElementById("insight-screen-text");
+const insightContinueBtn = document.getElementById("insight-continue-btn");
+
+// Insight screens data (appears at specific points)
+const insightScreens = {
+  midpoint: {
+    image: "career_compass.png",
+    title: "Ești pe drumul cel bun!",
+    text: "<span class='font-bold text-slate-900'>Aproape jumătate gata!</span> Răspunsurile tale ne ajută să îți construim un profil personalizat. Continuă — fiecare răspuns contează!"
+  },
+  beforeResults: {
+    image: "puzzle_progress.png",
+    title: "Ultimii pași spre claritate",
+    text: "<span class='font-bold text-slate-900'>Profilul tău e aproape gata.</span> Mai sunt doar câteva întrebări și vei descoperi ce tip de carieră ți se potrivește cel mai bine!"
+  }
+};
 
 function init() {
   // Start quiz directly with demographics (hide intro initially)
@@ -142,6 +164,11 @@ function init() {
   startBtn.addEventListener("click", continueAfterIntro);
   nextBtn.addEventListener("click", handleNext);
   backBtn.addEventListener("click", handleBack);
+
+  // Insight screen continue button
+  if (insightContinueBtn) {
+    insightContinueBtn.addEventListener("click", continueFromInsight);
+  }
 
   loadQuestion();
   updateNavigationState();
@@ -184,6 +211,40 @@ function continueAfterIntro() {
 
   // Move to first vocational question (index 2)
   currentQuestion = 2;
+  loadQuestion();
+  updateNavigationState();
+}
+
+// Track which insight screens have been shown
+let shownInsights = { midpoint: false, beforeResults: false };
+
+function showEducationalInsight(type) {
+  const data = insightScreens[type];
+  if (!data || !insightScreen) return;
+
+  // Update content
+  if (insightScreenImage) insightScreenImage.src = data.image;
+  if (insightScreenTitle) insightScreenTitle.textContent = data.title;
+  if (insightScreenText) insightScreenText.innerHTML = data.text;
+
+  // Hide quiz, show insight screen
+  quizContainer.classList.add("hidden");
+  quizFooter.classList.add("hidden");
+  insightScreen.classList.remove("hidden");
+  insightScreen.classList.add("flex");
+
+  shownInsights[type] = true;
+}
+
+function continueFromInsight() {
+  insightScreen.classList.add("hidden");
+  insightScreen.classList.remove("flex");
+  quizContainer.classList.remove("hidden");
+  quizFooter.classList.remove("hidden");
+
+  quizContainer.classList.add("animate-[fadeIn_0.5s_ease-out]");
+
+  currentQuestion++;
   loadQuestion();
   updateNavigationState();
 }
@@ -293,12 +354,12 @@ function loadQuestion() {
         `;
       }
     } else {
-      // List Card Style
+      // List Card Style (SmartyMe)
       btn.className = `
-          group relative w-full p-5 rounded-[2rem] bg-white border-2 transition-all duration-300 cursor-pointer flex items-center gap-5 select-none
+          group relative w-full p-5 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex items-center gap-4 select-none
           ${isSelected
-          ? 'border-primary shadow-xl shadow-primary/10 scale-[1.01]'
-          : 'border-transparent shadow-sm hover:shadow-lg hover:border-slate-100 hover:-translate-y-0.5'
+          ? 'border-primary bg-primary/5 shadow-md'
+          : 'border-slate-100 bg-white shadow-sm hover:shadow-md hover:border-slate-200'
         }
       `;
 
@@ -317,11 +378,11 @@ function loadQuestion() {
       const emoji = iconMap[opt.icon] || '🔹';
 
       btn.innerHTML = `
-        <div class="flex-shrink-0 text-3xl transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}">
+        <div class="flex-shrink-0 text-2xl">
            ${emoji}
         </div>
         <div class="flex-1 text-left">
-          <h3 class="font-bold text-slate-700 text-lg leading-snug group-hover:text-primary transition-colors ${isSelected ? 'text-primary' : ''}">${opt.text}</h3>
+          <span class="font-semibold text-slate-800 text-base leading-snug">${opt.text}</span>
         </div>
       `;
     }
@@ -329,6 +390,20 @@ function loadQuestion() {
     btn.addEventListener('click', () => handleOptionSelect(opt.type));
     optionsEl.appendChild(btn);
   });
+
+  // Show insight message if an option is selected
+  const selectedAnswer = userAnswers[currentQuestion];
+  if (selectedAnswer && insightContainer && insightMessageEl) {
+    const selectedOption = data.options.find(opt => opt.type === selectedAnswer);
+    if (selectedOption && selectedOption.insight) {
+      insightMessageEl.textContent = selectedOption.insight;
+      insightContainer.classList.remove('hidden');
+    } else {
+      insightContainer.classList.add('hidden');
+    }
+  } else if (insightContainer) {
+    insightContainer.classList.add('hidden');
+  }
 
   updateNavigationState();
 }
@@ -346,6 +421,28 @@ function handleNext() {
 
     setTimeout(() => {
       showIntroScreen();
+    }, 250);
+    return;
+  }
+
+  // Show midpoint insight at question 6 (halfway through vocational questions)
+  if (currentQuestion === 6 && !shownInsights.midpoint) {
+    optionsEl.classList.add('opacity-0', '-translate-x-2');
+    questionEl.classList.add('opacity-0');
+
+    setTimeout(() => {
+      showEducationalInsight('midpoint');
+    }, 250);
+    return;
+  }
+
+  // Show beforeResults insight at question 10 (near end)
+  if (currentQuestion === 10 && !shownInsights.beforeResults) {
+    optionsEl.classList.add('opacity-0', '-translate-x-2');
+    questionEl.classList.add('opacity-0');
+
+    setTimeout(() => {
+      showEducationalInsight('beforeResults');
     }, 250);
     return;
   }
