@@ -130,13 +130,51 @@ const nextBtn = document.getElementById("next-btn");
 const backBtn = document.getElementById("back-btn");
 
 
+const introMessageEl = document.getElementById("intro-message");
+
 function init() {
-  startBtn.addEventListener("click", startQuiz);
+  // Start quiz directly with demographics (hide intro initially)
+  introScreen.classList.add("hidden");
+  quizNav.classList.remove("hidden");
+  quizContainer.classList.remove("hidden");
+  quizFooter.classList.remove("hidden");
+
+  startBtn.addEventListener("click", continueAfterIntro);
   nextBtn.addEventListener("click", handleNext);
   backBtn.addEventListener("click", handleBack);
+
+  loadQuestion();
+  updateNavigationState();
 }
 
-function startQuiz() {
+function showIntroScreen() {
+  // Get personalized message based on gender and age
+  const genderAnswer = userAnswers[0];
+  const ageAnswer = userAnswers[1];
+
+  const genderText = genderAnswer === 'male' ? 'bărbați' : genderAnswer === 'female' ? 'femei' : 'tineri';
+  const ageText = {
+    'age_14_18': '14-18 ani',
+    'age_19_24': '19-24 ani',
+    'age_25_34': '25-34 ani',
+    'age_35_plus': '35+ ani'
+  }[ageAnswer] || '';
+
+  // Update intro message
+  if (introMessageEl) {
+    const count = Math.floor(Math.random() * 50000) + 150000; // Random realistic number
+    introMessageEl.innerHTML = `<span class="font-bold text-slate-900">${count.toLocaleString('ro-RO')}</span> ${genderText} cu vârsta ${ageText} și-au descoperit deja vocația cu noi — dar această călătorie este despre <span class="font-bold text-primary">tine</span>!`;
+  }
+
+  // Hide quiz, show intro
+  quizContainer.classList.add("hidden");
+  quizFooter.classList.add("hidden");
+  quizNav.classList.add("hidden");
+  introScreen.classList.remove("hidden");
+  introScreen.classList.add("animate-[fadeIn_0.5s_ease-out]");
+}
+
+function continueAfterIntro() {
   introScreen.classList.add("hidden");
   quizNav.classList.remove("hidden");
   quizContainer.classList.remove("hidden");
@@ -144,6 +182,8 @@ function startQuiz() {
 
   quizContainer.classList.add("animate-[fadeIn_0.5s_ease-out]");
 
+  // Move to first vocational question (index 2)
+  currentQuestion = 2;
   loadQuestion();
   updateNavigationState();
 }
@@ -299,6 +339,17 @@ function handleOptionSelect(type) {
 }
 
 function handleNext() {
+  // If finishing Age question (index 1), show intro screen
+  if (currentQuestion === 1 && userAnswers[1] !== null) {
+    optionsEl.classList.add('opacity-0', '-translate-x-2');
+    questionEl.classList.add('opacity-0');
+
+    setTimeout(() => {
+      showIntroScreen();
+    }, 250);
+    return;
+  }
+
   if (currentQuestion < quizData.length - 1) {
     optionsEl.classList.add('opacity-0', '-translate-x-2');
     questionEl.classList.add('opacity-0');
