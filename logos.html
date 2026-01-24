@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuneri Logo & Culori - QOrienta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Dynamic Colors Configuration -->
+    <style>
+        :root {
+            --color-primary: #4F46E5;
+            /* Default Indigo */
+            --color-secondary: #10B981;
+            /* Default Emerald */
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: 'var(--color-primary)',
+                        secondary: 'var(--color-secondary)',
+                        dark: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 min-h-screen pb-32">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-colors duration-500 border-b-2 border-primary/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold text-primary transition-colors duration-300">QOrienta</span>
+                <span
+                    class="bg-slate-100 text-slate-500 text-xs px-2 py-1 rounded-full uppercase tracking-wider">Branding
+                    Preview</span>
+            </div>
+            <a href="index.html" class="text-slate-500 hover:text-primary transition-colors text-sm font-medium">←
+                Înapoi la site</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4">Alege Identitatea Vizuală</h1>
+            <p class="text-slate-600 text-lg">
+                Analizați conceptele de logo și experimentați cu diferite palete de culori folosind meniul de jos.
+            </p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+            <!-- Option 1 -->
+            <div
+                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
+                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
+                    <!-- Placeholder -->
+                    <img src="https://placehold.co/400x400/4F46E5/white?text=Logo+1" id="logo1-img" alt="Logo Option 1"
+                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-primary/5 transition-colors duration-300">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Concept
+                            #1</h3>
+                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Modern</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6">Un design minimalist care pune accent pe litera "Q" și ideea
+                        de orientare/busolă.</p>
+                    <button onclick="voteFor('Concept #1')"
+                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-primary hover:text-primary hover:bg-primary/5 transition-all">
+                        Votează Conceptul #1
+                    </button>
+                </div>
+            </div>
+
+            <!-- Option 2 -->
+            <div
+                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
+                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
+                    <img src="https://placehold.co/400x400/10B981/white?text=Logo+2" id="logo2-img" alt="Logo Option 2"
+                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-secondary/5 transition-colors duration-300">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-secondary transition-colors">
+                            Concept #2</h3>
+                        <span
+                            class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full">Organic</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6">Forme fluide care sugerează creștere și dezvoltare personală.
+                    </p>
+                    <button onclick="voteFor('Concept #2')"
+                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-secondary hover:text-secondary hover:bg-secondary/5 transition-all">
+                        Votează Conceptul #2
+                    </button>
+                </div>
+            </div>
+
+            <!-- Option 3 -->
+            <div
+                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
+                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
+                    <img src="https://placehold.co/400x400/F59E0B/white?text=Logo+3" id="logo3-img" alt="Logo Option 3"
+                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-amber-500/5 transition-colors duration-300">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-500 transition-colors">
+                            Concept #3</h3>
+                        <span
+                            class="px-3 py-1 bg-amber-100 text-amber-600 text-xs font-bold rounded-full">Abstract</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6">O reprezentare abstractă a conexiunilor și a drumului în
+                        carieră.</p>
+                    <button onclick="voteFor('Concept #3')"
+                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 transition-all">
+                        Votează Conceptul #3
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Info -->
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+                <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 text-center">
+                    <p class="text-blue-600 text-sm">
+                        ℹ️ <strong>Notă:</strong> Imaginile de mai sus sunt placeholder. După ce alegeți o direcție,
+                        logo-urile finale vor fi randate aici.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Theme Switcher FAB (Floating Action Bar) -->
+    <div
+        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full p-2 pr-6 flex items-center gap-4 z-50 animate-[slideUp_0.5s_ease-out]">
+        <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+            🎨 Alege Tema
+        </div>
+
+        <div class="flex gap-2">
+            <!-- Theme: Corporate (Default) -->
+            <button onclick="setTheme('#4F46E5', '#10B981', 'Corporate')"
+                class="w-8 h-8 rounded-full bg-[#4F46E5] border-2 border-white ring-2 ring-transparent hover:ring-[#4F46E5] transition-all relative group"
+                title="Corporate">
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#10B981] rounded-full border border-white"></span>
+            </button>
+
+            <!-- Theme: Ocean -->
+            <button onclick="setTheme('#0ea5e9',('#06b6d4'), 'Ocean')"
+                class="w-8 h-8 rounded-full bg-[#0ea5e9] border-2 border-white ring-2 ring-transparent hover:ring-[#0ea5e9] transition-all relative group"
+                title="Ocean">
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#06b6d4] rounded-full border border-white"></span>
+            </button>
+
+            <!-- Theme: Sunset -->
+            <button onclick="setTheme('#f97316', '#e11d48', 'Sunset')"
+                class="w-8 h-8 rounded-full bg-[#f97316] border-2 border-white ring-2 ring-transparent hover:ring-[#f97316] transition-all relative group"
+                title="Sunset">
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#e11d48] rounded-full border border-white"></span>
+            </button>
+
+            <!-- Theme: Berry -->
+            <button onclick="setTheme('#8b5cf6', '#d946ef', 'Berry')"
+                class="w-8 h-8 rounded-full bg-[#8b5cf6] border-2 border-white ring-2 ring-transparent hover:ring-[#8b5cf6] transition-all relative group"
+                title="Berry">
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#d946ef] rounded-full border border-white"></span>
+            </button>
+
+            <!-- Theme: Nature -->
+            <button onclick="setTheme('#16a34a', '#84cc16', 'Nature')"
+                class="w-8 h-8 rounded-full bg-[#16a34a] border-2 border-white ring-2 ring-transparent hover:ring-[#16a34a] transition-all relative group"
+                title="Nature">
+                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#65a30d] rounded-full border border-white"></span>
+            </button>
+        </div>
+
+        <div id="current-theme-label" class="text-xs font-medium text-slate-500 w-16 text-center">Corporate</div>
+    </div>
+
+    <script>
+        function setTheme(primary, secondary, name) {
+            const root = document.documentElement;
+            root.style.setProperty('--color-primary', primary);
+            root.style.setProperty('--color-secondary', secondary);
+
+            document.getElementById('current-theme-label').textContent = name;
+
+            // Visual feedback - update placeholders colors too if needed
+            // (Only updates the query string for placehold.co to force reload with new color if we wanted, but let's keep it simple)
+        }
+
+        function voteFor(concept) {
+            // Get current theme
+            const theme = document.getElementById('current-theme-label').textContent;
+
+            const subject = encodeURIComponent(`Vot Logo QOrienta: ${concept}`);
+            const body = encodeURIComponent(`Salut,\n\nVotez pentru: ${concept}.\nPreferință paletă culori: ${theme}.\n\nObservații:\n`);
+            window.location.href = `mailto:contact@qorienta.ro?subject=${subject}&body=${body}`;
+        }
+    </script>
+
+    <style>
+        @keyframes slideUp {
+            from {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+
+</html>
