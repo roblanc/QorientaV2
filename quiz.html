@@ -274,23 +274,49 @@
     </div>
 
     <!-- RESULTS VIEW (Hidden Initially) -->
-    <div id="results-container" class="w-full hidden text-center animate-bg-fade pt-20 pb-10">
-      <div id="result-icon-container"
-        class="w-32 h-32 rounded-full bg-white shadow-xl flex items-center justify-center mb-8 mx-auto text-primary">
-        <span id="result-icon" class="material-symbols-rounded text-6xl">emoji_events</span>
+    <div id="results-container" class="w-full hidden text-center animate-bg-fade pt-16 pb-10">
+
+      <!-- Circular Progress Graph -->
+      <div class="relative w-48 h-48 mx-auto mb-6">
+        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+          <!-- Background circle -->
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" stroke-width="8" />
+          <!-- Progress circle (will be animated via JS) -->
+          <circle id="progress-circle" cx="50" cy="50" r="45" fill="none" stroke="#4f46e5" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283"
+            class="transition-all duration-1000 ease-out" />
+        </svg>
+        <!-- Percentage text in center -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span id="result-percentage" class="text-5xl font-black text-slate-900">0%</span>
+          <span class="text-sm text-slate-500">potrivire</span>
+        </div>
       </div>
 
-      <h2 class="font-display text-4xl font-black text-slate-900 mb-2">Felicitări!</h2>
-      <h3 id="result-title" class="font-display text-2xl font-bold text-primary mb-6">Ești un Creator vizionar</h3>
+      <!-- Result type icon -->
+      <div id="result-icon-container"
+        class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto">
+        <span id="result-icon" class="text-3xl">🎨</span>
+      </div>
 
-      <p id="result-desc" class="text-lg text-slate-600 mb-10 leading-relaxed px-4">
-        Ai un talent natural de a vedea potențialul acolo unde alții văd doar goluri. Lumea are nevoie de ideile tale.
+      <h2 id="result-title" class="font-display text-2xl font-black text-slate-900 mb-2 px-4">Ești un Creator!</h2>
+
+      <p id="result-desc" class="text-base text-slate-600 mb-8 leading-relaxed px-6">
+        Ai o imaginație bogată și îți place să te exprimi prin artă, design sau idei inovatoare.
       </p>
 
-      <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 mb-8 mx-4">
+      <!-- Score breakdown -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-lg mb-6 mx-4">
+        <h4 class="font-bold text-slate-400 text-xs uppercase tracking-wider mb-4">Profilul Tău</h4>
+        <div id="score-breakdown" class="space-y-3">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-lg mb-8 mx-4">
         <h4 class="font-bold text-slate-400 text-xs uppercase tracking-wider mb-3">Cariere Potrivite</h4>
-        <p id="result-careers" class="text-base font-bold text-slate-800">
-          Arhitectură, Design Grafic, Marketing Creativ, Regie Film
+        <p id="result-careers" class="text-sm font-semibold text-slate-700">
+          Designer Grafic, Arhitect, Director de Creație
         </p>
       </div>
 

@@ -108,6 +108,22 @@ const quizData = [
       { text: "O agendă sau planner", type: "organizational", icon: "event_note", insight: "Organizarea fizică îți clarifică mintea!" },
       { text: "O cameră foto sau tabletă grafică", type: "creative", icon: "camera_alt", insight: "Uneltele creative îți capturează viziunea!" }
     ]
+  },
+  {
+    question: "\"Prefer să lucrez singur decât în echipă.\"",
+    subtitle: "Cât de mult te descrie această afirmație?",
+    category: "AUTO-EVALUARE",
+    layout: "scale",
+    scaleLabels: { min: "Deloc", max: "Total" },
+    scoreMapping: { 1: "social", 2: "social", 3: null, 4: "technical", 5: "technical" }
+  },
+  {
+    question: "\"Văd soluții creative acolo unde alții văd probleme.\"",
+    subtitle: "Cât de mult ești de acord?",
+    category: "AUTO-EVALUARE",
+    layout: "scale",
+    scaleLabels: { min: "Deloc", max: "Total" },
+    scoreMapping: { 1: "organizational", 2: "organizational", 3: null, 4: "creative", 5: "creative" }
   }
 ];
 
@@ -273,7 +289,6 @@ function updateNavigationState() {
 
 function loadQuestion() {
   const data = quizData[currentQuestion];
-  const isGrid = data.layout === 'grid';
 
   questionEl.style.opacity = '0';
   setTimeout(() => {
@@ -304,7 +319,58 @@ function loadQuestion() {
 
   optionsEl.innerHTML = "";
 
-  // Set layout classes
+  // Handle SCALE layout (1-5 rating)
+  if (data.layout === 'scale') {
+    optionsEl.classList.remove('grid', 'grid-cols-2', 'flex-col');
+    optionsEl.classList.add('flex', 'flex-col');
+
+    // Add subtitle if present
+    if (data.subtitle) {
+      const subtitleEl = document.createElement('p');
+      subtitleEl.className = 'text-slate-500 text-base text-center mb-8 -mt-4';
+      subtitleEl.textContent = data.subtitle;
+      optionsEl.appendChild(subtitleEl);
+    }
+
+    // Create scale container
+    const scaleContainer = document.createElement('div');
+    scaleContainer.className = 'flex justify-center gap-3 mb-3';
+
+    for (let i = 1; i <= 5; i++) {
+      const isSelected = userAnswers[currentQuestion] === i;
+      const scaleBtn = document.createElement('button');
+      scaleBtn.className = `
+        w-14 h-14 rounded-xl font-bold text-lg transition-all duration-200
+        ${isSelected
+          ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-110'
+          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+        }
+      `;
+      scaleBtn.textContent = i;
+      scaleBtn.addEventListener('click', () => handleScaleSelect(i));
+      scaleContainer.appendChild(scaleBtn);
+    }
+
+    optionsEl.appendChild(scaleContainer);
+
+    // Add scale labels
+    if (data.scaleLabels) {
+      const labelsContainer = document.createElement('div');
+      labelsContainer.className = 'flex justify-between px-2 text-sm text-slate-400';
+      labelsContainer.innerHTML = `
+        <span>${data.scaleLabels.min}</span>
+        <span class="mx-auto">•────────────────────────────•</span>
+        <span>${data.scaleLabels.max}</span>
+      `;
+      optionsEl.appendChild(labelsContainer);
+    }
+
+    updateNavigationState();
+    return; // Don't process regular options
+  }
+
+  // Set layout classes for regular questions
+  const isGrid = data.layout === 'grid';
   if (isGrid) {
     optionsEl.classList.remove('flex-col');
     optionsEl.classList.add('grid', 'grid-cols-2');
@@ -413,6 +479,11 @@ function handleOptionSelect(type) {
   loadQuestion();
 }
 
+function handleScaleSelect(value) {
+  userAnswers[currentQuestion] = value;
+  loadQuestion();
+}
+
 function handleNext() {
   // If finishing Age question (index 1), show intro screen
   if (currentQuestion === 1 && userAnswers[1] !== null) {
@@ -478,9 +549,19 @@ function calculateAndShowResults() {
   // Ignore demographics (first 2 questions) for scoring
   const finalScores = { creative: 0, technical: 0, social: 0, organizational: 0 };
   for (let i = 2; i < userAnswers.length; i++) {
-    const type = userAnswers[i];
-    if (type && finalScores[type] !== undefined) {
-      finalScores[type]++;
+    const answer = userAnswers[i];
+    const questionData = quizData[i];
+
+    // Handle scale questions
+    if (questionData.layout === 'scale' && typeof answer === 'number') {
+      const mappedType = questionData.scoreMapping && questionData.scoreMapping[answer];
+      if (mappedType && finalScores[mappedType] !== undefined) {
+        finalScores[mappedType]++;
+      }
+    }
+    // Handle regular questions
+    else if (answer && finalScores[answer] !== undefined) {
+      finalScores[answer]++;
     }
   }
 
@@ -496,40 +577,94 @@ function calculateAndShowResults() {
     creative: {
       title: "Ești un Creator!",
       desc: "Ai o imaginație bogată și îți place să te exprimi prin artă, design sau idei inovatoare.",
-      careers: "Designer Grafic, Arhitect, Director de Creație, UX/UI Designer, Content Creator",
-      icon: "palette",
-      color: "text-accent-pink"
+      careers: "Designer Grafic, Arhitect, Director de Creație, UX/UI Designer",
+      emoji: "🎨"
     },
     technical: {
       title: "Ești un Tehnician!",
       desc: "Îți place să înțelegi cum funcționează lucrurile și să rezolvi probleme complexe prin logică.",
-      careers: "Programator, Inginer, Analist de Date, Specialist Cyber Security, Mecanic",
-      icon: "terminal",
-      color: "text-primary"
+      careers: "Programator, Inginer, Analist de Date, Specialist IT",
+      emoji: "💻"
     },
     social: {
       title: "Ești un Helper!",
-      desc: "Empatia este superputerea ta. Îți place să lucrezi cu oamenii și să îi ajuți să se dezvolte.",
-      careers: "Psiholog, Profesor, Medic, Specialist HR, Asistent Social",
-      icon: "volunteer_activism",
-      color: "text-accent-pink"
+      desc: "Empatia este superputerea ta. Îți place să lucrezi cu oamenii și să îi ajuți să crească.",
+      careers: "Psiholog, Profesor, Medic, Specialist HR",
+      emoji: "❤️"
     },
     organizational: {
       title: "Ești un Lider!",
       desc: "Ești organizat, eficient și îți place să pui lucrurile în mișcare. Ai stofă de antreprenor.",
-      careers: "Manager de Proiect, Antreprenor, Contabil, Consultant Business, Event Planner",
-      icon: "trending_up",
-      color: "text-accent-cyan"
+      careers: "Manager, Antreprenor, Consultant, Event Planner",
+      emoji: "📈"
     }
   };
 
   const result = resultContents[resultType] || resultContents.creative;
+  const totalAnswered = Object.values(finalScores).reduce((a, b) => a + b, 0);
+  const percentage = totalAnswered > 0 ? Math.round((maxScore / totalAnswered) * 100) : 0;
 
+  // Update result content
   document.getElementById('result-title').textContent = result.title;
   document.getElementById('result-desc').textContent = result.desc;
   document.getElementById('result-careers').textContent = result.careers;
-  document.getElementById('result-icon').textContent = result.icon;
-  document.getElementById('result-icon-container').className = `w-32 h-32 rounded-full bg-white shadow-xl flex items-center justify-center mb-8 mx-auto animate-[fadeIn_0.5s_ease-out] ${result.color}`;
+  document.getElementById('result-icon').textContent = result.emoji;
+
+  // Animate circular graph
+  const progressCircle = document.getElementById('progress-circle');
+  const percentageText = document.getElementById('result-percentage');
+  if (progressCircle && percentageText) {
+    const circumference = 283; // 2 * PI * 45
+    const offset = circumference - (percentage / 100) * circumference;
+
+    setTimeout(() => {
+      progressCircle.style.strokeDashoffset = offset;
+
+      // Animate percentage counter
+      let current = 0;
+      const increment = percentage / 30;
+      const counter = setInterval(() => {
+        current += increment;
+        if (current >= percentage) {
+          current = percentage;
+          clearInterval(counter);
+        }
+        percentageText.textContent = Math.round(current) + '%';
+      }, 30);
+    }, 300);
+  }
+
+  // Populate score breakdown
+  const scoreBreakdown = document.getElementById('score-breakdown');
+  if (scoreBreakdown) {
+    const typeNames = {
+      creative: { name: 'Creativ', emoji: '🎨', color: 'bg-pink-500' },
+      technical: { name: 'Tehnic', emoji: '💻', color: 'bg-indigo-500' },
+      social: { name: 'Social', emoji: '❤️', color: 'bg-rose-500' },
+      organizational: { name: 'Organizator', emoji: '📈', color: 'bg-cyan-500' }
+    };
+
+    scoreBreakdown.innerHTML = Object.entries(finalScores)
+      .sort((a, b) => b[1] - a[1])
+      .map(([type, score]) => {
+        const info = typeNames[type];
+        const scorePercent = totalAnswered > 0 ? Math.round((score / totalAnswered) * 100) : 0;
+        return `
+          <div class="flex items-center gap-3">
+            <span class="text-lg">${info.emoji}</span>
+            <div class="flex-1">
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-semibold text-slate-700">${info.name}</span>
+                <span class="text-slate-500">${scorePercent}%</span>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="${info.color} h-full rounded-full transition-all duration-700" style="width: ${scorePercent}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+  }
 }
 
 // Start
