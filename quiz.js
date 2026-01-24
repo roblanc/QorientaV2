@@ -82,97 +82,159 @@ const quizData = [
 ];
 
 let currentQuestion = 0;
-let scores = {
-  creative: 0,
-  technical: 0,
-  social: 0,
-  organizational: 0
-};
+// Track user answers by index to allow "Back" functionality and score recalculation
+let userAnswers = new Array(quizData.length).fill(null);
 
 const questionEl = document.getElementById("question-text");
 const optionsEl = document.getElementById("options-container");
-const progressText = document.getElementById("progress-text");
-const progressPercentage = document.getElementById("progress-percentage");
 const progressBar = document.getElementById("progress-bar-inner");
 const nextBtn = document.getElementById("next-btn");
+const backBtn = document.getElementById("back-btn");
 const quizContainer = document.getElementById("quiz-container");
 const resultsContainer = document.getElementById("results-container");
 
-// Initial state
-nextBtn.disabled = true;
+// Initial state updates
+function init() {
+  loadQuestion();
+  updateNavigationState();
+}
+
+function updateNavigationState() {
+  // Back button handling
+  backBtn.disabled = currentQuestion === 0;
+  if (currentQuestion === 0) {
+    backBtn.classList.add('opacity-0', 'pointer-events-none');
+  } else {
+    backBtn.classList.remove('opacity-0', 'pointer-events-none');
+  }
+
+  // Next button state based on if an answer is selected
+  const hasAnswer = userAnswers[currentQuestion] !== null;
+  nextBtn.disabled = !hasAnswer;
+
+  if (hasAnswer) {
+    nextBtn.classList.remove('bg-slate-200', 'text-slate-400');
+    nextBtn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/30');
+  } else {
+    nextBtn.classList.add('bg-slate-200', 'text-slate-400');
+    nextBtn.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/30');
+  }
+}
 
 function loadQuestion() {
   const data = quizData[currentQuestion];
   questionEl.textContent = data.question;
-  
-// Update progress
+
+  // Update progress
   const progress = ((currentQuestion + 1) / quizData.length) * 100;
-  progressText.textContent = `Întrebarea ${currentQuestion + 1} din ${quizData.length}`;
-  progressPercentage.textContent = `${Math.round(progress)}%`;
   progressBar.style.width = `${progress}%`;
 
   // Clear previous options
   optionsEl.innerHTML = "";
-  nextBtn.disabled = true;
-  nextBtn.classList.remove('bg-primary', 'hover:bg-primary-light', 'text-white', 'shadow-lg', 'shadow-primary/30', 'hover:scale-105');
-  nextBtn.classList.add('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
 
+  // Render options
   data.options.forEach((opt, index) => {
-    const label = document.createElement("label");
-    label.className = "group relative cursor-pointer w-full";
-    label.innerHTML = `
-      <input class="peer sr-only" name="answer" type="radio" value="${opt.type}"/>
-      <div class="h-full min-h-[240px] p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:shadow-primary/20 transition-all duration-300 flex flex-col items-center justify-center text-center gap-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 peer-checked:scale-110 peer-checked:bg-primary peer-checked:text-white shadow-sm">
-          <span class="material-symbols-rounded text-4xl">${opt.icon}</span>
-        </div>
-        <h3 class="text-lg font-bold text-slate-900 relative z-10 group-hover:text-primary transition-colors">${opt.text}</h3>
-        <div class="absolute top-4 right-4 w-6 h-6 rounded-full border-2 border-slate-200 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
-          <span class="material-symbols-rounded text-sm text-white opacity-0 peer-checked:opacity-100 font-bold">check</span>
+    // Check if this option was previously selected
+    const isSelected = userAnswers[currentQuestion] === opt.type;
+
+    const btn = document.createElement("div");
+    // Card styling
+    btn.className = `
+        group relative w-full p-4 rounded-2xl bg-white border-2 transition-all duration-200 cursor-pointer flex items-center gap-4
+        ${isSelected
+        ? 'border-primary bg-primary/5 shadow-md shadow-primary/10'
+        : 'border-white shadow-sm hover:border-slate-200 hover:shadow-md'
+      }
+    `;
+
+    // Inner HTML
+    btn.innerHTML = `
+      <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${isSelected ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200'}">
+        <span class="material-symbols-rounded text-2xl">${opt.icon}</span>
+      </div>
+      <div class="flex-1 text-left">
+        <h3 class="font-bold text-slate-800 text-base leading-tight group-hover:text-primary transition-colors ${isSelected ? 'text-primary' : ''}">${opt.text}</h3>
+      </div>
+      <div class="flex-shrink-0">
+        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${isSelected ? 'border-primary bg-primary' : 'border-slate-200'}">
+            <span class="material-symbols-rounded text-white text-xs font-bold leading-none ${isSelected ? 'opacity-100' : 'opacity-0'}">check</span>
         </div>
       </div>
     `;
-    
-    label.querySelector('input').addEventListener('change', () => {
-      nextBtn.disabled = false;
-        nextBtn.classList.add('bg-primary', 'hover:bg-primary-light', 'text-white', 'shadow-lg', 'shadow-primary/30', 'hover:scale-105');
-        nextBtn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
-    });
-    
-    optionsEl.appendChild(label);
+
+    // Click handler
+    btn.addEventListener('click', () => handleOptionSelect(opt.type));
+
+    optionsEl.appendChild(btn);
   });
+
+  updateNavigationState();
+}
+
+function handleOptionSelect(type) {
+  // Save answer
+  userAnswers[currentQuestion] = type;
+
+  // Re-render to show selection state immediately (could be optimized but fast enough)
+  loadQuestion();
+
+  // Optional: Auto-scroll slightly or minimal feedback
 }
 
 function handleNext() {
-  const selectedOption = document.querySelector('input[name="answer"]:checked');
-  if (!selectedOption) return;
+  if (currentQuestion < quizData.length - 1) {
+    // Animating out
+    optionsEl.classList.add('opacity-50', 'translate-x-[-10px]');
+    questionEl.classList.add('opacity-50');
 
-  const answerType = selectedOption.value;
-  scores[answerType]++;
-
-  currentQuestion++;
-
-  if (currentQuestion < quizData.length) {
-    // Basic transition effect
-    optionsEl.classList.add('opacity-0', 'translate-y-4');
     setTimeout(() => {
-        loadQuestion();
-        optionsEl.classList.remove('opacity-0', 'translate-y-4');
-        optionsEl.classList.add('animate-[fadeIn_0.5s_ease-out]');
-    }, 300);
+      currentQuestion++;
+      loadQuestion();
+
+      // Reset animation classes
+      optionsEl.classList.remove('opacity-50', 'translate-x-[-10px]');
+      questionEl.classList.remove('opacity-50');
+
+      // Add fade in
+      optionsEl.classList.add('animate-[fadeIn_0.3s_ease-out]');
+      setTimeout(() => optionsEl.classList.remove('animate-[fadeIn_0.3s_ease-out]'), 300);
+    }, 200);
+
   } else {
-    showResults();
+    calculateAndShowResults();
   }
 }
 
-function showResults() {
+function handleBack() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion();
+  }
+}
+
+function calculateAndShowResults() {
+  // Calculate scores based on userAnswers
+  const finalScores = {
+    creative: 0,
+    technical: 0,
+    social: 0,
+    organizational: 0
+  };
+
+  userAnswers.forEach(type => {
+    if (type && finalScores[type] !== undefined) {
+      finalScores[type]++;
+    }
+  });
+
   quizContainer.classList.add('hidden');
+  document.querySelector('nav').classList.add('hidden'); // Hide nav on results
   resultsContainer.classList.remove('hidden');
 
-  // Calculate top result
-  const maxScore = Math.max(...Object.values(scores));
-  const resultType = Object.keys(scores).find(key => scores[key] === maxScore);
+  // Find winner
+  const maxScore = Math.max(...Object.values(finalScores));
+  // In case of tie, prioritize order: creative > technical > social > organizational
+  const resultType = Object.keys(finalScores).find(key => finalScores[key] === maxScore);
 
   const resultContents = {
     creative: {
@@ -205,16 +267,18 @@ function showResults() {
     }
   };
 
-  const result = resultContents[resultType] || resultContents.creative; // Fallback
+  const result = resultContents[resultType] || resultContents.creative;
 
   document.getElementById('result-title').textContent = result.title;
   document.getElementById('result-desc').textContent = result.desc;
   document.getElementById('result-careers').textContent = result.careers;
   document.getElementById('result-icon').textContent = result.icon;
-  document.getElementById('result-icon-container').className = `w-24 h-24 rounded-full bg-white shadow-xl flex items-center justify-center mb-6 animate-[fadeIn_0.5s_ease-out] mx-auto ${result.color}`;
+  document.getElementById('result-icon-container').className = `w-32 h-32 rounded-full bg-white shadow-xl flex items-center justify-center mb-8 mx-auto animate-[fadeIn_0.5s_ease-out] ${result.color}`;
 }
 
-// Initial load
-loadQuestion();
-
+// Event Listeners
 nextBtn.addEventListener("click", handleNext);
+backBtn.addEventListener("click", handleBack);
+
+// Start
+init();
