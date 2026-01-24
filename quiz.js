@@ -230,6 +230,10 @@ function continueAfterIntro() {
 
   quizContainer.classList.add("animate-[fadeIn_0.5s_ease-out]");
 
+  // Reset opacity classes that were added before showing intro
+  optionsEl.classList.remove('opacity-0', '-translate-x-2');
+  questionEl.classList.remove('opacity-0');
+
   // Move to first vocational question (index 2)
   currentQuestion = 2;
   loadQuestion();
@@ -264,6 +268,10 @@ function continueFromInsight() {
   quizFooter.classList.remove("hidden");
 
   quizContainer.classList.add("animate-[fadeIn_0.5s_ease-out]");
+
+  // Reset opacity classes that were added before showing insight
+  optionsEl.classList.remove('opacity-0', '-translate-x-2');
+  questionEl.classList.remove('opacity-0');
 
   currentQuestion++;
   loadQuestion();
