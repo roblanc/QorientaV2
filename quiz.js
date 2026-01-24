@@ -124,6 +124,38 @@ const quizData = [
     layout: "scale",
     scaleLabels: { min: "Deloc", max: "Total" },
     scoreMapping: { 1: "organizational", 2: "organizational", 3: null, 4: "creative", 5: "creative" }
+  },
+  {
+    question: "Ce abilități vrei să îmbunătățești?",
+    subtitle: "Selectează toate care se aplică",
+    category: "OBIECTIVE",
+    layout: "multiselect",
+    options: [
+      { text: "Comunicare eficientă", emoji: "💬" },
+      { text: "Creștere personală", emoji: "🌱" },
+      { text: "Vorbit în public", emoji: "🎤" },
+      { text: "Ascultare activă", emoji: "👂" },
+      { text: "Leadership", emoji: "👑" },
+      { text: "Încredere în sine", emoji: "💪" },
+      { text: "Succes în carieră", emoji: "🚀" },
+      { text: "Rezolvarea conflictelor", emoji: "🤝" },
+      { text: "Prezentări", emoji: "📊" }
+    ]
+  },
+  {
+    question: "Ce te împiedică să îți atingi obiectivele?",
+    subtitle: "Selectează toate care se aplică",
+    category: "OBSTACOLE",
+    layout: "multiselect",
+    options: [
+      { text: "Nu știu de unde să încep", emoji: "🚧" },
+      { text: "Îmi pierd interesul", emoji: "😔" },
+      { text: "Nu practic destul", emoji: "🏔️" },
+      { text: "Mi-e frică de judecata altora", emoji: "👀" },
+      { text: "Rutina mea e haotică", emoji: "🧹" },
+      { text: "Am prea puțin timp", emoji: "⏰" },
+      { text: "Altceva", emoji: "📦" }
+    ]
   }
 ];
 
@@ -288,7 +320,16 @@ function updateNavigationState() {
     backBtn.classList.add('opacity-100');
   }
 
-  const hasAnswer = userAnswers[currentQuestion] !== null;
+  // Handle both single select (value or string) and multi-select (array)
+  let hasAnswer = false;
+  const answer = userAnswers[currentQuestion];
+
+  if (Array.isArray(answer)) {
+    hasAnswer = answer.length > 0;
+  } else {
+    hasAnswer = answer !== null;
+  }
+
   nextBtn.disabled = !hasAnswer;
 
   if (hasAnswer) {
@@ -299,6 +340,25 @@ function updateNavigationState() {
     nextBtn.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/30');
   }
 }
+
+
+
+function handleMultiselectToggle(index) {
+  const currentSelections = userAnswers[currentQuestion] || [];
+
+  if (currentSelections.includes(index)) {
+    // Remove if already selected
+    userAnswers[currentQuestion] = currentSelections.filter(i => i !== index);
+  } else {
+    // Add if not selected
+    userAnswers[currentQuestion] = [...currentSelections, index];
+  }
+
+  loadQuestion();
+  updateNavigationState();
+}
+
+
 
 function loadQuestion() {
   const data = quizData[currentQuestion];
@@ -380,6 +440,59 @@ function loadQuestion() {
 
     updateNavigationState();
     return; // Don't process regular options
+  }
+
+  // Handle multiselect (checkbox) layout
+  if (data.layout === 'multiselect') {
+    // Initialize answer array if not exists
+    if (!Array.isArray(userAnswers[currentQuestion])) {
+      userAnswers[currentQuestion] = [];
+    }
+
+    // Add subtitle
+    if (data.subtitle) {
+      const subtitleEl = document.createElement('p');
+      subtitleEl.className = 'text-slate-500 text-base text-center mb-6 -mt-4';
+      subtitleEl.textContent = data.subtitle;
+      optionsEl.appendChild(subtitleEl);
+    }
+
+    // Create checkbox list container
+    const listContainer = document.createElement('div');
+    listContainer.className = 'flex flex-col gap-3 w-full';
+
+    data.options.forEach((opt, idx) => {
+      const isSelected = userAnswers[currentQuestion].includes(idx);
+
+      const item = document.createElement('div');
+      item.className = `
+        flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200
+        ${isSelected
+          ? 'border-primary bg-primary/5 shadow-md'
+          : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm'
+        }
+      `;
+
+      item.innerHTML = `
+        <span class="text-2xl">${opt.emoji || '📌'}</span>
+        <span class="flex-1 text-left text-slate-800 font-medium">${opt.text}</span>
+        <div class="w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all
+          ${isSelected
+          ? 'bg-primary border-primary text-white'
+          : 'border-slate-300 bg-white'
+        }
+        ">
+          ${isSelected ? '<span class="text-sm font-bold">✓</span>' : ''}
+        </div>
+      `;
+
+      item.addEventListener('click', () => handleMultiselectToggle(idx));
+      listContainer.appendChild(item);
+    });
+
+    optionsEl.appendChild(listContainer);
+    updateNavigationState();
+    return;
   }
 
   // Set layout classes for regular questions
