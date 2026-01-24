@@ -288,8 +288,8 @@
 
     <script>
         // Load votes from localStorage
-        // Using 'qorienta_votes_v2' to simulate a fresh start if needed, but keeping consistent names
-        let votes = JSON.parse(localStorage.getItem('qorienta_votes')) || {};
+        // Using 'qorienta_votes_v2' to ensure fresh start (0 votes) by default
+        let votes = JSON.parse(localStorage.getItem('qorienta_votes_v2')) || {};
 
         function setTheme(primary, secondary, name) {
             const root = document.documentElement;
@@ -302,7 +302,7 @@
             votes[id] = (votes[id] || 0) + 1;
 
             // Save to local storage
-            localStorage.setItem('qorienta_votes', JSON.stringify(votes));
+            localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
 
             // Show feedback
             showToast();
