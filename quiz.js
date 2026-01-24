@@ -511,9 +511,14 @@ function loadQuestion() {
     const btn = document.createElement("div");
 
     if (isGrid) {
-      // Grid Card Style (SmartyMe Gender/Age)
+      // Check if it's an image card (Gender) or Icon card (Age)
+      const hasImage = !!opt.image;
+
+      // Grid Card Style
+      // Gender (Image): aspect-[4/5] (Large)
+      // Age (Icon): aspect-square max-w-[140px] mx-auto (Smaller, Compact)
       btn.className = `
-          group relative w-full aspect-[4/5] rounded-[2rem] bg-white border-2 transition-all duration-300 cursor-pointer flex flex-col items-center justify-end overflow-hidden select-none
+          group relative w-full ${hasImage ? 'aspect-[4/5]' : 'aspect-square max-w-[150px] mx-auto'} rounded-[2rem] bg-white border-2 transition-all duration-300 cursor-pointer flex flex-col items-center justify-end overflow-hidden select-none
           ${isSelected
           ? 'border-primary shadow-xl shadow-primary/10 scale-[1.02]'
           : 'border-transparent shadow-md hover:shadow-lg hover:-translate-y-1'
@@ -531,16 +536,16 @@ function loadQuestion() {
           </div>
         `;
       } else {
-        // Icon-based grid card (for age)
+        // Icon-based grid card (for age) - Compact Layout
         const iconMap = {
           'school': '🎒', 'work': '💼', 'group': '✨'
         };
         const emoji = iconMap[opt.icon] || '🔹';
         btn.innerHTML = `
-          <div class="flex-1 w-full flex items-center justify-center text-5xl transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}">
+          <div class="flex-1 w-full flex items-center justify-center text-4xl transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}">
             ${emoji}
           </div>
-          <div class="w-full py-3 px-4 bg-primary text-white text-center font-bold text-base rounded-b-[1.8rem]">
+          <div class="w-full py-2 px-2 bg-primary text-white text-center font-bold text-sm rounded-b-[1.8rem]">
             ${opt.text}
           </div>
         `;
