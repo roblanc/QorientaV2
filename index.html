@@ -90,7 +90,21 @@
             overflow: hidden;
             z-index: -1;
             pointer-events: none;
-            background: #f8fafc;
+            background:
+                /* Horizontal lines */
+                repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 39px,
+                    rgba(203, 213, 225, 0.25) 39px,
+                    rgba(203, 213, 225, 0.25) 40px),
+                /* Vertical lines */
+                repeating-linear-gradient(to right,
+                    transparent 0px,
+                    transparent 39px,
+                    rgba(203, 213, 225, 0.25) 39px,
+                    rgba(203, 213, 225, 0.25) 40px),
+                /* Base background color */
+                #f8fafc;
         }
 
         .aurora-blob {
