@@ -8,17 +8,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Dynamic Colors Configuration -->
     <style>
         :root {
             --color-primary: #4F46E5;
-            /* Default Indigo */
             --color-secondary: #10B981;
-            /* Default Emerald */
         }
 
         body {
             font-family: 'Outfit', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translate(-50%, 100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
         }
     </style>
 
@@ -49,7 +58,7 @@
                 <span class="text-2xl font-bold text-primary transition-colors duration-300">QOrienta</span>
                 <span
                     class="bg-slate-100 text-slate-500 text-xs px-2 py-1 rounded-full uppercase tracking-wider">Branding
-                    Preview</span>
+                    Premium</span>
             </div>
             <a href="index.html" class="text-slate-500 hover:text-primary transition-colors text-sm font-medium">←
                 Înapoi la site</a>
@@ -62,7 +71,7 @@
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h1 class="text-4xl font-bold text-slate-900 mb-4">Alege Identitatea Vizuală</h1>
             <p class="text-slate-600 text-lg">
-                Am extras fiecare variație individuală. Analizează opțiunile și votează exact logo-ul care îți place!
+                Am recreat conceptele în format vectorial premium. Iată cele mai bune 3 direcții pentru brandul tău.
             </p>
         </div>
 
@@ -70,31 +79,68 @@
         <div class="mb-20">
             <div class="flex items-center gap-4 mb-8">
                 <div
-                    class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">
+                    class="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">
                     1</div>
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">Concept #1: Minimalist & Simbolic</h2>
-                    <p class="text-slate-500">Focus pe litera "Q" și metafore vizuale simple.</p>
+                    <p class="text-slate-500">Focus pe litera "Q" și metafore vizuale simple (busolă, direcție).</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                <!-- Javascript will generate items here -->
-                <script>
-                    for (let i = 1; i <= 20; i++) {
-                        document.write(`
-                            <div onclick="voteFor('Despre Concept #1 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 hover:border-primary transition-all cursor-pointer relative overflow-hidden">
-                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
-                                    <img src="assets/logos/concept1_v${i}.png" class="w-full h-full object-contain" loading="lazy">
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs font-bold text-slate-400 group-hover:text-primary transition-colors">#1.${i}</span>
-                                    <span class="text-[10px] uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
-                                </div>
-                            </div>
-                        `);
-                    }
-                </script>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- V1 -->
+                <div onclick="voteFor('Minimalist V1')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/minimalist_v1.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V1:
+                            Compass Q</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 1 ➔
+                        </div>
+                    </div>
+                </div>
+
+                <!-- V2 -->
+                <div onclick="voteFor('Minimalist V2')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/minimalist_v2.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V2:
+                            Modern Path</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 2 ➔
+                        </div>
+                    </div>
+                </div>
+
+                <!-- V3 -->
+                <div onclick="voteFor('Minimalist V3')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/minimalist_v3.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V3:
+                            Rose Compass</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 3 ➔
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -102,34 +148,70 @@
         <div class="mb-20">
             <div class="flex items-center gap-4 mb-8">
                 <div
-                    class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary font-bold text-xl">
+                    class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-xl">
                     2</div>
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">Concept #2: Organic & Uman</h2>
-                    <p class="text-slate-500">Siluete umane, telescoape și explorare.</p>
+                    <p class="text-slate-500">Siluete umane, natură, telescoape și explorare.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                <script>
-                    for (let i = 1; i <= 12; i++) {
-                        document.write(`
-                            <div onclick="voteFor('Despre Concept #2 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-secondary/20 hover:-translate-y-1 hover:border-secondary transition-all cursor-pointer relative overflow-hidden">
-                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
-                                    <img src="assets/logos/concept2_v${i}.png" class="w-full h-full object-contain" loading="lazy">
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs font-bold text-slate-400 group-hover:text-secondary transition-colors">#2.${i}</span>
-                                    <span class="text-[10px] uppercase font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
-                                </div>
-                            </div>
-                        `);
-                    }
-                </script>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- V1 -->
+                <div onclick="voteFor('Organic V1')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/organic_v1.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V1:
+                            Leaf Vision</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 1 ➔
+                        </div>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div onclick="voteFor('Organic V2')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/organic_v2.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V2:
+                            Climbing Star</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 2 ➔
+                        </div>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div onclick="voteFor('Organic V3')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/organic_v3.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V3:
+                            Knowledge Tree</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 3 ➔
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Section 3: Cosmic/Abstract -->
+        <!-- Section 3: Abstract -->
         <div class="mb-20">
             <div class="flex items-center gap-4 mb-8">
                 <div
@@ -137,26 +219,62 @@
                     3</div>
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">Concept #3: Cosmic & Abstract</h2>
-                    <p class="text-slate-500">Metafore spațiale, stele și direcție.</p>
+                    <p class="text-slate-500">Forme geometrice, săgeți și stele care simbolizează succesul.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                <script>
-                    for (let i = 1; i <= 12; i++) {
-                        document.write(`
-                            <div onclick="voteFor('Despre Concept #3 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-amber-500/20 hover:-translate-y-1 hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden">
-                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
-                                    <img src="assets/logos/concept3_v${i}.png" class="w-full h-full object-contain" loading="lazy">
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs font-bold text-slate-400 group-hover:text-amber-500 transition-colors">#3.${i}</span>
-                                    <span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
-                                </div>
-                            </div>
-                        `);
-                    }
-                </script>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- V1 -->
+                <div onclick="voteFor('Abstract V1')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-2 hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/abstract_v1.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V1:
+                            Arrow Rise</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-amber-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 1 ➔
+                        </div>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div onclick="voteFor('Abstract V2')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-2 hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/abstract_v2.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V2:
+                            Golden Peak</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-amber-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 2 ➔
+                        </div>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div onclick="voteFor('Abstract V3')"
+                    class="group bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-2 hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square flex items-center justify-center mb-6">
+                        <img src="assets/logos/generated/abstract_v3.png"
+                            class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-center">
+                        <span
+                            class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V3:
+                            Spark Moment</span>
+                        <div
+                            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-amber-600 font-bold flex items-center justify-center gap-2">
+                            Votează Varianta 3 ➔
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -201,25 +319,11 @@
 
         function voteFor(concept) {
             const theme = document.getElementById('current-theme-label').textContent;
-            const subject = encodeURIComponent(`Vot ${concept}`);
-            const body = encodeURIComponent(`Salut,\n\nAm ales: ${concept}.\nÎmi place cu tema de culori: ${theme}.\n\nAlte observații:\n`);
+            const subject = encodeURIComponent(`Vot Logo Premium: ${concept}`);
+            const body = encodeURIComponent(`Salut,\n\nAm ales varianta: ${concept}.\nÎmi place cu tema de culori: ${theme}.\n\nAlte observații:\n`);
             window.location.href = `mailto:contact@qorienta.ro?subject=${subject}&body=${body}`;
         }
     </script>
-
-    <style>
-        @keyframes slideUp {
-            from {
-                transform: translate(-50%, 100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translate(-50%, 0);
-                opacity: 1;
-            }
-        }
-    </style>
 </body>
 
 </html>
