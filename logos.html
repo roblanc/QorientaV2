@@ -62,102 +62,107 @@
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h1 class="text-4xl font-bold text-slate-900 mb-4">Alege Identitatea Vizuală</h1>
             <p class="text-slate-600 text-lg">
-                Analizați conceptele de logo și experimentați cu diferite palete de culori folosind meniul de jos.
+                Am extras fiecare variație individuală. Analizează opțiunile și votează exact logo-ul care îți place!
             </p>
         </div>
 
-        <!-- Gallery Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-
-            <!-- Option 1 -->
-            <div
-                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
-                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
-                    <!-- Placeholder -->
-                    <img src="logo_concept_1.png" id="logo1-img" alt="Logo Option 1"
-                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-primary/5 transition-colors duration-300">
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Concept
-                            #1</h3>
-                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Modern</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-6">Un design minimalist care pune accent pe litera "Q" și ideea
-                        de orientare/busolă.</p>
-                    <button onclick="voteFor('Concept #1')"
-                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-primary hover:text-primary hover:bg-primary/5 transition-all">
-                        Votează Conceptul #1
-                    </button>
+        <!-- Section 1: Minimalist -->
+        <div class="mb-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">
+                    1</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Concept #1: Minimalist & Simbolic</h2>
+                    <p class="text-slate-500">Focus pe litera "Q" și metafore vizuale simple.</p>
                 </div>
             </div>
 
-            <!-- Option 2 -->
-            <div
-                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
-                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="logo_concept_2.png" id="logo2-img" alt="Logo Option 2"
-                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-secondary/5 transition-colors duration-300">
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-secondary transition-colors">
-                            Concept #2</h3>
-                        <span
-                            class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full">Organic</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-6">Forme fluide care sugerează creștere și dezvoltare personală.
-                    </p>
-                    <button onclick="voteFor('Concept #2')"
-                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-secondary hover:text-secondary hover:bg-secondary/5 transition-all">
-                        Votează Conceptul #2
-                    </button>
-                </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Javascript will generate items here -->
+                <script>
+                    for (let i = 1; i <= 20; i++) {
+                        document.write(`
+                            <div onclick="voteFor('Despre Concept #1 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 hover:border-primary transition-all cursor-pointer relative overflow-hidden">
+                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
+                                    <img src="assets/logos/concept1_v${i}.png" class="w-full h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-slate-400 group-hover:text-primary transition-colors">#1.${i}</span>
+                                    <span class="text-[10px] uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                </script>
             </div>
-
-            <!-- Option 3 -->
-            <div
-                class="group bg-white rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 overflow-hidden border border-slate-100">
-                <div class="aspect-square bg-slate-50 flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="logo_concept_3.png" id="logo3-img" alt="Logo Option 3"
-                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-amber-500/5 transition-colors duration-300">
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-500 transition-colors">
-                            Concept #3</h3>
-                        <span
-                            class="px-3 py-1 bg-amber-100 text-amber-600 text-xs font-bold rounded-full">Abstract</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-6">O reprezentare abstractă a conexiunilor și a drumului în
-                        carieră.</p>
-                    <button onclick="voteFor('Concept #3')"
-                        class="w-full py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 transition-all">
-                        Votează Conceptul #3
-                    </button>
-                </div>
-            </div>
-
-            <!-- Upload Info -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3">
-                <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 text-center">
-                    <p class="text-blue-600 text-sm">
-                        ℹ️ <strong>Notă:</strong> Imaginile de mai sus sunt placeholder. După ce alegeți o direcție,
-                        logo-urile finale vor fi randate aici.
-                    </p>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Section 2: Organic -->
+        <div class="mb-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary font-bold text-xl">
+                    2</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Concept #2: Organic & Uman</h2>
+                    <p class="text-slate-500">Siluete umane, telescoape și explorare.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                <script>
+                    for (let i = 1; i <= 12; i++) {
+                        document.write(`
+                            <div onclick="voteFor('Despre Concept #2 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-secondary/20 hover:-translate-y-1 hover:border-secondary transition-all cursor-pointer relative overflow-hidden">
+                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
+                                    <img src="assets/logos/concept2_v${i}.png" class="w-full h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-slate-400 group-hover:text-secondary transition-colors">#2.${i}</span>
+                                    <span class="text-[10px] uppercase font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+
+        <!-- Section 3: Cosmic/Abstract -->
+        <div class="mb-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 font-bold text-xl">
+                    3</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Concept #3: Cosmic & Abstract</h2>
+                    <p class="text-slate-500">Metafore spațiale, stele și direcție.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                <script>
+                    for (let i = 1; i <= 12; i++) {
+                        document.write(`
+                            <div onclick="voteFor('Despre Concept #3 - Varianta ${i}')" class="group bg-white rounded-2xl p-4 shadow-sm border border-slate-100 hover:shadow-xl hover:shadow-amber-500/20 hover:-translate-y-1 hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden">
+                                <div class="aspect-square flex items-center justify-center mb-3 p-2 bg-slate-50 rounded-xl group-hover:bg-white transition-colors">
+                                    <img src="assets/logos/concept3_v${i}.png" class="w-full h-full object-contain" loading="lazy">
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-slate-400 group-hover:text-amber-500 transition-colors">#3.${i}</span>
+                                    <span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">Votează</span>
+                                </div>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Theme Switcher FAB (Floating Action Bar) -->
+    <!-- Theme Switcher FAB -->
     <div
         class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full p-2 pr-6 flex items-center gap-4 z-50 animate-[slideUp_0.5s_ease-out]">
         <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">
@@ -165,40 +170,22 @@
         </div>
 
         <div class="flex gap-2">
-            <!-- Theme: Corporate (Default) -->
+            <!-- Themes -->
             <button onclick="setTheme('#4F46E5', '#10B981', 'Corporate')"
-                class="w-8 h-8 rounded-full bg-[#4F46E5] border-2 border-white ring-2 ring-transparent hover:ring-[#4F46E5] transition-all relative group"
-                title="Corporate">
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#10B981] rounded-full border border-white"></span>
-            </button>
-
-            <!-- Theme: Ocean -->
-            <button onclick="setTheme('#0ea5e9',('#06b6d4'), 'Ocean')"
-                class="w-8 h-8 rounded-full bg-[#0ea5e9] border-2 border-white ring-2 ring-transparent hover:ring-[#0ea5e9] transition-all relative group"
-                title="Ocean">
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#06b6d4] rounded-full border border-white"></span>
-            </button>
-
-            <!-- Theme: Sunset -->
+                class="w-8 h-8 rounded-full bg-[#4F46E5] border-2 border-white hover:scale-110 transition-transform"
+                title="Corporate"></button>
+            <button onclick="setTheme('#0ea5e9', '#06b6d4', 'Ocean')"
+                class="w-8 h-8 rounded-full bg-[#0ea5e9] border-2 border-white hover:scale-110 transition-transform"
+                title="Ocean"></button>
             <button onclick="setTheme('#f97316', '#e11d48', 'Sunset')"
-                class="w-8 h-8 rounded-full bg-[#f97316] border-2 border-white ring-2 ring-transparent hover:ring-[#f97316] transition-all relative group"
-                title="Sunset">
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#e11d48] rounded-full border border-white"></span>
-            </button>
-
-            <!-- Theme: Berry -->
+                class="w-8 h-8 rounded-full bg-[#f97316] border-2 border-white hover:scale-110 transition-transform"
+                title="Sunset"></button>
             <button onclick="setTheme('#8b5cf6', '#d946ef', 'Berry')"
-                class="w-8 h-8 rounded-full bg-[#8b5cf6] border-2 border-white ring-2 ring-transparent hover:ring-[#8b5cf6] transition-all relative group"
-                title="Berry">
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#d946ef] rounded-full border border-white"></span>
-            </button>
-
-            <!-- Theme: Nature -->
+                class="w-8 h-8 rounded-full bg-[#8b5cf6] border-2 border-white hover:scale-110 transition-transform"
+                title="Berry"></button>
             <button onclick="setTheme('#16a34a', '#84cc16', 'Nature')"
-                class="w-8 h-8 rounded-full bg-[#16a34a] border-2 border-white ring-2 ring-transparent hover:ring-[#16a34a] transition-all relative group"
-                title="Nature">
-                <span class="absolute -top-1 -right-1 w-3 h-3 bg-[#65a30d] rounded-full border border-white"></span>
-            </button>
+                class="w-8 h-8 rounded-full bg-[#16a34a] border-2 border-white hover:scale-110 transition-transform"
+                title="Nature"></button>
         </div>
 
         <div id="current-theme-label" class="text-xs font-medium text-slate-500 w-16 text-center">Corporate</div>
@@ -209,19 +196,13 @@
             const root = document.documentElement;
             root.style.setProperty('--color-primary', primary);
             root.style.setProperty('--color-secondary', secondary);
-
             document.getElementById('current-theme-label').textContent = name;
-
-            // Visual feedback - update placeholders colors too if needed
-            // (Only updates the query string for placehold.co to force reload with new color if we wanted, but let's keep it simple)
         }
 
         function voteFor(concept) {
-            // Get current theme
             const theme = document.getElementById('current-theme-label').textContent;
-
-            const subject = encodeURIComponent(`Vot Logo QOrienta: ${concept}`);
-            const body = encodeURIComponent(`Salut,\n\nVotez pentru: ${concept}.\nPreferință paletă culori: ${theme}.\n\nObservații:\n`);
+            const subject = encodeURIComponent(`Vot ${concept}`);
+            const body = encodeURIComponent(`Salut,\n\nAm ales: ${concept}.\nÎmi place cu tema de culori: ${theme}.\n\nAlte observații:\n`);
             window.location.href = `mailto:contact@qorienta.ro?subject=${subject}&body=${body}`;
         }
     </script>
