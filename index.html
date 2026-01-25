@@ -22,8 +22,8 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#4f46e5", // Indigo-600
-                        "primary-light": "#818cf8", // Indigo-400
+                        "primary": "var(--color-primary)",
+                        "primary-light": "var(--color-primary-light)",
                         "accent-pink": "#ec4899", // Pink-500
                         "accent-cyan": "#06b6d4", // Cyan-500
                         "surface-light": "#ffffff",
@@ -52,7 +52,13 @@
             },
         }
     </script>
+    <script src="assets/js/theme.js"></script>
     <style>
+        :root {
+            --color-primary: #4f46e5;
+            --color-primary-light: #818cf8;
+        }
+
         body {
             background-color: #f8fafc;
             color: #0f172a;
@@ -171,38 +177,41 @@
             </a>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-1 bg-white/50 px-2 py-1.5 rounded-full border border-slate-200">
-                <a href="quiz.html"
-                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Test
-                    vocațional</a>
-                <a href="pricing.html"
-                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Pachete</a>
-                <a href="team.html"
-                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Mentori</a>
-                <a href="about.html"
-                    class="px-5 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-primary hover:bg-white/80 transition-all">Despre
-                    Noi</a>
-                <a href="logos.html"
-                    class="px-5 py-2 rounded-full text-sm font-bold text-primary bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-all">
-                    Logos
-                </a>
+            <div class="hidden md:flex gap-8 items-center">
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex gap-8 items-center">
+                    <a href="quiz.html"
+                        class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Test
+                        Vocațional</a>
+                    <a href="pricing.html"
+                        class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Pachete</a>
+                    <a href="team.html"
+                        class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Mentori</a>
+                    <a href="about.html"
+                        class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Despre
+                        Noi</a>
+                    <a href="logos.html"
+                        class="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors">Logos</a>
+                </div>
+
+                <!-- CTA & Mobile Button -->
+                <div class="flex items-center gap-4">
+                    <!-- Theme Switcher -->
+                    <div id="nav-theme-toggle" class="relative"></div>
+
+                    <a href="quiz.html"
+                        class="hidden md:inline-flex bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                        Începe Gratuit
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors">
+                    <span class="material-symbols-rounded text-3xl">menu</span>
+                </button>
             </div>
 
-            <!-- CTA -->
-            <div class="hidden md:flex items-center gap-4">
-                <a href="quiz.html"
-                    class="bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
-                    Începe Gratuit
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors">
-                <span class="material-symbols-rounded text-3xl">menu</span>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Moved to Body End -->
+            <!-- Mobile Menu Moved to Body End -->
     </nav>
 
     <!-- Hero Section -->
@@ -783,6 +792,12 @@
                             }
                         });
                     }
+                }
+
+                // Init Theme Toggle
+                if (typeof renderThemeToggle === 'function') {
+                    renderThemeToggle('nav-theme-toggle');
+                    // Also mobile? We can add another container for mobile if needed.
                 }
 
                 // Helper to download emails CSV

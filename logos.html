@@ -5,14 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propuneri Logo & Culori - QOrienta</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Included for potential charts, but using HTML bars for simplicity/speed -->
-
+    <!-- Tailwind CSS with Config -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "var(--color-primary)",
+                        "primary-light": "var(--color-primary-light)",
+                        "accent-pink": "#ec4899", // Pink-500
+                        "accent-cyan": "#06b6d4", // Cyan-500
+                        "surface-light": "#ffffff",
+                        "surface-off": "#f8fafc", // Slate-50
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: { "3xl": "1.5rem", "4xl": "2.5rem" },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'scroll': 'scroll 40s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <script src="assets/js/theme.js"></script>
     <style>
         :root {
             --color-primary: #4F46E5;
+            --color-primary-light: #818cf8;
             --color-secondary: #10B981;
         }
 
@@ -96,6 +131,9 @@
             </a>
 
             <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Switcher -->
+                <div id="nav-theme-toggle" class="relative"></div>
+
                 <a href="#ranking"
                     class="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-red-100 transition-colors">
                     <div class="w-2 h-2 bg-red-500 rounded-full relative live-indicator"></div>
@@ -1226,6 +1264,11 @@
                 updateHeaderLogo(savedLogo);
             }
             renderLeaderboard();
+
+            // Init Theme Toggle
+            if (typeof renderThemeToggle === 'function') {
+                renderThemeToggle('nav-theme-toggle');
+            }
         })();
     </script>
 

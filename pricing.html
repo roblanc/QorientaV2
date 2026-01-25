@@ -16,14 +16,15 @@
         rel="stylesheet" />
     <!-- Tailwind CSS with Config -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="assets/js/theme.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#4f46e5", // Indigo-600
-                        "primary-light": "#818cf8", // Indigo-400
+                        "primary": "var(--color-primary)",
+                        "primary-light": "var(--color-primary-light)",
                         "accent-pink": "#ec4899", // Pink-500
                         "accent-cyan": "#06b6d4", // Cyan-500
                         "surface-light": "#ffffff",
@@ -47,7 +48,13 @@
             },
         }
     </script>
+    <script src="assets/js/theme.js"></script>
     <style>
+        :root {
+            --color-primary: #4f46e5;
+            --color-primary-light: #818cf8;
+        }
+
         body {
             background-color: #f8fafc;
             color: #0f172a;
@@ -356,6 +363,26 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white py-16 px-6">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div id="logo-icon-wrapper"
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+                    <span class="material-symbols-rounded">explore</span>
+                </div>
+                <span class="font-display font-bold text-xl text-slate-800">QOrienta</span>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <!-- Theme Switcher -->
+                <div id="nav-theme-toggle" class="relative"></div>
+                <div class="hidden md:flex gap-6 mr-4">
+                    <a href="quiz.html" class="text-slate-600 hover:text-primary font-medium">Test</a>
+                </div>
+                <a href="index.html"
+                    class="text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors">Înapoi</a>
+            </div>
+        </div>
+
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
             <div class="col-span-1 md:col-span-1">
                 <a href="index.html" class="flex items-center gap-2 mb-6">
@@ -446,8 +473,8 @@
             if (savedLogo) {
                 const navLogo = document.getElementById('logo-icon-wrapper');
                 if (navLogo) {
-                    navLogo.className = 'w-20 h-20 flex items-center justify-center transition-transform group-hover:scale-110';
-                    navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                    navLogo.className = 'w-10 h-10 flex items-center justify-center';
+                    navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain">`;
                 }
                 const footerLogo = document.getElementById('footer-logo-icon-wrapper');
                 if (footerLogo) {
@@ -455,8 +482,13 @@
                     footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                 }
             }
+            // Init Theme Toggle
+            if (typeof renderThemeToggle === 'function') {
+                renderThemeToggle('nav-theme-toggle');
+            }
         })();
     </script>
+    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>
