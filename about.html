@@ -117,7 +117,7 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Logo -->
             <a href="index.html" class="flex items-center gap-2 group">
-                <div
+                <div id="logo-icon-wrapper"
                     class="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
                     <span class="material-symbols-rounded">explore</span>
                 </div>
@@ -312,7 +312,8 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
             <div class="col-span-1 md:col-span-1">
                 <a href="index.html" class="flex items-center gap-2 mb-6">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <div id="footer-logo-icon-wrapper"
+                        class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
                         <span class="material-symbols-rounded text-sm">explore</span>
                     </div>
                     <span class="font-display font-bold text-lg text-slate-800">QOrienta</span>
@@ -356,6 +357,23 @@
         </div>
     </footer>
 
+    <script>
+            (function () {
+                const savedLogo = localStorage.getItem('qorienta_selected_logo');
+                if (savedLogo) {
+                    const navLogo = document.getElementById('logo-icon-wrapper');
+                    if (navLogo) {
+                        navLogo.className = 'w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110';
+                        navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                    }
+                    const footerLogo = document.getElementById('footer-logo-icon-wrapper');
+                    if (footerLogo) {
+                        footerLogo.className = 'w-8 h-8 flex items-center justify-center';
+                        footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                    }
+                }
+            })();
+    </script>
 </body>
 
 </html>

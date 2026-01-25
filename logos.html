@@ -382,6 +382,10 @@
             // Save to local storage
             localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
 
+            // NEW: Save selected logo for live preview across the site
+            const logoPath = `assets/logos/generated/${id}.png`;
+            localStorage.setItem('qorienta_selected_logo', logoPath);
+
             // Show feedback
             showToast();
 

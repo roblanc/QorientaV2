@@ -172,7 +172,7 @@
         <a href="index.html" class="w-10 h-10 flex items-center justify-center text-slate-400">
           <span class="material-symbols-rounded">arrow_back_ios_new</span>
         </a>
-        <div class="flex items-center gap-1 text-primary font-bold text-lg">
+        <div id="quiz-intro-logo" class="flex items-center gap-1 text-primary font-bold text-lg">
           <span class="material-symbols-rounded">explore</span>
           <span>QOrienta</span>
         </div>
@@ -577,6 +577,27 @@
 
   <!-- Quiz Logic -->
   <script src="quiz.js"></script>
+  <script>
+      (function () {
+        const savedLogo = localStorage.getItem('qorienta_selected_logo');
+        if (savedLogo) {
+          const quizLogo = document.getElementById('quiz-intro-logo');
+          if (quizLogo) {
+            // This is a flex container with text. The icon is the first child span.
+            // Let's replace the icon span with the image.
+            // Original: <span class="material-symbols-rounded">explore</span>
+            const iconSpan = quizLogo.querySelector('.material-symbols-rounded');
+            if (iconSpan) {
+              // We need to make the image fit nicely with the text.
+              const img = document.createElement('img');
+              img.src = savedLogo;
+              img.className = 'w-6 h-6 object-contain mr-1'; // Adjust size to match text
+              quizLogo.replaceChild(img, iconSpan);
+            }
+          }
+        }
+      })();
+  </script>
 </body>
 
 </html>
