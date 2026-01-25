@@ -169,7 +169,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- V1 -->
                 <div onclick="voteFor('organic_v1', 'Organic V1: Leaf Vision', this)"
                     class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
@@ -275,7 +275,7 @@
         <div class="mb-20">
             <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #3: Explorer
                 New (Girl with Telescope)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
                 <!-- V1 -->
                 <div onclick="voteFor('explorer_new_1', 'Explorer New V1', this)"
                     class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
@@ -370,7 +370,7 @@
         <!-- Section 5: Explorer (Limbo Style) (NEW) -->
         <div class="mb-20">
             <h2 class="text-xl font-bold text-slate-400 mb-6 border-b border-slate-100 pb-2">Explorer (Limbo Style)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
                 <!-- V1 -->
                 <div onclick="voteFor('explorer_limbo_v1', 'Explorer V1', this)"
                     class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
@@ -591,7 +591,7 @@
 
     <!-- Notification Toast -->
     <div id="toast"
-        class="fixed top-24 right-5 bg-white border-l-4 border-green-500 text-slate-800 p-4 rounded shadow-2xl transform translate-x-full transition-transform duration-300 z-[60]">
+        class="fixed top-24 right-5 bg-white border-l-4 border-green-500 text-slate-800 p-4 rounded shadow-2xl transform translate-x-[200%] transition-transform duration-300 z-[60]">
         <div class="flex items-center gap-3">
             <span class="text-xl">✅</span>
             <div>
@@ -746,9 +746,9 @@
 
         function showToast() {
             const toast = document.getElementById('toast');
-            toast.classList.remove('translate-x-full');
+            toast.classList.remove('translate-x-[200%]');
             setTimeout(() => {
-                toast.classList.add('translate-x-full');
+                toast.classList.add('translate-x-[200%]');
             }, 3000);
         }
 
