@@ -338,6 +338,80 @@
             </script>
         </div>
 
+        <!-- Section 7: Child & Bear (New Generated Concepts) -->
+        <div class="mb-20">
+            <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #4: Child &
+                Bear Legacy (New)</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
+                <!-- V1 -->
+                <div onclick="voteFor('child_bear_1', 'Child Bear V1', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/child_bear/child_bear_1.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Bear V1</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <span
+                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
+                            & Preview ➔</span>
+                        <div
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
+                            Setează ca logo pe site
+                        </div>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div onclick="voteFor('child_bear_2', 'Child Bear V2', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/child_bear/child_bear_2.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Bear V2</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <span
+                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
+                            & Preview ➔</span>
+                        <div
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
+                            Setează ca logo pe site
+                        </div>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div onclick="voteFor('child_bear_3', 'Child Bear V3', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/child_bear/child_bear_3.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Bear V3</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <span
+                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
+                            & Preview ➔</span>
+                        <div
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
+                            Setează ca logo pe site
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Section 5: Explorer (Limbo Style) (NEW) -->
         <div class="mb-20">
             <h2 class="text-xl font-bold text-slate-400 mb-6 border-b border-slate-100 pb-2">Explorer (Limbo Style)</h2>
@@ -713,6 +787,8 @@
                     imgPath = `assets/logos/generated/explorer_new_${num}.png`;
                 } else if (id.startsWith('organic_v')) {
                     imgPath = `assets/logos/generated/${id}.png`;
+                } else if (id.startsWith('child_bear_')) {
+                    imgPath = `assets/logos/generated/child_bear/${id}.png`;
                 }
 
                 const percentage = maxVotes > 0 ? (count / maxVotes) * 100 : 0;
