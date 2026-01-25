@@ -271,100 +271,45 @@
 
 
 
-        <!-- Section 6: Explorer New (Girl) -->
+        <!-- Section 6: Explorer Extracted (From Upload) -->
         <div class="mb-20">
             <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #3: Explorer
-                New (Girl with Telescope)</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
-                <!-- V1 -->
-                <div onclick="voteFor('explorer_new_1', 'Explorer New V1', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
-                        <div class="aspect-square flex items-center justify-center mb-4">
-                            <img src="assets/logos/generated/explorer_new_1.png"
-                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold text-slate-500">New V1</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
-                    </div>
-                </div>
-                <!-- V2 -->
-                <div onclick="voteFor('explorer_new_2', 'Explorer New V2', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
-                        <div class="aspect-square flex items-center justify-center mb-4">
-                            <img src="assets/logos/generated/explorer_new_2.png"
-                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold text-slate-500">New V2</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
-                    </div>
-                </div>
-                <!-- V3 -->
-                <div onclick="voteFor('explorer_new_3', 'Explorer New V3', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
-                        <div class="aspect-square flex items-center justify-center mb-4">
-                            <img src="assets/logos/generated/explorer_new_3.png"
-                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold text-slate-500">New V3</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
-                    </div>
-                </div>
-                <!-- V4 -->
-                <div onclick="voteFor('explorer_new_4', 'Explorer New V4', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
-                        <div class="aspect-square flex items-center justify-center mb-4">
-                            <img src="assets/logos/generated/explorer_new_4.png"
-                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold text-slate-500">New V4</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
-                    </div>
-                </div>
+                Extracted (From Upload)</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity"
+                id="extracted-logos-grid">
+                <!-- JS will populate or we hardcode. Let's hardcode for simplicity as we know there are 20 -->
+                <!-- Generating loop via script is tedious in replace tool. I'll write a small JS snippet to inject them or just hardcode the first few and let JS handle the rest, or hardcode all if possible.
+                    Actually, hardcoding 20 items is large. I'll use JS to inject them to keep the file clean. -->
             </div>
+            <script>
+                const extractedGrid = document.getElementById('extracted-logos-grid');
+                for (let i = 1; i <= 20; i++) {
+                    // Check if file exists? Browser will just show broken image if not. Assuming they exist.
+                    // We'll generate HTML for 20 items.
+                    const div = document.createElement('div');
+                    div.className = "group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full";
+                    div.setAttribute('onclick', `voteFor('explorer_extracted_${i}', 'Extracted Logo ${i}', this)`);
+
+                    div.innerHTML = `
+                        <div>
+                            <div class="aspect-square flex items-center justify-center mb-4">
+                                <img src="assets/logos/generated/extracted/extracted_logo_${i}.png"
+                                    class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="text-center">
+                                <span class="text-xs font-bold text-slate-500">Extracted #${i}</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                            <span class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează & Preview ➔</span>
+                            <div class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
+                                Setează ca logo pe site
+                            </div>
+                        </div>
+                    `;
+                    extractedGrid.appendChild(div);
+                }
+            </script>
         </div>
 
         <!-- Section 5: Explorer (Limbo Style) (NEW) -->
@@ -576,14 +521,21 @@
                     class="w-8 h-8 rounded-full bg-white border-2 border-slate-200 hover:scale-110 transition-transform shadow-sm"
                     title="White"></button>
 
-                <div class="relative group">
-                    <input type="color" id="customColorPicker" onchange="setLogoColor(this.value)"
-                        class="w-8 h-8 rounded-full overflow-hidden cursor-pointer border-0 p-0 absolute opacity-0 z-10">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 border-2 border-white hover:scale-110 transition-transform shadow-sm flex items-center justify-center">
-                        <span class="text-[10px] text-white font-bold">+</span>
-                    </div>
-                </div>
+                <button onclick="setLogoColor('#ef4444')"
+                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#ef4444] border-2 border-white hover:scale-110 transition-transform shadow-sm"
+                    title="Red"></button>
+                <button onclick="setLogoColor('#3b82f6')"
+                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#3b82f6] border-2 border-white hover:scale-110 transition-transform shadow-sm"
+                    title="Blue"></button>
+                <button onclick="setLogoColor('#10b981')"
+                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#10b981] border-2 border-white hover:scale-110 transition-transform shadow-sm"
+                    title="Green"></button>
+                <button onclick="setLogoColor('#f59e0b')"
+                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#f59e0b] border-2 border-white hover:scale-110 transition-transform shadow-sm"
+                    title="Orange"></button>
+                <button onclick="setLogoColor('#8b5cf6')"
+                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#8b5cf6] border-2 border-white hover:scale-110 transition-transform shadow-sm"
+                    title="Purple"></button>
             </div>
         </div>
 
