@@ -112,4 +112,9 @@ function renderThemeToggle(containerId) {
     // 1. Load saved theme immediately to prevent flash
     const saved = getSavedTheme();
     applyTheme(saved);
+
+    // 2. Set Default Logo (Bear V2) if none selected
+    if (!localStorage.getItem('qorienta_selected_logo')) {
+        localStorage.setItem('qorienta_selected_logo', 'assets/logos/generated/child_bear/child_bear_2.png');
+    }
 })();
