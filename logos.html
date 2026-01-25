@@ -130,20 +130,25 @@
                 </div>
             </a>
 
-            <div class="hidden md:flex items-center gap-4">
+            <div class="flex items-center gap-4">
                 <!-- Theme Switcher -->
                 <div id="nav-theme-toggle" class="relative"></div>
 
                 <a href="#ranking"
-                    class="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-red-100 transition-colors">
+                    class="hidden md:flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-red-100 transition-colors">
                     <div class="w-2 h-2 bg-red-500 rounded-full relative live-indicator"></div>
                     Live Ranking
                 </a>
-                <a href="index.html" class="text-slate-500 hover:text-primary transition-colors text-sm font-medium">←
+                <a href="index.html"
+                    class="hidden md:inline-block text-slate-500 hover:text-primary transition-colors text-sm font-medium">←
                     Înapoi la site</a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-primary">
+                    <span class="material-symbols-rounded text-3xl">menu</span>
+                </button>
             </div>
 
-            <!-- Mobile Ranking Link (Small) -->
             <a href="#ranking"
                 class="md:hidden flex items-center gap-1 bg-red-50 text-red-600 px-2 py-1 rounded-full text-[10px] font-bold mr-2">
                 <div class="w-1.5 h-1.5 bg-red-500 rounded-full relative live-indicator"></div>
