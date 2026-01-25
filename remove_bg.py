@@ -26,10 +26,11 @@ def main():
         print(f"Directory not found: {target_dir}")
         return
 
-    for filename in os.listdir(target_dir):
-        if filename.lower().endswith(".png"):
-            file_path = os.path.join(target_dir, filename)
-            remove_background(file_path)
+    for root, dirs, files in os.walk(target_dir):
+        for filename in files:
+            if filename.lower().endswith(".png"):
+                file_path = os.path.join(root, filename)
+                remove_background(file_path)
 
 if __name__ == "__main__":
     main()
