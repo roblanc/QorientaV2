@@ -140,14 +140,42 @@
             </div>
 
             <!-- CTA -->
-            <div class="flex items-center gap-4">
-                <a href="#"
-                    class="hidden sm:block text-sm font-bold text-slate-600 hover:text-primary transition-colors">Login</a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Login</a>
                 <a href="quiz.html"
                     class="bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
                     Începe Gratuit
                 </a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-primary transition-colors">
+                <span class="material-symbols-rounded text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center gap-8">
+            <button id="close-menu-btn" class="absolute top-6 right-6 p-2 text-slate-500 hover:text-red-500">
+                <span class="material-symbols-rounded text-4xl">close</span>
+            </button>
+            <a href="index.html" class="text-2xl font-bold text-slate-800 hover:text-primary"
+                onclick="toggleMobileMenu()">Acasă</a>
+            <a href="quiz.html" class="text-2xl font-bold text-slate-800 hover:text-primary"
+                onclick="toggleMobileMenu()">Test Vocațional</a>
+            <a href="pricing.html" class="text-2xl font-bold text-slate-800 hover:text-primary"
+                onclick="toggleMobileMenu()">Pachete</a>
+            <a href="team.html" class="text-2xl font-bold text-slate-800 hover:text-primary"
+                onclick="toggleMobileMenu()">Mentori</a>
+            <a href="about.html" class="text-2xl font-bold text-slate-800 hover:text-primary"
+                onclick="toggleMobileMenu()">Despre Noi</a>
+            <a href="logos.html" class="text-2xl font-bold text-emerald-600" onclick="toggleMobileMenu()">Logos</a>
+            <div class="h-px w-24 bg-slate-200 my-2"></div>
+            <a href="#" class="text-xl font-medium text-slate-500">Login</a>
+            <a href="quiz.html"
+                class="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg shadow-primary/30">Începe
+                Gratuit</a>
         </div>
     </nav>
 
@@ -358,21 +386,34 @@
     </footer>
 
     <script>
-            (function () {
-                const savedLogo = localStorage.getItem('qorienta_selected_logo');
-                if (savedLogo) {
-                    const navLogo = document.getElementById('logo-icon-wrapper');
-                    if (navLogo) {
-                        navLogo.className = 'w-20 h-20 flex items-center justify-center transition-transform group-hover:scale-110';
-                        navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
-                    }
-                    const footerLogo = document.getElementById('footer-logo-icon-wrapper');
-                    if (footerLogo) {
-                        footerLogo.className = 'w-8 h-8 flex items-center justify-center';
-                        footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
-                    }
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        (function () {
+            const savedLogo = localStorage.getItem('qorienta_selected_logo');
+            if (savedLogo) {
+                const navLogo = document.getElementById('logo-icon-wrapper');
+                if (navLogo) {
+                    navLogo.className = 'w-20 h-20 flex items-center justify-center transition-transform group-hover:scale-110';
+                    navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                 }
-            })();
+                const footerLogo = document.getElementById('footer-logo-icon-wrapper');
+                if (footerLogo) {
+                    footerLogo.className = 'w-8 h-8 flex items-center justify-center';
+                    footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                }
+            }
+        })();
     </script>
 </body>
 
