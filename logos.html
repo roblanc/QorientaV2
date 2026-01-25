@@ -195,9 +195,9 @@
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- V1 -->
-                <div onclick="voteFor('organic_v1', 'Organic V1: Leaf Vision', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('organic_v1', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/organic_v1.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -208,19 +208,20 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('organic_v1')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('organic_v1', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
                 <!-- V2 -->
-                <div onclick="voteFor('organic_v2', 'Organic V2: Climbing Star', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('organic_v2', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/organic_v2.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -231,19 +232,20 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('organic_v2')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('organic_v2', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
                 <!-- V3 -->
-                <div onclick="voteFor('organic_v3', 'Organic V3: Knowledge Tree', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('organic_v3', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/organic_v3.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -254,22 +256,23 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('organic_v3')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('organic_v3', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
                 <!-- V4 NEW -->
-                <div onclick="voteFor('organic_v4', 'Organic V4: Harmony Tree', this)"
-                    class="ring-2 ring-emerald-400 ring-offset-2 group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                <div
+                    class="ring-2 ring-emerald-400 ring-offset-2 group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
                     <div
                         class="absolute top-0 right-0 bg-red-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-bl-lg z-10">
                         Nou</div>
-                    <div>
+                    <div onclick="setSiteLogo('organic_v4', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/organic_v4.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -281,13 +284,14 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('organic_v4')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('organic_v4', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
             </div>
@@ -301,9 +305,7 @@
                 Extracted (From Upload)</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity"
                 id="extracted-logos-grid">
-                <!-- JS will populate or we hardcode. Let's hardcode for simplicity as we know there are 20 -->
-                <!-- Generating loop via script is tedious in replace tool. I'll write a small JS snippet to inject them or just hardcode the first few and let JS handle the rest, or hardcode all if possible.
-                    Actually, hardcoding 20 items is large. I'll use JS to inject them to keep the file clean. -->
+                <!-- JS Populated -->
             </div>
             <script>
                 const extractedGrid = document.getElementById('extracted-logos-grid');
@@ -313,11 +315,10 @@
                     if (rejectedIds.includes(i)) continue;
 
                     const div = document.createElement('div');
-                    div.className = "group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full";
-                    div.setAttribute('onclick', `voteFor('explorer_extracted_${i}', 'Extracted Logo ${i}', this)`);
+                    div.className = "group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full";
 
                     div.innerHTML = `
-                        <div>
+                        <div onclick="setSiteLogo('explorer_extracted_${i}', this)" class="cursor-pointer">
                             <div class="aspect-square flex items-center justify-center mb-4">
                                 <img src="assets/logos/generated/extracted/extracted_logo_${i}.png"
                                     class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -327,10 +328,12 @@
                             </div>
                         </div>
                         <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                            <span class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează & Preview ➔</span>
-                            <div class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                                Setează ca logo pe site
-                            </div>
+                            <button onclick="voteFor('explorer_extracted_${i}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                                Votează
+                            </button>
+                            <button onclick="setSiteLogo('explorer_extracted_${i}', this)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                                Setează Logo
+                            </button>
                         </div>
                     `;
                     extractedGrid.appendChild(div);
@@ -344,9 +347,9 @@
                 Bear Legacy (New)</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
                 <!-- V1 -->
-                <div onclick="voteFor('child_bear_1', 'Child Bear V1', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('child_bear_1', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/child_bear/child_bear_1.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -356,19 +359,20 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('child_bear_1')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('child_bear_1', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
                 <!-- V2 -->
-                <div onclick="voteFor('child_bear_2', 'Child Bear V2', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('child_bear_2', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/child_bear/child_bear_2.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -378,19 +382,20 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
-                        </div>
+                        <button onclick="voteFor('child_bear_2')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('child_bear_2', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
                 <!-- V3 -->
-                <div onclick="voteFor('child_bear_3', 'Child Bear V3', this)"
-                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
-                    <div>
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('child_bear_3', this)" class="cursor-pointer">
                         <div class="aspect-square flex items-center justify-center mb-4">
                             <img src="assets/logos/generated/child_bear/child_bear_3.png"
                                 class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
@@ -400,13 +405,91 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                        <span
-                            class="text-emerald-600 font-bold text-sm group-hover:scale-105 transition-transform">Votează
-                            & Preview ➔</span>
-                        <div
-                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-md hover:shadow-lg">
-                            Setează ca logo pe site
+                        <button onclick="voteFor('child_bear_3')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('child_bear_3', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: Creative Thematic (New) -->
+        <div class="mb-20">
+            <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #5: Creative
+                Thematic (New)</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
+                <!-- V1 -->
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('creative_1', this)" class="cursor-pointer">
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/creative/creative_1.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
                         </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Book Portal</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <button onclick="voteFor('creative_1')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('creative_1', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('creative_2', this)" class="cursor-pointer">
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/creative/creative_2.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Compass</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <button onclick="voteFor('creative_2')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('creative_2', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full">
+                    <div onclick="setSiteLogo('creative_3', this)" class="cursor-pointer">
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/creative/creative_3.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Stars Reach</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <button onclick="voteFor('creative_3')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
+                        <button onclick="setSiteLogo('creative_3', this)"
+                            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-2 rounded-xl text-center text-xs font-semibold transition-all">
+                            Setează Logo
+                        </button>
                     </div>
                 </div>
             </div>
@@ -714,36 +797,42 @@
             }
         }
 
-        function voteFor(id, name, element) {
-            // Increment vote
+        function voteFor(id) {
+            // Increment vote using id as key
             votes[id] = (votes[id] || 0) + 1;
 
             // Save to local storage
             localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
 
-            // Save selected logo for live preview from DOM
-            if (element) {
-                const img = element.querySelector('img');
-                if (img) {
-                    const logoPath = img.getAttribute('src');
-                    localStorage.setItem('qorienta_selected_logo', logoPath);
-                    // Live update this page
-                    updateHeaderLogo(logoPath);
-                }
-            }
-
             // Show feedback
-            showToast();
+            showToastMessage('Vot Înregistrat!');
 
             // Update UI
             renderLeaderboard();
 
             // Show leaderboard if hidden
             document.getElementById('ranking').classList.remove('hidden');
-
-            // Scroll to top to see ranking
-            document.getElementById('ranking').scrollIntoView({ behavior: 'smooth' });
         }
+
+        function setSiteLogo(id, element) {
+            if (element) {
+                const img = element.closest('.group').querySelector('.aspect-square img'); // More robust selector
+                if (img) {
+                    // We need the raw source, not the one potentially modified by mask logic?
+                    // Actually the img.src is constant. The mask logic hides it opacity-0.
+                    // But we want the path.
+                    const logoPath = img.getAttribute('src');
+                    localStorage.setItem('qorienta_selected_logo', logoPath);
+                    // Live update this page
+                    updateHeaderLogo(logoPath);
+
+                    showToastMessage('Logo Setat pe Site!');
+                }
+            }
+        }
+
+        // Backwards compatibility if needed, or cleanup.
+        // We will update the HTML to call voteFor(id) and setSiteLogo(id, this).
 
         function renderLeaderboard() {
             const listObj = document.getElementById('leaderboard-list');
@@ -789,6 +878,8 @@
                     imgPath = `assets/logos/generated/${id}.png`;
                 } else if (id.startsWith('child_bear_')) {
                     imgPath = `assets/logos/generated/child_bear/${id}.png`;
+                } else if (id.startsWith('creative_')) {
+                    imgPath = `assets/logos/generated/creative/${id}.png`;
                 }
 
                 const percentage = maxVotes > 0 ? (count / maxVotes) * 100 : 0;
