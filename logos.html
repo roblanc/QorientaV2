@@ -79,13 +79,18 @@
 
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-colors duration-500 border-b-2 border-primary/10">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl font-bold text-primary transition-colors duration-300">QOrienta</span>
-                <span
-                    class="bg-slate-100 text-slate-500 text-xs px-2 py-1 rounded-full uppercase tracking-wider">Branding
-                    Premium</span>
-            </div>
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center h-24">
+            <a href="index.html" class="flex items-center gap-2 group decoration-transparent">
+                <!-- Dynamic Logo Container -->
+                <div id="header-logo-container"
+                    class="w-20 h-20 flex items-center justify-center transition-transform group-hover:scale-110 hidden">
+                    <!-- Image injected by JS -->
+                </div>
+                <!-- Fallback text if no logo selected (or shown alongside) -->
+                <span id="header-logo-text"
+                    class="text-2xl font-bold text-primary transition-colors duration-300">QOrienta</span>
+            </a>
+
             <div class="flex items-center gap-4">
                 <a href="#ranking"
                     class="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-red-100 transition-colors">
@@ -97,6 +102,435 @@
             </div>
         </div>
     </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4">Votează Identitatea Vizuală</h1>
+            <p class="text-slate-600 text-lg">
+                Am adăugat concepte noi! Sistemul de vot este acum <strong>LIVE</strong>.
+                Alege-ți favoritul și vezi clasamentul în timp real.
+            </p>
+        </div>
+
+        <!-- LIVE RANKING SECTION -->
+        <section id="ranking"
+            class="hidden max-w-4xl mx-auto mb-20 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-500">
+            <div class="bg-slate-900 p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🏆</span>
+                    <h2 class="text-white font-bold text-xl">Clasament Live</h2>
+                </div>
+                <div class="text-slate-400 text-sm flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    System Online
+                </div>
+            </div>
+            <div class="p-6 md:p-8">
+                <div id="leaderboard-list" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Organic (Featured) -->
+        <div class="mb-20 scroll-mt-24" id="organic">
+            <div class="flex items-center gap-4 mb-8">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-xl">
+                    ★</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Concept #2: Organic & Uman (Extended)</h2>
+                    <p class="text-slate-500">Noi variante adăugate bazate pe feedback-ul tău.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- V1 -->
+                <div onclick="voteFor('organic_v1', 'Organic V1: Leaf Vision', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/organic_v1.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span
+                                class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V1</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div onclick="voteFor('organic_v2', 'Organic V2: Climbing Star', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/organic_v2.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span
+                                class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V2</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div onclick="voteFor('organic_v3', 'Organic V3: Knowledge Tree', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/organic_v3.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span
+                                class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V3</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V4 NEW -->
+                <div onclick="voteFor('organic_v4', 'Organic V4: Harmony Tree', this)"
+                    class="ring-2 ring-emerald-400 ring-offset-2 group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div
+                        class="absolute top-0 right-0 bg-red-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-bl-lg z-10">
+                        Nou</div>
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/organic_v4.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span
+                                class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">V4:
+                                Harmony</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Section 5: Explorer (Limbo Style) (NEW) -->
+        <div class="mb-20">
+            <h2 class="text-xl font-bold text-slate-400 mb-6 border-b border-slate-100 pb-2">Explorer (Limbo Style)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity">
+                <!-- V1 -->
+                <div onclick="voteFor('explorer_limbo_v1', 'Explorer V1', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_1.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V1</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V2 -->
+                <div onclick="voteFor('explorer_limbo_v2', 'Explorer V2', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_2.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V2</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V3 -->
+                <div onclick="voteFor('explorer_limbo_v3', 'Explorer V3', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_3.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V3</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V4 -->
+                <div onclick="voteFor('explorer_limbo_v4', 'Explorer V4', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_4.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V4</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V5 -->
+                <div onclick="voteFor('explorer_limbo_v5', 'Explorer V5', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_5.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V5</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V6 -->
+                <div onclick="voteFor('explorer_limbo_v6', 'Explorer V6', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_6.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V6</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V7 -->
+                <div onclick="voteFor('explorer_limbo_v7', 'Explorer V7', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_7.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V7</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+                <!-- V8 -->
+                <div onclick="voteFor('explorer_limbo_v8', 'Explorer V8', this)"
+                    class="group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between h-full">
+                    <div>
+                        <div class="aspect-square flex items-center justify-center mb-4">
+                            <img src="assets/logos/generated/explorer_limbo_8.png"
+                                class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-500">Explorer V8</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-col items-center gap-1">
+                        <span class="text-emerald-600 font-bold text-sm">Votează & Preview ➔</span>
+                        <span class="text-[10px] text-slate-400">Setează ca logo pe site</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Theme Switcher -->
+    <div
+        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full p-2 pr-6 flex items-center gap-4 z-50 animate-[slideUp_0.5s_ease-out]">
+        <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+            🎨 Tema
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setTheme('#4F46E5', '#10B981', 'Corporate')"
+                class="w-8 h-8 rounded-full bg-[#4F46E5] border-2 border-white hover:scale-110 transition-transform"></button>
+            <button onclick="setTheme('#0ea5e9', '#06b6d4', 'Ocean')"
+                class="w-8 h-8 rounded-full bg-[#0ea5e9] border-2 border-white hover:scale-110 transition-transform"></button>
+            <button onclick="setTheme('#f97316', '#e11d48', 'Sunset')"
+                class="w-8 h-8 rounded-full bg-[#f97316] border-2 border-white hover:scale-110 transition-transform"></button>
+            <button onclick="setTheme('#8b5cf6', '#d946ef', 'Berry')"
+                class="w-8 h-8 rounded-full bg-[#8b5cf6] border-2 border-white hover:scale-110 transition-transform"></button>
+            <button onclick="setTheme('#16a34a', '#84cc16', 'Nature')"
+                class="w-8 h-8 rounded-full bg-[#16a34a] border-2 border-white hover:scale-110 transition-transform"></button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast"
+        class="fixed top-24 right-5 bg-white border-l-4 border-green-500 text-slate-800 p-4 rounded shadow-2xl transform translate-x-full transition-transform duration-300 z-[60]">
+        <div class="flex items-center gap-3">
+            <span class="text-xl">✅</span>
+            <div>
+                <h4 class="font-bold text-sm">Vot Înregistrat & Preview Activ!</h4>
+                <p class="text-xs text-slate-500">Logo-ul a fost setat pe tot site-ul.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load votes from localStorage
+        let votes = JSON.parse(localStorage.getItem('qorienta_votes_v2')) || {};
+
+        function setTheme(primary, secondary, name) {
+            const root = document.documentElement;
+            root.style.setProperty('--color-primary', primary);
+            root.style.setProperty('--color-secondary', secondary);
+        }
+
+        // Helper to update the local header logo
+        function updateHeaderLogo(logoPath) {
+            const container = document.getElementById('header-logo-container');
+            const text = document.getElementById('header-logo-text');
+            if (container) {
+                if (logoPath) {
+                    container.innerHTML = `<img src="${logoPath}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                    container.classList.remove('hidden');
+                } else {
+                    container.innerHTML = '';
+                    container.classList.add('hidden');
+                }
+            }
+        }
+
+        function voteFor(id, name, element) {
+            // Increment vote
+            votes[id] = (votes[id] || 0) + 1;
+
+            // Save to local storage
+            localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
+
+            // Save selected logo for live preview from DOM
+            if (element) {
+                const img = element.querySelector('img');
+                if (img) {
+                    const logoPath = img.getAttribute('src');
+                    localStorage.setItem('qorienta_selected_logo', logoPath);
+                    // Live update this page
+                    updateHeaderLogo(logoPath);
+                }
+            }
+
+            // Show feedback
+            showToast();
+
+            // Update UI
+            renderLeaderboard();
+
+            // Show leaderboard if hidden
+            document.getElementById('ranking').classList.remove('hidden');
+
+            // Scroll to top to see ranking
+            document.getElementById('ranking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderLeaderboard() {
+            const listObj = document.getElementById('leaderboard-list');
+            listObj.innerHTML = '';
+
+            const rankingSection = document.getElementById('ranking');
+
+            // If no votes, hide the section
+            if (Object.keys(votes).length === 0) {
+                rankingSection.classList.add('hidden');
+                return;
+            } else {
+                rankingSection.classList.remove('hidden');
+            }
+
+            // Convert to array and sort
+            const sorted = Object.entries(votes)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 5); // Top 5
+
+            if (sorted.length === 0) return;
+
+            let maxVotes = sorted[0][1];
+
+            sorted.forEach(([id, count], index) => {
+                // Formatting name
+                let displayName = id.replace('_', ' ').toUpperCase();
+                // Map ID to better names if possible
+                if (id === 'organic_v4') displayName = "ORGANIC V4: HARMONY (NOU)";
+
+                const percentage = maxVotes > 0 ? (count / maxVotes) * 100 : 0;
+                const colors = ['bg-yellow-400', 'bg-slate-300', 'bg-orange-300', 'bg-slate-100', 'bg-slate-100'];
+                const rankColor = colors[index] || 'bg-slate-100';
+
+                listObj.innerHTML += `
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-8 h-8 ${rankColor} rounded-lg flex items-center justify-center font-bold text-slate-700 shadow-sm text-sm">
+                            #${index + 1}
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-700 text-sm">${displayName}</span>
+                                <span class="font-bold text-primary text-sm">${count} voturi</span>
+                            </div>
+                            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary rounded-full transition-all duration-1000 ease-out" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Init
+        // Check for existing logo choice on load
+        (function () {
+            const savedLogo = localStorage.getItem('qorienta_selected_logo');
+            if (savedLogo) {
+                updateHeaderLogo(savedLogo);
+            }
+            renderLeaderboard();
+        })();
+    </script>
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
