@@ -78,6 +78,7 @@
         .text-gradient {
             background: linear-gradient(135deg, #4f46e5, #ec4899);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -189,7 +190,6 @@
 
             <!-- CTA -->
             <div class="hidden md:flex items-center gap-4">
-                <a href="#" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Login</a>
                 <a href="quiz.html"
                     class="bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
                     Începe Gratuit
@@ -726,7 +726,6 @@
                 onclick="toggleMobileMenu()">Despre Noi</a>
             <a href="logos.html" class="text-2xl font-bold text-emerald-600" onclick="toggleMobileMenu()">Logos</a>
             <div class="h-px w-24 bg-slate-200 my-2"></div>
-            <a href="#" class="text-xl font-medium text-slate-500">Login</a>
             <a href="quiz.html"
                 class="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg shadow-primary/30">Începe
                 Gratuit</a>
@@ -758,12 +757,54 @@
                         navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                     }
 
-                    // Update Footer Logo
+                    // Update Footer Logo and Admin Logic
                     const footerLogo = document.getElementById('footer-logo-icon-wrapper');
                     if (footerLogo) {
-                        footerLogo.className = 'w-8 h-8 flex items-center justify-center';
+                        footerLogo.className = 'w-8 h-8 flex items-center justify-center cursor-default select-none'; // Added cursor
                         footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+
+                        // HIDDEN ADMIN LOGIC: 5 Clicks to download emails
+                        let clickCount = 0;
+                        let lastClickTime = 0;
+
+                        footerLogo.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const now = Date.now();
+                            if (now - lastClickTime < 1000) {
+                                clickCount++;
+                            } else {
+                                clickCount = 1;
+                            }
+                            lastClickTime = now;
+
+                            if (clickCount === 5) {
+                                downloadEmails();
+                                clickCount = 0;
+                            }
+                        });
                     }
+                }
+
+                // Helper to download emails CSV
+                function downloadEmails() {
+                    const emails = JSON.parse(localStorage.getItem('qorienta_leads') || '[]');
+                    if (emails.length === 0) {
+                        alert('Nu sunt emailuri colectate încă.');
+                        return;
+                    }
+
+                    let csvContent = "data:text/csv;charset=utf-8,Data,Nume,Email,Rezultat\n";
+                    emails.forEach(row => {
+                        csvContent += `${row.date},${row.name},${row.email},${row.result}\n`;
+                    });
+
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "qorienta_leads.csv");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 }
             })();
         </script>

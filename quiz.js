@@ -721,16 +721,75 @@ function calculateAndShowResults() {
     animateLoadingStep(2, 0, () => {
       animateLoadingStep(3, 0, () => {
         animateLoadingStep(4, 0, () => {
-          // All done, show results after short delay
+          // All done, show EMAIL GATE instead of results directly
           setTimeout(() => {
             loadingScreen.classList.add('hidden');
             loadingScreen.classList.remove('flex');
-            showFinalResults(finalScores);
+
+            // showFinalResults(finalScores); -> Moved to after email
+            showEmailGate(finalScores);
           }, 500);
         });
       });
     });
   });
+}
+
+// Email Gate Logic
+const emailModal = document.getElementById('email-modal');
+const emailForm = document.getElementById('email-gate-form');
+
+function showEmailGate(finalScores) {
+  if (emailModal) {
+    emailModal.classList.remove('hidden');
+    emailModal.classList.add('flex');
+
+    // Handle Form Submit
+    if (emailForm) {
+      // Remove old listeners to avoid duplicates if re-run
+      const newForm = emailForm.cloneNode(true);
+      emailForm.parentNode.replaceChild(newForm, emailForm);
+
+      newForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('user-name').value;
+        const email = document.getElementById('user-email').value;
+
+        // Save Lead
+        saveLead(name, email, finalScores);
+
+        // Hide Modal
+        emailModal.classList.add('hidden');
+        emailModal.classList.remove('flex');
+
+        // Show Results
+        showFinalResults(finalScores);
+      });
+    }
+  } else {
+    // Fallback if modal missing
+    showFinalResults(finalScores);
+  }
+}
+
+function saveLead(name, email, finalScores) {
+  // Determine result type
+  const maxScore = Math.max(...Object.values(finalScores));
+  const resultType = Object.keys(finalScores).find(key => finalScores[key] === maxScore) || 'Unknown';
+
+  const lead = {
+    date: new Date().toLocaleString(),
+    name: name || 'Anonim',
+    email: email,
+    result: resultType
+  };
+
+  // Save to LocalStorage
+  const leads = JSON.parse(localStorage.getItem('qorienta_leads') || '[]');
+  leads.push(lead);
+  localStorage.setItem('qorienta_leads', JSON.stringify(leads));
+
+  console.log('Lead saved:', lead);
 }
 
 function animateLoadingStep(stepNum, currentPercent, onComplete) {
