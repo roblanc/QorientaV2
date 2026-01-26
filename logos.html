@@ -176,7 +176,7 @@
 
         <!-- LIVE RANKING SECTION -->
         <section id="ranking"
-            class="hidden max-w-4xl mx-auto mb-20 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-500">
+            class="scroll-mt-32 hidden max-w-4xl mx-auto mb-20 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-500">
             <div class="bg-slate-900 p-6 flex justify-between items-center select-none cursor-pointer"
                 onclick="toggleLeaderboard()">
                 <div class="flex items-center gap-3">
@@ -1081,12 +1081,19 @@
 
             const rankingSection = document.getElementById('ranking');
 
-            // If no votes, hide the section
+            // Always show the section
+            rankingSection.classList.remove('hidden');
+
+            // If no votes, show empty state
             if (Object.keys(votes).length === 0) {
-                rankingSection.classList.add('hidden');
+                listObj.innerHTML = `
+                    <div class="text-center py-8 flex flex-col items-center gap-2">
+                        <div class="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-2xl">🗳️</div>
+                        <p class="text-slate-500 font-medium">Nu există voturi încă.</p>
+                        <p class="text-slate-400 text-sm">Fii primul care alege un favorit!</p>
+                    </div>
+                `;
                 return;
-            } else {
-                rankingSection.classList.remove('hidden');
             }
 
             // Convert to array and sort
@@ -1232,8 +1239,9 @@
             localStorage.removeItem('qorienta_votes_v2');
             localStorage.removeItem('qorienta_selected_logo');
 
-            // Reset UI
-            document.getElementById('ranking').classList.add('hidden');
+            // Reset UI - Keep visible but empty
+            // rankingSection.classList.add('hidden'); // REMOVED hiding
+            renderLeaderboard(); // Re-render to show empty state
             const headerContainer = document.getElementById('header-logo-container');
             if (headerContainer) {
                 headerContainer.classList.add('hidden');
