@@ -43,6 +43,8 @@
             },
         }
     </script>
+    <!-- Supabase CDN -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="assets/js/theme.js"></script>
     <!-- Material Symbols Rounded -->
     <link rel="stylesheet"
@@ -993,7 +995,60 @@
         if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
 
         // Load votes from localStorage
-        let votes = JSON.parse(localStorage.getItem('qorienta_votes_v2')) || {};
+        // ------------------------------------------------------------------
+        // CONFIGURARE LIVE VOTING (SUPABASE)
+        // ------------------------------------------------------------------
+        const SUPABASE_URL = 'https://uwnwqwmdvudftjyysyww.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_hVHeePUVdmJeEw3Ab1bQbg_FHyFrpZ3';
+
+        // Stare Sistem
+        let supabase = null;
+        let isLive = false;
+        let votes = {};
+
+        // 1. Initializare Client Supabase
+        if (SUPABASE_URL && SUPABASE_KEY) {
+            try {
+                if (typeof window.supabase !== 'undefined') {
+                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                    isLive = true;
+                    console.log('✅ Sistemul de vot este LIVE (Conectat la Supabase)');
+                } else {
+                    console.warn('⚠️ Biblioteca Supabase nu s-a încărcat corect din CDN.');
+                }
+            } catch (e) {
+                console.warn('⚠️ Eroare config Supabase:', e);
+            }
+        }
+
+        if (!isLive) {
+            console.warn('⚠️ Mod Live inactiv (Lipsesc cheile). Se folosește stocare locală.');
+            votes = JSON.parse(localStorage.getItem('qorienta_votes_v2')) || {};
+        }
+
+        // 2. Funcție pentru sincronizare (Se apelează la start)
+        async function initLiveVoting() {
+            if (!isLive) return;
+
+            // A. Încarcă voturile existente
+            const { data, error } = await supabase.from('logo_votes').select('*');
+            if (data) {
+                votes = {};
+                data.forEach(row => votes[row.logo_id] = row.count);
+                renderLeaderboard();
+            }
+
+            // B. Abonează-te la modificări în timp real (Realtime)
+            supabase.channel('public:logo_votes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'logo_votes' }, payload => {
+                    const newRow = payload.new;
+                    if (newRow) {
+                        votes[newRow.logo_id] = newRow.count;
+                        renderLeaderboard();
+                    }
+                })
+                .subscribe();
+        }
 
         function setTheme(primary, secondary, name) {
             const root = document.documentElement;
@@ -1017,21 +1072,31 @@
             }
         }
 
-        function voteFor(id) {
-            // Increment vote using id as key
+        async function voteFor(id) {
+            // 1. Actualizare Optimistă (Feedback instant)
             votes[id] = (votes[id] || 0) + 1;
-
-            // Save to local storage
-            localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
-
-            // Show feedback
-            showToastMessage('Vot Înregistrat!');
-
-            // Update UI
             renderLeaderboard();
-
-            // Show leaderboard if hidden
             document.getElementById('ranking').classList.remove('hidden');
+
+            showToastMessage(isLive ? 'Vot Transmis Live!' : 'Vot Salvat Local!');
+
+            // 2. Persistență
+            if (isLive) {
+                // Folosim RPC pentru a incrementa sigur
+                const { error } = await supabase.rpc('increment_vote', { logo_slug: id });
+
+                if (error) {
+                    console.error("Eroare la vot (RPC):", error);
+                    // Fallback la upsert simplu dacă RPC lipsește
+                    if (error.code === '42883') {
+                        const { data } = await supabase.from('logo_votes').select('count').eq('logo_id', id).single();
+                        const current = (data?.count || 0);
+                        await supabase.from('logo_votes').upsert({ logo_id: id, count: current + 1 });
+                    }
+                }
+            } else {
+                localStorage.setItem('qorienta_votes_v2', JSON.stringify(votes));
+            }
         }
 
         function setSiteLogo(id, element) {
@@ -1211,26 +1276,26 @@
         }
 
         function resetLeaderboard(event) {
-            event.stopPropagation(); // Prevent toggling when clicking reset
-            if (!confirm('Sigur vrei să resetezi clasamentul?')) return;
+            event.stopPropagation();
+
+            if (isLive) {
+                alert("Resetarea este dezactivată în modul Live pentru a proteja datele comune.");
+                return;
+            }
+
+            if (!confirm('Sigur vrei să resetezi clasamentul local?')) return;
 
             votes = {};
             localStorage.removeItem('qorienta_votes_v2');
             localStorage.removeItem('qorienta_selected_logo');
 
-            // Reset UI - Keep visible but empty
-            // rankingSection.classList.add('hidden'); // REMOVED hiding
-            renderLeaderboard(); // Re-render to show empty state
+            renderLeaderboard();
             const headerContainer = document.getElementById('header-logo-container');
             if (headerContainer) {
                 headerContainer.classList.add('hidden');
                 headerContainer.innerHTML = '';
             }
-
-            // Reset grid selection markers logic could be added here but simple re-render or reload works. 
-            // The grid doesn't explicitly show "selected" state except via header logo presence.
-
-            showToastMessage('Clasament resetat cu succes!');
+            showToastMessage('S-a resetat cache-ul local!');
         }
 
         function showToastMessage(msg) {
@@ -1247,7 +1312,9 @@
             if (savedLogo) {
                 updateHeaderLogo(savedLogo);
             }
+
             renderLeaderboard();
+            if (typeof initLiveVoting === 'function') initLiveVoting();
 
             // Init Theme Toggle
             if (typeof renderThemeToggle === 'function') {
