@@ -178,7 +178,7 @@
 
         <!-- LIVE RANKING SECTION -->
         <section id="ranking"
-            class="scroll-mt-32 hidden max-w-4xl mx-auto mb-20 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-500">
+            class="scroll-mt-32 max-w-4xl mx-auto mb-20 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-500">
             <div class="bg-slate-900 p-6 flex justify-between items-center select-none cursor-pointer"
                 onclick="toggleLeaderboard()">
                 <div class="flex items-center gap-3">
@@ -441,6 +441,10 @@
                         </div>
                     </div>
                     <div class="mt-4 flex flex-col items-center gap-2 w-full">
+                        <button onclick="voteFor('child_bear_3')"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
+                            Votează
+                        </button>
                         <button onclick="setSiteLogo('child_bear_3', this)"
                             class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl text-center text-xs font-semibold transition-all shadow-sm hover:shadow-md">
                             Setează Logo
@@ -1034,6 +1038,10 @@
 
             // A. Încarcă voturile existente
             const { data, error } = await supabase.from('logo_votes').select('*');
+            if (error) {
+                console.error('Eroare la încărcarea voturilor:', error);
+                return;
+            }
             if (data) {
                 votes = {};
                 data.forEach(row => votes[row.logo_id] = row.count);
@@ -1078,7 +1086,6 @@
             // 1. Actualizare Optimistă (Feedback instant)
             votes[id] = (votes[id] || 0) + 1;
             renderLeaderboard();
-            document.getElementById('ranking').classList.remove('hidden');
 
             showToastMessage(isLive ? 'Vot Transmis Live!' : 'Vot Salvat Local!');
 
@@ -1121,14 +1128,36 @@
         // Backwards compatibility if needed, or cleanup.
         // We will update the HTML to call voteFor(id) and setSiteLogo(id, this).
 
+        const logoNameMap = {
+            'organic_v1': 'Organic V1',
+            'organic_v2': 'Organic V2',
+            'organic_v3': 'Organic V3',
+            'organic_v4': 'Organic V4: Harmony',
+            'child_bear_1': 'Child & Bear V1',
+            'child_bear_2': 'Child & Bear V2',
+            'child_bear_3': 'Child & Bear V3',
+            'creative_1': 'Creative: Book Portal',
+            'creative_2': 'Creative: Compass',
+            'creative_3': 'Creative: Stars Reach',
+            'creative_4': 'Creative: Growth Tree',
+            'creative_5': 'Creative: Flight',
+            'creative_6': 'Creative: Thematic VI',
+            'juggling_1': 'Juggling Professions V1',
+            'juggling_2': 'Juggling Professions V2',
+            'juggling_3': 'Juggling Professions V3',
+            'juggling_heads_1': 'Juggling Heads V1',
+            'explorer_limbo_v1': 'Explorer Limbo V1',
+            'explorer_limbo_v2': 'Explorer Limbo V2',
+            'explorer_limbo_v3': 'Explorer Limbo V3',
+            'explorer_limbo_v4': 'Explorer Limbo V4',
+            'explorer_limbo_v5': 'Explorer Limbo V5',
+            'explorer_limbo_v6': 'Explorer Limbo V6',
+            'explorer_limbo_v7': 'Explorer Limbo V7',
+        };
+
         function renderLeaderboard() {
             const listObj = document.getElementById('leaderboard-list');
             listObj.innerHTML = '';
-
-            const rankingSection = document.getElementById('ranking');
-
-            // Always show the section
-            rankingSection.classList.remove('hidden');
 
             // If no votes, show empty state
             if (Object.keys(votes).length === 0) {
@@ -1152,10 +1181,7 @@
             let maxVotes = sorted[0][1];
 
             sorted.forEach(([id, count], index) => {
-                // Formatting name
-                let displayName = id.replace('_', ' ').toUpperCase();
-                // Map ID to better names if possible
-                if (id === 'organic_v4') displayName = "ORGANIC V4: HARMONY (NOU)";
+                let displayName = logoNameMap[id] || id.replace(/_/g, ' ').replace(/\bv(\d)/i, 'V$1');
 
                 // Construct Image Path
                 let imgPath = '';
@@ -1174,6 +1200,10 @@
                     imgPath = `assets/logos/generated/child_bear/${id}.png`;
                 } else if (id.startsWith('creative_')) {
                     imgPath = `assets/logos/generated/creative/${id}.png`;
+                } else if (id.startsWith('juggling_heads_')) {
+                    imgPath = `assets/logos/generated/juggling/${id}.png`;
+                } else if (id.startsWith('juggling_')) {
+                    imgPath = `assets/logos/generated/juggling/${id}.png`;
                 }
 
                 const percentage = maxVotes > 0 ? (count / maxVotes) * 100 : 0;
