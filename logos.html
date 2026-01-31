@@ -1305,6 +1305,15 @@
             showToast();
         }
 
+        // Expunem funcțiile global pentru onclick handlers
+        window.voteFor = voteFor;
+        window.setSiteLogo = setSiteLogo;
+        window.renderLeaderboard = renderLeaderboard;
+        window.toggleLeaderboard = toggleLeaderboard;
+        window.resetLeaderboard = resetLeaderboard;
+        window.setLogoColor = setLogoColor;
+        window.showToastMessage = showToastMessage;
+
         // Init
         // Check for existing logo choice on load
         (function () {
