@@ -15,10 +15,10 @@
                     colors: {
                         "primary": "var(--color-primary)",
                         "primary-light": "var(--color-primary-light)",
-                        "accent-pink": "#ec4899", // Pink-500
-                        "accent-cyan": "#06b6d4", // Cyan-500
+                        "accent": "var(--color-accent)",
+                        "accent-light": "var(--color-accent-light)",
                         "surface-light": "#ffffff",
-                        "surface-off": "#f8fafc", // Slate-50
+                        "surface-off": "var(--color-bg)",
                     },
                     fontFamily: {
                         "display": ["Outfit", "sans-serif"],
@@ -51,8 +51,16 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         :root {
-            --color-primary: #4F46E5;
-            --color-primary-light: #818cf8;
+            --color-primary: #6d28d9;
+            --color-primary-light: #8b5cf6;
+            --color-accent: #d4a853;
+            --color-accent-light: #f0dca0;
+            --color-bg: #faf5ff;
+            --color-bg-card: #f3e8ff;
+            --color-gradient-end: #d4a853;
+            --color-aurora-1: rgba(109, 40, 217, 0.15);
+            --color-aurora-2: rgba(212, 168, 83, 0.12);
+            --color-aurora-3: rgba(139, 92, 246, 0.12);
             --color-secondary: #10B981;
         }
 
@@ -106,6 +114,9 @@
                     },
                     colors: {
                         primary: 'var(--color-primary)',
+                        'primary-light': 'var(--color-primary-light)',
+                        accent: 'var(--color-accent)',
+                        'accent-light': 'var(--color-accent-light)',
                         secondary: 'var(--color-secondary)',
                         dark: '#1e293b',
                     }
@@ -115,7 +126,7 @@
     </script>
 </head>
 
-<body class="bg-slate-50 min-h-screen pb-32">
+<body class="min-h-screen pb-32" style="background-color: var(--color-bg)">
 
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-colors duration-500 border-b-2 border-primary/10">

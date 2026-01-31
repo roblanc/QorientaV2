@@ -17,6 +17,7 @@
     <!-- Tailwind CSS with Config -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="assets/js/audience.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -25,10 +26,12 @@
                     colors: {
                         "primary": "var(--color-primary)",
                         "primary-light": "var(--color-primary-light)",
-                        "accent-pink": "#ec4899", // Pink-500
-                        "accent-cyan": "#06b6d4", // Cyan-500
+                        "accent": "var(--color-accent)",
+                        "accent-light": "var(--color-accent-light)",
+                        "accent-pink": "var(--color-accent)",
+                        "accent-cyan": "var(--color-accent)",
                         "surface-light": "#ffffff",
-                        "surface-off": "#f8fafc", // Slate-50
+                        "surface-off": "var(--color-bg)",
                     },
                     fontFamily: {
                         "display": ["Outfit", "sans-serif"],
@@ -51,12 +54,20 @@
     <script src="assets/js/theme.js"></script>
     <style>
         :root {
-            --color-primary: #4f46e5;
-            --color-primary-light: #818cf8;
+            --color-primary: #6d28d9;
+            --color-primary-light: #8b5cf6;
+            --color-accent: #d4a853;
+            --color-accent-light: #f0dca0;
+            --color-bg: #faf5ff;
+            --color-bg-card: #f3e8ff;
+            --color-gradient-end: #d4a853;
+            --color-aurora-1: rgba(109, 40, 217, 0.15);
+            --color-aurora-2: rgba(212, 168, 83, 0.12);
+            --color-aurora-3: rgba(139, 92, 246, 0.12);
         }
 
         body {
-            background-color: #f8fafc;
+            background-color: var(--color-bg);
             color: #0f172a;
             /* Slate-900 */
         }
@@ -78,12 +89,12 @@
             overflow: hidden;
             z-index: -1;
             pointer-events: none;
-            background: #f8fafc;
+            background: var(--color-bg);
         }
 
         .aurora-blob {
             position: absolute;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, var(--color-aurora-1) 0%, rgba(255, 255, 255, 0) 70%);
             width: 1000px;
             height: 1000px;
             border-radius: 50%;
@@ -94,7 +105,7 @@
 
         .aurora-blob-2 {
             position: absolute;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, var(--color-aurora-2) 0%, rgba(255, 255, 255, 0) 70%);
             width: 800px;
             height: 800px;
             border-radius: 50%;
@@ -171,8 +182,13 @@
         </p>
     </section>
 
-    <!-- Pricing Cards -->
-    <section class="pb-32 px-6">
+    <!-- Audience Toggle -->
+    <div class="flex justify-center mb-12">
+        <div id="audience-toggle"></div>
+    </div>
+
+    <!-- Pricing Cards (Student) -->
+    <section class="pb-32 px-6" data-audience="student">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 
             <!-- Tier 1: Explorer -->
@@ -291,6 +307,142 @@
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
                         Plan de carieră personalizat
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Suport WhatsApp prioritar
+                    </li>
+                </ul>
+
+                <button
+                    class="block w-full py-3.5 rounded-xl bg-slate-50 text-slate-900 font-bold text-center hover:bg-slate-100 transition-colors">
+                    Contactează-ne
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pricing Cards (Adult) -->
+    <section class="pb-32 px-6 hidden" data-audience="adult">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+            <!-- Tier 1: Discovery -->
+            <div
+                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 relative group">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center border-4 border-white shadow-sm text-slate-500">
+                    <span class="material-symbols-rounded text-3xl">hiking</span>
+                </div>
+
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-2xl font-bold text-slate-900">Discovery</h3>
+                    <p class="text-slate-500 text-sm mb-6">Perfect pentru început.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-4xl font-bold text-slate-900">Gratuit</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Acces complet la testul vocațional
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Profil de personalitate de bază
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        3 domenii de reconversie sugerate
+                    </li>
+                </ul>
+
+                <a href="quiz.html"
+                    class="block w-full py-3.5 rounded-xl bg-slate-50 text-slate-900 font-bold text-center hover:bg-slate-100 transition-colors">
+                    Începe Acum
+                </a>
+            </div>
+
+            <!-- Tier 2: Navigator (Highlighted) -->
+            <div
+                class="bg-slate-900 p-8 pt-12 rounded-[2.5rem] shadow-2xl shadow-primary/20 hover:-translate-y-2 transition-transform duration-300 relative z-10 md:-mt-8 text-white">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-primary rounded-2xl flex items-center justify-center border-8 border-white dark:border-slate-900 shadow-lg text-white">
+                    <span class="material-symbols-rounded text-4xl">sailing</span>
+                </div>
+                <div
+                    class="absolute top-6 right-6 px-3 py-1 bg-gradient-to-r from-primary to-accent-pink rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    Popular
+                </div>
+
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-3xl font-bold text-white">Navigator</h3>
+                    <p class="text-slate-300 text-sm mb-6">Pentru cei care vor claritate totală.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-5xl font-bold text-white">149</span>
+                        <span class="text-xl text-slate-400">RON</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-10 text-sm text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        <span class="text-white">Tot ce include Discovery</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Raport detaliat (20+ pagini)
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Analiză SWOT personală
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Ghid pas cu pas pentru tranziția profesională
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-primary-light shrink-0">check_circle</span>
+                        Acces la comunitatea privată QOrienta
+                    </li>
+                </ul>
+
+                <button
+                    class="block w-full py-4 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary-light shadow-lg shadow-primary/25 transition-all hover:scale-105">
+                    Alege Pachetul
+                </button>
+            </div>
+
+            <!-- Tier 3: Transformation -->
+            <div
+                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 relative group">
+                <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-2xl flex items-center justify-center border-4 border-white shadow-sm text-accent-cyan">
+                    <span class="material-symbols-rounded text-3xl">rocket_launch</span>
+                </div>
+
+                <div class="text-center mt-6 mb-8">
+                    <h3 class="font-display text-2xl font-bold text-slate-900">Transformation</h3>
+                    <p class="text-slate-500 text-sm mb-6">Expertiză umană dedicată.</p>
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-4xl font-bold text-slate-900">499</span>
+                        <span class="text-xl text-slate-400">RON</span>
+                    </div>
+                </div>
+
+                <ul class="space-y-4 mb-8 text-sm text-slate-600">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Tot ce include Navigator
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        <span class="font-bold text-slate-900">1-la-1 cu un mentor (60 min)</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
+                        Plan de reconversie profesională
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-rounded text-green-500 shrink-0">check_circle</span>
@@ -490,6 +642,10 @@
             // Init Theme Toggle
             if (typeof renderThemeToggle === 'function') {
                 renderThemeToggle('nav-theme-toggle');
+            }
+            // Init Audience Toggle
+            if (typeof renderAudienceToggle === 'function') {
+                renderAudienceToggle('audience-toggle');
             }
         })();
     </script>

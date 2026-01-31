@@ -740,6 +740,12 @@ const emailModal = document.getElementById('email-modal');
 const emailForm = document.getElementById('email-gate-form');
 
 function showEmailGate(finalScores) {
+  // Skip email gate if lead already captured
+  if (localStorage.getItem('qorienta_lead_captured') === 'true') {
+    showFinalResults(finalScores);
+    return;
+  }
+
   if (emailModal) {
     emailModal.classList.remove('hidden');
     emailModal.classList.add('flex');
@@ -788,8 +794,32 @@ function saveLead(name, email, finalScores) {
   const leads = JSON.parse(localStorage.getItem('qorienta_leads') || '[]');
   leads.push(lead);
   localStorage.setItem('qorienta_leads', JSON.stringify(leads));
+  localStorage.setItem('qorienta_lead_captured', 'true');
 
   console.log('Lead saved:', lead);
+
+  // Fire-and-forget: Save lead to Supabase
+  try {
+    const supabaseUrl = 'https://uwnwqwmdvudftjyysyww.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3bndxd21kdnVkZnRqeXlzeXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MDc0MTUsImV4cCI6MjA4NTI4MzQxNX0.ykoaJs5068mfy9fgG81vxusxQX8VeFsbMQMJbn1Gjzs';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    supabase.from('leads').insert({
+      name: name || 'Anonim',
+      email: email,
+      audience_type: localStorage.getItem('qorienta_audience') || 'student',
+      quiz_result: resultType,
+      source: 'quiz_end'
+    }).then(({ error }) => {
+      if (error) {
+        console.warn('Supabase lead save error:', error.message);
+      } else {
+        console.log('Lead saved to Supabase successfully');
+      }
+    });
+  } catch (err) {
+    console.warn('Supabase lead save failed:', err);
+  }
 }
 
 function animateLoadingStep(stepNum, currentPercent, onComplete) {

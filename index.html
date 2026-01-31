@@ -24,10 +24,12 @@
                     colors: {
                         "primary": "var(--color-primary)",
                         "primary-light": "var(--color-primary-light)",
-                        "accent-pink": "#ec4899", // Pink-500
-                        "accent-cyan": "#06b6d4", // Cyan-500
+                        "accent": "var(--color-accent)",
+                        "accent-light": "var(--color-accent-light)",
+                        "accent-pink": "var(--color-accent)",
+                        "accent-cyan": "var(--color-accent)",
                         "surface-light": "#ffffff",
-                        "surface-off": "#f8fafc", // Slate-50
+                        "surface-off": "var(--color-bg)",
                     },
                     fontFamily: {
                         "display": ["Outfit", "sans-serif"],
@@ -37,6 +39,7 @@
                     animation: {
                         'float': 'float 8s ease-in-out infinite',
                         'scroll': 'scroll 40s linear infinite',
+                        'grow': 'grow 3s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -46,23 +49,38 @@
                         scroll: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        grow: {
+                            '0%': { width: '0%' },
+                            '100%': { width: '100%' },
                         }
                     }
                 },
             },
         }
     </script>
+    <!-- Supabase CDN -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="assets/js/audience.js"></script>
+    <script src="assets/js/leadcapture.js"></script>
     <style>
         :root {
-            --color-primary: #4f46e5;
-            --color-primary-light: #818cf8;
+            --color-primary: #6d28d9;
+            --color-primary-light: #8b5cf6;
+            --color-accent: #d4a853;
+            --color-accent-light: #f0dca0;
+            --color-bg: #faf5ff;
+            --color-bg-card: #f3e8ff;
+            --color-gradient-end: #d4a853;
+            --color-aurora-1: rgba(109, 40, 217, 0.15);
+            --color-aurora-2: rgba(212, 168, 83, 0.12);
+            --color-aurora-3: rgba(139, 92, 246, 0.12);
         }
 
         body {
-            background-color: #f8fafc;
+            background-color: var(--color-bg);
             color: #0f172a;
-            /* Slate-900 */
         }
 
         .glass-card {
@@ -82,7 +100,7 @@
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #4f46e5, #ec4899);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -111,12 +129,12 @@
                     rgba(203, 213, 225, 0.25) 39px,
                     rgba(203, 213, 225, 0.25) 40px),
                 /* Base background color */
-                #f8fafc;
+                var(--color-bg);
         }
 
         .aurora-blob {
             position: absolute;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, var(--color-aurora-1) 0%, rgba(255, 255, 255, 0) 70%);
             width: 900px;
             height: 900px;
             border-radius: 50%;
@@ -127,7 +145,7 @@
 
         .aurora-blob-2 {
             position: absolute;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, var(--color-aurora-2) 0%, rgba(255, 255, 255, 0) 70%);
             width: 800px;
             height: 800px;
             border-radius: 50%;
@@ -138,7 +156,7 @@
 
         .aurora-blob-3 {
             position: absolute;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, var(--color-aurora-3) 0%, rgba(255, 255, 255, 0) 70%);
             width: 600px;
             height: 600px;
             border-radius: 50%;
@@ -211,13 +229,17 @@
             <!-- Mobile Menu Moved to Body End -->
     </nav>
 
+    <!-- Audience Toggle -->
+    <div class="pt-28 pb-4 flex justify-center px-6">
+        <div id="audience-toggle"></div>
+    </div>
+
     <!-- Hero Section -->
-    <main class="relative pt-36 pb-20 lg:pt-48 lg:pb-32 px-6">
+    <main class="relative pt-8 pb-20 lg:pt-16 lg:pb-32 px-6">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            <div class="flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
-
-
+            <!-- STUDENT Hero -->
+            <div data-audience="student" class="flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
                 <h1
                     class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight">
                     Găsește-ți <br />
@@ -225,15 +247,42 @@
                 </h1>
 
                 <p class="text-lg sm:text-xl text-slate-600 max-w-lg leading-relaxed">
-                    Nu lăsa viitorul la voia întâmplării. Folosește algoritmi avansați și insight-uri de la experți
-                    reali pentru a alege facultatea perfectă.
+                    Nu lăsa viitorul la voia întâmplării. Descoperă-ți vocația cu ajutorul mentorilor noștri
+                    și al unui test creat de psihologi.
                 </p>
 
+                <!-- Lead Capture Form -->
+                <div id="lead-capture-form" class="w-full max-w-md">
+                    <div class="glass-card rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-display font-bold text-slate-800 text-lg mb-1">Primești GRATUIT ghidul</h3>
+                        <p class="text-sm text-slate-500 mb-4">"Primii Pași în Alegerea Direcției Potrivite"</p>
+                        <form id="hero-lead-form" class="flex flex-col gap-3">
+                            <input type="text" name="lead-name" placeholder="Numele tău (opțional)"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                            <input type="email" name="lead-email" placeholder="Email-ul tău" required
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                            <button type="submit"
+                                class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                Descarcă Ghidul Gratuit
+                            </button>
+                        </form>
+                        <p class="text-xs text-slate-400 mt-3 text-center">+ Acces la testul vocațional complet</p>
+                    </div>
+                </div>
+
+                <!-- Lead Capture Success -->
+                <div id="lead-capture-success" class="hidden w-full max-w-md">
+                    <div class="glass-card rounded-2xl p-8 shadow-lg text-center">
+                        <div class="text-4xl mb-3">🎉</div>
+                        <h3 class="font-display font-bold text-slate-800 text-xl mb-2">Mulțumim!</h3>
+                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te redirectăm către testul vocațional...</p>
+                        <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex flex-wrap gap-4 pt-2 justify-center lg:justify-start">
-                    <a href="quiz.html"
-                        class="h-14 px-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                        Fă Testul (10 min)
-                    </a>
                     <a href="#features"
                         class="h-14 px-8 rounded-full bg-white border border-slate-200 text-slate-700 flex items-center justify-center font-bold font-display hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
                         Cum funcționează?
@@ -257,7 +306,80 @@
                             <span class="material-symbols-rounded fill-current">star</span>
                             <span class="material-symbols-rounded fill-current">star</span>
                         </div>
-                        <p class="text-xs font-bold text-slate-600">Alătură-te celor 2.500+ elevi fericiți.</p>
+                        <p class="text-xs font-bold text-slate-600">Alătură-te celor 500+ elevi mulțumiți.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADULT Hero -->
+            <div data-audience="adult" class="hidden flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
+                <h1
+                    class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight">
+                    Redescoperă-ți <br />
+                    <span class="text-gradient">Direcția Profesională.</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-600 max-w-lg leading-relaxed">
+                    Nu e niciodată prea târziu pentru o schimbare. Găsește claritate profesională
+                    cu sprijinul mentorilor noștri și al unui test validat de psihologi.
+                </p>
+
+                <!-- Lead Capture Form (Adult) -->
+                <div id="lead-capture-form-adult" class="w-full max-w-md">
+                    <div class="glass-card rounded-2xl p-6 shadow-lg">
+                        <h3 class="font-display font-bold text-slate-800 text-lg mb-1">Primești GRATUIT ghidul</h3>
+                        <p class="text-sm text-slate-500 mb-4">"Primii Pași în Reconversia Profesională"</p>
+                        <form id="hero-lead-form-adult" class="flex flex-col gap-3">
+                            <input type="text" name="lead-name" placeholder="Numele tău (opțional)"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                            <input type="email" name="lead-email" placeholder="Email-ul tău" required
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                            <button type="submit"
+                                class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                Descarcă Ghidul Gratuit
+                            </button>
+                        </form>
+                        <p class="text-xs text-slate-400 mt-3 text-center">+ Acces la evaluarea profesională completă</p>
+                    </div>
+                </div>
+
+                <!-- Lead Capture Success (Adult) -->
+                <div id="lead-capture-success-adult" class="hidden w-full max-w-md">
+                    <div class="glass-card rounded-2xl p-8 shadow-lg text-center">
+                        <div class="text-4xl mb-3">🎉</div>
+                        <h3 class="font-display font-bold text-slate-800 text-xl mb-2">Mulțumim!</h3>
+                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te redirectăm către evaluarea profesională...</p>
+                        <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4 pt-2 justify-center lg:justify-start">
+                    <a href="#features"
+                        class="h-14 px-8 rounded-full bg-white border border-slate-200 text-slate-700 flex items-center justify-center font-bold font-display hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
+                        Cum funcționează?
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-4 text-sm font-medium text-slate-500 pt-4">
+                    <div class="flex -space-x-4">
+                        <img src="https://i.pravatar.cc/100?img=32" alt="Profesionist"
+                            class="w-12 h-12 rounded-full border-4 border-slate-50">
+                        <img src="https://i.pravatar.cc/100?img=47" alt="Profesionist"
+                            class="w-12 h-12 rounded-full border-4 border-slate-50">
+                        <img src="https://i.pravatar.cc/100?img=44" alt="Profesionist"
+                            class="w-12 h-12 rounded-full border-4 border-slate-50">
+                    </div>
+                    <div>
+                        <div class="flex text-amber-400 text-lg">
+                            <span class="material-symbols-rounded fill-current">star</span>
+                            <span class="material-symbols-rounded fill-current">star</span>
+                            <span class="material-symbols-rounded fill-current">star</span>
+                            <span class="material-symbols-rounded fill-current">star</span>
+                            <span class="material-symbols-rounded fill-current">star</span>
+                        </div>
+                        <p class="text-xs font-bold text-slate-600">Sute de profesioniști și-au găsit deja noua direcție.</p>
                     </div>
                 </div>
             </div>
@@ -321,10 +443,10 @@
                                 class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                                 <span class="material-symbols-rounded text-[32px]">psychology</span>
                             </div>
-                            <h3 class="font-display text-2xl font-bold text-slate-900 mb-2">Testare Psihometrică
-                                Avansată</h3>
-                            <p class="text-slate-500 max-w-md">Algoritmii noștri analizează 50+ de trăsături de
-                                personalitate pentru a-ți oferi sugestii de carieră cu o precizie de neegalat.</p>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 mb-2">Test Vocațional
+                                Personalizat</h3>
+                            <p class="text-slate-500 max-w-md">Testul nostru explorează 50+ de trăsături de
+                                personalitate pentru a-ți oferi sugestii de carieră cu o claritate reală.</p>
                         </div>
                         <img src="psychometric_dashboard_ro.png"
                             class="w-full max-w-md rounded-xl shadow-xl border border-slate-100 group-hover:scale-[1.02] transition-all duration-500"
@@ -820,6 +942,30 @@
                     document.body.removeChild(link);
                 }
             })();
+
+            // Init Audience Toggle
+            if (typeof renderAudienceToggle === 'function') {
+                renderAudienceToggle('audience-toggle');
+            }
+
+            // Init Lead Capture Forms
+            if (typeof initLeadCaptureForm === 'function') {
+                initLeadCaptureForm('hero-lead-form');
+                initLeadCaptureForm('hero-lead-form-adult');
+
+                // If lead already captured, show quiz CTA instead of form
+                if (typeof isLeadCaptured === 'function' && isLeadCaptured()) {
+                    const form = document.getElementById('lead-capture-form');
+                    const formAdult = document.getElementById('lead-capture-form-adult');
+                    if (form) form.innerHTML = '<a href="quiz.html" class="inline-flex h-14 px-8 rounded-full bg-primary text-white items-center justify-center font-bold text-lg hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all">Continuă Testul</a>';
+                    if (formAdult) formAdult.innerHTML = '<a href="quiz.html" class="inline-flex h-14 px-8 rounded-full bg-primary text-white items-center justify-center font-bold text-lg hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all">Continuă Evaluarea</a>';
+                }
+            }
+
+            // Init Theme Toggle
+            if (typeof renderThemeToggle === 'function') {
+                renderThemeToggle('nav-theme-toggle');
+            }
         </script>
 </body>
 

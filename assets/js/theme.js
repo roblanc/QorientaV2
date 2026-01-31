@@ -1,102 +1,147 @@
 /**
- * Global Theme Manager for QOrienta
- * Handles color schemes using CSS variables and LocalStorage.
+ * Global Theme Manager for QOrienta v2
+ * 5 teme complete — fiecare controleaza intregul site:
+ * primary, accent, background, gradients, aurora blobs.
  */
 
 const themes = {
-    'Original': {
-        primary: '#4f46e5', // Indigo-600
-        primaryLight: '#818cf8', // Indigo-400
-        secondary: '#0f172a' // Slate-900 (Used for some accents)
+    'Royal': {
+        label: 'Royal',
+        primary: '#6d28d9',
+        primaryLight: '#8b5cf6',
+        accent: '#d4a853',
+        accentLight: '#f0dca0',
+        bg: '#faf5ff',
+        bgCard: '#f3e8ff',
+        gradientEnd: '#d4a853',
+        aurora1: 'rgba(109, 40, 217, 0.15)',
+        aurora2: 'rgba(212, 168, 83, 0.12)',
+        aurora3: 'rgba(139, 92, 246, 0.12)',
     },
     'Ocean': {
-        primary: '#0ea5e9', // Sky-500
-        primaryLight: '#38bdf8', // Sky-400
-        secondary: '#0c4a6e' // Sky-900
+        label: 'Ocean',
+        primary: '#1e40af',
+        primaryLight: '#3b82f6',
+        accent: '#06b6d4',
+        accentLight: '#a5f3fc',
+        bg: '#f0f9ff',
+        bgCard: '#e0f2fe',
+        gradientEnd: '#06b6d4',
+        aurora1: 'rgba(30, 64, 175, 0.15)',
+        aurora2: 'rgba(6, 182, 212, 0.12)',
+        aurora3: 'rgba(59, 130, 246, 0.12)',
     },
     'Sunset': {
-        primary: '#f97316', // Orange-500
-        primaryLight: '#fb923c', // Orange-400
-        secondary: '#7c2d12' // Orange-900
+        label: 'Sunset',
+        primary: '#c2410c',
+        primaryLight: '#f97316',
+        accent: '#e11d48',
+        accentLight: '#fecdd3',
+        bg: '#fff7ed',
+        bgCard: '#ffedd5',
+        gradientEnd: '#e11d48',
+        aurora1: 'rgba(194, 65, 12, 0.15)',
+        aurora2: 'rgba(225, 29, 72, 0.12)',
+        aurora3: 'rgba(249, 115, 22, 0.12)',
     },
-    'Berry': {
-        primary: '#8b5cf6', // Violet-500
-        primaryLight: '#a78bfa', // Violet-400
-        secondary: '#4c1d95' // Violet-900
+    'Forest': {
+        label: 'Forest',
+        primary: '#166534',
+        primaryLight: '#16a34a',
+        accent: '#65a30d',
+        accentLight: '#d9f99d',
+        bg: '#f0fdf4',
+        bgCard: '#dcfce7',
+        gradientEnd: '#65a30d',
+        aurora1: 'rgba(22, 101, 52, 0.15)',
+        aurora2: 'rgba(101, 163, 13, 0.12)',
+        aurora3: 'rgba(22, 163, 74, 0.12)',
     },
-    'Nature': {
-        primary: '#16a34a', // Green-600
-        primaryLight: '#4ade80', // Green-400
-        secondary: '#14532d' // Green-900
+    'Midnight': {
+        label: 'Midnight',
+        primary: '#312e81',
+        primaryLight: '#4f46e5',
+        accent: '#7c3aed',
+        accentLight: '#c4b5fd',
+        bg: '#f8fafc',
+        bgCard: '#eef2ff',
+        gradientEnd: '#7c3aed',
+        aurora1: 'rgba(49, 46, 129, 0.15)',
+        aurora2: 'rgba(124, 58, 237, 0.12)',
+        aurora3: 'rgba(79, 70, 229, 0.12)',
     }
 };
 
-const THEME_KEY = 'qorienta_theme_v1';
+const THEME_KEY = 'qorienta_theme_v2';
 
-// Function to apply theme
 function applyTheme(themeName) {
-    const theme = themes[themeName] || themes['Original'];
+    const theme = themes[themeName] || themes['Royal'];
     const root = document.documentElement;
 
     root.style.setProperty('--color-primary', theme.primary);
     root.style.setProperty('--color-primary-light', theme.primaryLight);
-    // Add RGB variants for Tailwind opacity modifiers if needed, 
-    // but for now simple hex replacement is easier via CSS var.
-    // Note: Tailwind opacity with CSS vars usually requires the var to be "R G B" format.
-    // We will stick to simple solid colors first for stability.
+    root.style.setProperty('--color-accent', theme.accent);
+    root.style.setProperty('--color-accent-light', theme.accentLight);
+    root.style.setProperty('--color-bg', theme.bg);
+    root.style.setProperty('--color-bg-card', theme.bgCard);
+    root.style.setProperty('--color-gradient-end', theme.gradientEnd);
+    root.style.setProperty('--color-aurora-1', theme.aurora1);
+    root.style.setProperty('--color-aurora-2', theme.aurora2);
+    root.style.setProperty('--color-aurora-3', theme.aurora3);
 
     localStorage.setItem(THEME_KEY, themeName);
-
-    // Dispatch event for components to listen
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: { themeName, theme } }));
 }
 
-// Function to get current theme
 function getSavedTheme() {
-    return localStorage.getItem(THEME_KEY) || 'Original';
+    return localStorage.getItem(THEME_KEY) || 'Royal';
 }
 
-// Function to render Toggle UI
 function renderThemeToggle(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Create Dropdown HTML
-    const currentTheme = getSavedTheme();
-
-    // Button
     const btn = document.createElement('button');
     btn.className = "flex items-center gap-2 text-slate-600 hover:text-primary transition-colors p-2 rounded-lg";
-    btn.innerHTML = `<span class="material-symbols-rounded">palette</span>`;
+    btn.innerHTML = '<span class="material-symbols-rounded">palette</span>';
     btn.onclick = (e) => {
         e.stopPropagation();
         const dropdown = document.getElementById('theme-dropdown');
         dropdown.classList.toggle('hidden');
     };
 
-    // Dropdown
     const dropdown = document.createElement('div');
     dropdown.id = 'theme-dropdown';
-    dropdown.className = "hidden absolute top-full right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-100 p-2 z-[100] animate-[fadeIn_0.2s_ease-out]";
+    dropdown.className = "hidden absolute top-full right-0 mt-2 w-52 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-100 p-2 z-[100] animate-[fadeIn_0.2s_ease-out]";
 
-    // Generate Options
+    const currentTheme = getSavedTheme();
+
     Object.keys(themes).forEach(name => {
         const t = themes[name];
         const option = document.createElement('button');
-        option.className = "w-full flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 transition-colors text-left text-sm font-medium text-slate-700";
+        const isActive = name === currentTheme;
+        option.className = `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors text-left text-sm font-medium ${isActive ? 'bg-slate-100 text-slate-900' : 'hover:bg-slate-50 text-slate-700'}`;
         option.onclick = () => {
             applyTheme(name);
             document.getElementById('theme-dropdown').classList.add('hidden');
+            // Update active state
+            dropdown.querySelectorAll('button').forEach(b => {
+                b.className = b.className.replace('bg-slate-100 text-slate-900', 'hover:bg-slate-50 text-slate-700');
+            });
+            option.className = option.className.replace('hover:bg-slate-50 text-slate-700', 'bg-slate-100 text-slate-900');
         };
 
         option.innerHTML = `
-            <div class="w-4 h-4 rounded-full shadow-sm" style="background: ${t.primary}"></div>
-            ${name}
+            <div class="flex gap-1">
+                <div class="w-4 h-4 rounded-full shadow-sm border border-white/50" style="background: ${t.primary}"></div>
+                <div class="w-4 h-4 rounded-full shadow-sm border border-white/50" style="background: ${t.accent}"></div>
+            </div>
+            <span>${t.label}</span>
+            ${isActive ? '<span class="ml-auto text-xs text-slate-400">&#10003;</span>' : ''}
         `;
         dropdown.appendChild(option);
     });
 
-    // Close on outside click
     document.addEventListener('click', (e) => {
         if (!container.contains(e.target)) {
             dropdown.classList.add('hidden');
@@ -109,11 +154,9 @@ function renderThemeToggle(containerId) {
 
 // Init on load
 (function () {
-    // 1. Load saved theme immediately to prevent flash
     const saved = getSavedTheme();
     applyTheme(saved);
 
-    // 2. Set Default Logo (Bear V2) if none selected
     if (!localStorage.getItem('qorienta_selected_logo')) {
         localStorage.setItem('qorienta_selected_logo', 'assets/logos/generated/child_bear/child_bear_2.png');
     }
