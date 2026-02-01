@@ -1154,6 +1154,10 @@
 
         function renderLeaderboard() {
             const listObj = document.getElementById('leaderboard-list');
+            if (!listObj) {
+                console.error('❌ leaderboard-list element not found');
+                return;
+            }
             listObj.innerHTML = '';
 
             // If no votes, show empty state
