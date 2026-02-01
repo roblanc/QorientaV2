@@ -894,38 +894,12 @@
 
     </main>
 
-    <!-- Theme & Logo Studio -->
+    <!-- Logo Studio -->
     <div
-        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl p-4 flex flex-col items-center gap-4 md:flex-row md:gap-6 z-50 animate-[slideUp_0.5s_ease-out] w-[90%] md:w-auto max-w-sm md:max-w-none">
+        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl p-4 flex items-center gap-4 z-50 animate-[slideUp_0.5s_ease-out] max-w-sm md:max-w-none">
 
-        <!-- Theme Switcher -->
-        <div class="flex items-center gap-3 w-full md:w-auto justify-center">
-            <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shrink-0">
-                🎨 Tema
-            </div>
-            <div class="flex gap-2 flex-wrap justify-center">
-                <button onclick="setTheme('#4F46E5', '#10B981', 'Corporate')"
-                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#4F46E5] border-2 border-white hover:scale-110 transition-transform"
-                    title="Corporate"></button>
-                <button onclick="setTheme('#0ea5e9', '#06b6d4', 'Ocean')"
-                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0ea5e9] border-2 border-white hover:scale-110 transition-transform"
-                    title="Ocean"></button>
-                <button onclick="setTheme('#f97316', '#e11d48', 'Sunset')"
-                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#f97316] border-2 border-white hover:scale-110 transition-transform"
-                    title="Sunset"></button>
-                <button onclick="setTheme('#8b5cf6', '#d946ef', 'Berry')"
-                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#8b5cf6] border-2 border-white hover:scale-110 transition-transform"
-                    title="Berry"></button>
-                <button onclick="setTheme('#16a34a', '#84cc16', 'Nature')"
-                    class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#16a34a] border-2 border-white hover:scale-110 transition-transform"
-                    title="Nature"></button>
-            </div>
-        </div>
-
-        <div class="w-full h-px bg-slate-200 md:w-px md:h-8"></div>
-
-        <!-- Logo Studio -->
-        <div class="flex items-center gap-3 w-full md:w-auto justify-center">
+        <!-- Logo Color -->
+        <div class="flex items-center gap-3 justify-center">
             <div
                 class="bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full border border-primary/20 shrink-0">
                 🖌️ Color
@@ -1097,6 +1071,18 @@
             // 1. Actualizare Optimistă (Feedback instant)
             votes[id] = (votes[id] || 0) + 1;
             renderLeaderboard();
+
+            // Scroll la clasament și asigură-te că e deschis
+            const ranking = document.getElementById('ranking');
+            const content = document.getElementById('leaderboard-content');
+            if (ranking) {
+                ranking.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            if (content && content.style.maxHeight === '0px') {
+                content.style.maxHeight = '1000px';
+                const chevron = document.getElementById('leaderboard-chevron');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
 
             showToastMessage(isLive ? 'Vot Transmis Live!' : 'Vot Salvat Local!');
 
