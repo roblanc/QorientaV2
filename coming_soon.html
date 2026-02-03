@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>QOrienta - În Curând</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6d28d9",
+                        "accent": "#d4a853",
+                        "azure": "#3b82f6", /* Matched to illustration water */
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Seamless Input Container */
+        .seamless-input-container {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-radius: 9999px;
+            /* Pill shape */
+            padding: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .seamless-input-container:focus-within {
+            border-color: #6d28d9;
+            box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+        }
+
+        .seamless-input {
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            color: #1e293b;
+            width: 100%;
+            padding: 12px 20px;
+        }
+
+        .seamless-input:focus {
+            outline: none;
+            box-shadow: none;
+            border: none;
+            ring: 0;
+        }
+
+        .seamless-btn {
+            background: linear-gradient(135deg, #6d28d9, #4f46e5);
+            color: white;
+            border-radius: 9999px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: transform 0.2s;
+        }
+
+        .seamless-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        /* Image fade in */
+        .fade-in-up {
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body min-h-screen flex flex-col items-center justify-center relative px-4">
+
+    <div class="ambient-glow"></div>
+
+    <main class="w-full max-w-2xl text-center flex flex-col items-center gap-6">
+
+        <!-- Logo Text Minimal -->
+        <!-- Logo Removed -->
+
+        <!-- Illustration -->
+        <div class="w-full max-w-[500px] aspect-auto mb-4 fade-in-up animate-float" style="animation-delay: 0.2s;">
+            <!-- Using the uploaded image -->
+            <img src="assets/journey_illustration_v2_transparent.png" alt="Journey to Purpose"
+                class="w-full h-auto object-contain drop-shadow-sm">
+        </div>
+
+        <!-- Text Content -->
+        <div class="space-y-4 max-w-lg mx-auto fade-in-up" style="animation-delay: 0.4s;">
+            <h1 class="text-4xl md:text-5xl font-display font-bold text-slate-900 tracking-tight">
+                În Curând
+            </h1>
+            <p class="text-slate-500 text-lg leading-relaxed">
+                Fii primul care află când lansăm și asigură-ți un loc în programul nostru de orientare.
+            </p>
+        </div>
+
+        <!-- Seamless Email Form -->
+        <form id="mystery-form" class="w-full max-w-md mt-6 fade-in-up" style="animation-delay: 0.6s;">
+            <div class="seamless-input-container">
+                <input type="email" name="email" placeholder="Adresa ta de email..." required
+                    class="seamless-input placeholder:text-slate-400 focus:ring-0">
+                <button type="submit" class="seamless-btn flex items-center gap-2">
+                    Rezervă loc <span class="material-symbols-rounded text-sm">arrow_forward</span>
+                </button>
+            </div>
+
+        </form>
+
+        <!-- Success Message -->
+        <div id="success-message"
+            class="hidden mt-6 text-center transform scale-95 opacity-0 transition-all duration-500">
+            <div
+                class="inline-flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 rounded-full text-sm font-bold border border-green-100">
+                <span class="material-symbols-rounded">check_circle</span>
+                Te-am adăugat pe listă!
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <!-- Logic -->
+    <script>
+        // Supabase Logic
+        const SUPABASE_URL = 'https://uwnwqwmdvudftjyysyww.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3bndxd21kdnVkZnRqeXlzeXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MDc0MTUsImV4cCI6MjA4NTI4MzQxNX0.ykoaJs5068mfy9fgG81vxusxQX8VeFsbMQMJbn1Gjzs';
+
+        let supabase = null;
+        if (typeof window.supabase !== 'undefined') {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+
+        const form = document.getElementById('mystery-form');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = form.querySelector('[name="email"]');
+            const email = emailInput.value.trim();
+
+            if (!email) return;
+
+            const btn = form.querySelector('button');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
+            btn.disabled = true;
+
+            // Save to Supabase
+            if (supabase) {
+                try {
+                    await supabase.from('leads').insert({
+                        email: email,
+                        source: 'mystery_landing_illustration',
+                        audience_type: 'unknown',
+                        name: 'Guest'
+                    });
+                } catch (err) {
+                    console.error('Error saving lead:', err);
+                }
+            }
+
+            // Simulate delay for smooth UI
+            setTimeout(() => {
+                form.style.opacity = '0';
+                form.style.transform = 'translateY(10px)';
+
+                setTimeout(() => {
+                    form.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+
+                    // Trigger reflow
+                    void successMessage.offsetWidth;
+
+                    successMessage.style.opacity = '1';
+                    successMessage.style.transform = 'scale(1)';
+                }, 300);
+
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>
