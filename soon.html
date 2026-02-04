@@ -182,7 +182,7 @@
                 <input type="email" name="email" placeholder="Adresa ta de email..." required
                     class="seamless-input placeholder:text-slate-400 focus:ring-0">
 
-                <button type="submit" class="seamless-btn flex items-center gap-2">
+                <button type="button" id="submit-btn" class="seamless-btn flex items-center gap-2">
 
                     Rezervă loc <span class="material-symbols-rounded text-sm">arrow_forward</span>
 
@@ -238,70 +238,73 @@
         }
 
         if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
 
-                const emailInput = form.querySelector('[name="email"]');
-                const email = emailInput ? emailInput.value.trim() : '';
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function (e) {
+                    e.preventDefault(); // Just in case
 
-                if (!email) return;
+                    const emailInput = form.querySelector('[name="email"]');
+                    const email = emailInput ? emailInput.value.trim() : '';
 
-                // UI Loading State
-                const btn = form.querySelector('button');
-                if (btn) {
-                    // Preserve width to avoid layout shift
-                    const width = btn.offsetWidth;
-                    btn.style.width = width + 'px';
-                    btn.style.justifyContent = 'center';
-                    btn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
-                    btn.disabled = true;
-                }
-
-                // 1. Attempt Save to Supabase (Safe Mode)
-                try {
-                    if (supabase) {
-                        supabase.from('leads').insert({
-                            email: email,
-                            source: 'mystery_landing_illustration',
-                            audience_type: 'unknown',
-                            name: 'Guest'
-                        }).then(() => {
-                            // Success silent
-                        }).catch(err => {
-                            console.warn('Lead save background error:', err);
-                        });
-                    }
-                } catch (err) {
-                    console.warn('Supabase synchronous error:', err);
-                }
-
-                // 2. UI Success Transition (Always runs)
-                setTimeout(() => {
-                    // Fire Confetti
-                    if (typeof confetti === 'function') {
-                        confetti({
-                            particleCount: 100,
-                            spread: 70,
-                            origin: { y: 0.6 }
-                        });
+                    if (!email) {
+                        alert('Te rugăm să introduci o adresă de email validă.');
+                        return;
                     }
 
-                    form.style.opacity = '0';
-                    form.style.transform = 'translateY(10px)';
+                    // UI Loading State
+                    const width = submitBtn.offsetWidth;
+                    submitBtn.style.width = width + 'px';
+                    submitBtn.style.justifyContent = 'center';
+                    submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
+                    submitBtn.disabled = true;
 
+                    // 1. Attempt Save to Supabase (Safe Mode)
+                    try {
+                        if (supabase) {
+                            supabase.from('leads').insert({
+                                email: email,
+                                source: 'mystery_landing_illustration',
+                                audience_type: 'unknown',
+                                name: 'Guest'
+                            }).then(() => {
+                                // Success silent
+                            }).catch(err => {
+                                console.warn('Lead save background error:', err);
+                            });
+                        }
+                    } catch (err) {
+                        console.warn('Supabase synchronous error:', err);
+                    }
+
+                    // 2. UI Success Transition (Always runs)
                     setTimeout(() => {
-                        form.classList.add('hidden');
-                        successMessage.classList.remove('hidden');
-                        successMessage.classList.add('flex'); // Ensure flex display
+                        // Fire Confetti
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 100,
+                                spread: 70,
+                                origin: { y: 0.6 }
+                            });
+                        }
 
-                        // Trigger reflow
-                        void successMessage.offsetWidth;
+                        form.style.opacity = '0';
+                        form.style.transform = 'translateY(10px)';
 
-                        successMessage.style.opacity = '1';
-                        successMessage.style.transform = 'scale(1)';
-                    }, 300);
-                }, 800);
-            });
+                        setTimeout(() => {
+                            form.classList.add('hidden');
+                            successMessage.classList.remove('hidden');
+                            successMessage.classList.add('flex'); // Ensure flex display
+
+                            // Trigger reflow
+                            void successMessage.offsetWidth;
+
+                            successMessage.style.opacity = '1';
+                            successMessage.style.transform = 'scale(1)';
+                        }, 300);
+                    }, 800);
+                });
+            }
         }
     </script>
 </body>
