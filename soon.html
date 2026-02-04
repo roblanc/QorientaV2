@@ -43,7 +43,7 @@
         }
     </script>
     <!-- Supabase -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
             background-color: #ffffff;
@@ -92,7 +92,6 @@
             outline: none;
             box-shadow: none;
             border: none;
-            ring: 0;
         }
 
         .seamless-btn {
@@ -212,57 +211,63 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3bndxd21kdnVkZnRqeXlzeXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MDc0MTUsImV4cCI6MjA4NTI4MzQxNX0.ykoaJs5068mfy9fgG81vxusxQX8VeFsbMQMJbn1Gjzs';
 
         let supabase = null;
-        if (typeof window.supabase !== 'undefined') {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        try {
+            if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            }
+        } catch (e) {
+            console.error('Supabase init failed:', e);
         }
 
         const form = document.getElementById('mystery-form');
         const successMessage = document.getElementById('success-message');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const emailInput = form.querySelector('[name="email"]');
-            const email = emailInput.value.trim();
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const emailInput = form.querySelector('[name="email"]');
+                const email = emailInput ? emailInput.value.trim() : '';
 
-            if (!email) return;
+                if (!email) return;
 
-            const btn = form.querySelector('button');
-            const originalBtnText = btn.innerHTML;
-            btn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
-            btn.disabled = true;
+                const btn = form.querySelector('button');
+                if (btn) {
+                    btn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
+                    btn.disabled = true;
+                }
 
-            // Save to Supabase
-            if (supabase) {
-                try {
-                    await supabase.from('leads').insert({
+                // 1. Save to Supabase (fire and forget)
+                if (supabase) {
+                    supabase.from('leads').insert({
                         email: email,
                         source: 'mystery_landing_illustration',
                         audience_type: 'unknown',
                         name: 'Guest'
+                    }).then(({ error }) => {
+                        if (error) console.error('Error saving lead:', error);
+                    }).catch(err => {
+                        console.error('Lead save exception:', err);
                     });
-                } catch (err) {
-                    console.error('Error saving lead:', err);
                 }
-            }
 
-            // Simulate delay for smooth UI
-            setTimeout(() => {
-                form.style.opacity = '0';
-                form.style.transform = 'translateY(10px)';
-
+                // 2. UI Transition (immediate or slight delay for feel)
                 setTimeout(() => {
-                    form.classList.add('hidden');
-                    successMessage.classList.remove('hidden');
+                    form.style.opacity = '0';
+                    form.style.transform = 'translateY(10px)';
 
-                    // Trigger reflow
-                    void successMessage.offsetWidth;
+                    setTimeout(() => {
+                        form.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
 
-                    successMessage.style.opacity = '1';
-                    successMessage.style.transform = 'scale(1)';
-                }, 300);
+                        // Trigger reflow
+                        void successMessage.offsetWidth;
 
-            }, 800);
-        });
+                        successMessage.style.opacity = '1';
+                        successMessage.style.transform = 'scale(1)';
+                    }, 300);
+                }, 600);
+            });
+        }
     </script>
 </body>
 
