@@ -35,10 +35,10 @@
                         "display": ["Outfit", "sans-serif"],
                         "body": ["Plus Jakarta Sans", "sans-serif"],
                     },
-                    borderRadius: { "3xl": "1.5rem", "4xl": "2.5rem" },
+                    borderRadius: { "3xl": "1.5rem",l": "2.5rem" },
                     animation: {
                         'float': 'float 8s ease-in-out infinite',
-                        'scroll': 'scroll 40s linear infinite',
+                        'scroll': 'scroll 40s line,
                         'grow': 'grow 3s ease-out forwards',
                     },
                     keyframes: {
@@ -239,7 +239,8 @@
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             <!-- STUDENT Hero -->
-            <div data-audience="student" class="flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
+            <div data-audience="student"
+                class="flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
                 <h1
                     class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight">
                     Găsește-ți <br />
@@ -275,9 +276,11 @@
                     <div class="glass-card rounded-2xl p-8 shadow-lg text-center">
                         <div class="text-4xl mb-3">🎉</div>
                         <h3 class="font-display font-bold text-slate-800 text-xl mb-2">Mulțumim!</h3>
-                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te redirectăm către testul vocațional...</p>
+                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te
+                            redirectăm către testul vocațional...</p>
                         <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]" style="width: 0%"></div>
+                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -312,7 +315,8 @@
             </div>
 
             <!-- ADULT Hero -->
-            <div data-audience="adult" class="hidden flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
+            <div data-audience="adult"
+                class="hidden flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
                 <h1
                     class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight">
                     Redescoperă-ți <br />
@@ -339,7 +343,8 @@
                                 Descarcă Ghidul Gratuit
                             </button>
                         </form>
-                        <p class="text-xs text-slate-400 mt-3 text-center">+ Acces la evaluarea profesională completă</p>
+                        <p class="text-xs text-slate-400 mt-3 text-center">+ Acces la evaluarea profesională completă
+                        </p>
                     </div>
                 </div>
 
@@ -348,9 +353,11 @@
                     <div class="glass-card rounded-2xl p-8 shadow-lg text-center">
                         <div class="text-4xl mb-3">🎉</div>
                         <h3 class="font-display font-bold text-slate-800 text-xl mb-2">Mulțumim!</h3>
-                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te redirectăm către evaluarea profesională...</p>
+                        <p class="text-slate-600 text-sm mb-4">Ghidul va fi disponibil în curând. Între timp, te
+                            redirectăm către evaluarea profesională...</p>
                         <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]" style="width: 0%"></div>
+                            <div class="h-full bg-primary rounded-full animate-[grow_3s_ease-out_forwards]"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -379,7 +386,8 @@
                             <span class="material-symbols-rounded fill-current">star</span>
                             <span class="material-symbols-rounded fill-current">star</span>
                         </div>
-                        <p class="text-xs font-bold text-slate-600">Sute de profesioniști și-au găsit deja noua direcție.</p>
+                        <p class="text-xs font-bold text-slate-600">Sute de profesioniști și-au găsit deja noua
+                            direcție.</p>
                     </div>
                 </div>
             </div>
@@ -872,7 +880,7 @@
             }
 
             if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', togobi;
 
 
             // Live Logo Preview Script
@@ -886,31 +894,11 @@
                         navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                     }
 
-                    // Update Footer Logo and Admin Logic
+                    // Update Footer Logo
                     const footerLogo = document.getElementById('footer-logo-icon-wrapper');
                     if (footerLogo) {
-                        footerLogo.className = 'w-8 h-8 flex items-center justify-center cursor-default select-none'; // Added cursor
+                        footerLogo.className = 'w-8 h-8 flex items-center justify-center cursor-default select-none';
                         footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
-
-                        // HIDDEN ADMIN LOGIC: 5 Clicks to download emails
-                        let clickCount = 0;
-                        let lastClickTime = 0;
-
-                        footerLogo.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const now = Date.now();
-                            if (now - lastClickTime < 1000) {
-                                clickCount++;
-                            } else {
-                                clickCount = 1;
-                            }
-                            lastClickTime = now;
-
-                            if (clickCount === 5) {
-                                downloadEmails();
-                                clickCount = 0;
-                            }
-                        });
                     }
                 }
 
@@ -920,27 +908,6 @@
                     // Also mobile? We can add another container for mobile if needed.
                 }
 
-                // Helper to download emails CSV
-                function downloadEmails() {
-                    const emails = JSON.parse(localStorage.getItem('qorienta_leads') || '[]');
-                    if (emails.length === 0) {
-                        alert('Nu sunt emailuri colectate încă.');
-                        return;
-                    }
-
-                    let csvContent = "data:text/csv;charset=utf-8,Data,Nume,Email,Rezultat\n";
-                    emails.forEach(row => {
-                        csvContent += `${row.date},${row.name},${row.email},${row.result}\n`;
-                    });
-
-                    const encodedUri = encodeURI(csvContent);
-                    const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "qorienta_leads.csv");
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
             })();
 
             // Init Audience Toggle
