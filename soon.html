@@ -44,6 +44,8 @@
     </script>
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
             background-color: #ffffff;
@@ -192,12 +194,18 @@
 
         <!-- Success Message -->
         <div id="success-message"
-            class="hidden mt-6 text-center transform scale-95 opacity-0 transition-all duration-500">
+            class="hidden mt-6 flex-col items-center gap-4 text-center transform scale-95 opacity-0 transition-all duration-500">
             <div
                 class="inline-flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 rounded-full text-sm font-bold border border-green-100">
                 <span class="material-symbols-rounded">check_circle</span>
-                Te-am adăugat pe listă!
+                Ești pe listă!
             </div>
+
+            <button id="reset-btn"
+                class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors flex items-center gap-1 mt-2">
+                <span class="material-symbols-rounded">arrow_back</span>
+                Înapoi
+            </button>
         </div>
 
     </main>
@@ -221,6 +229,13 @@
 
         const form = document.getElementById('mystery-form');
         const successMessage = document.getElementById('success-message');
+        const resetBtn = document.getElementById('reset-btn');
+
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                location.reload();
+            });
+        }
 
         if (form) {
             form.addEventListener('submit', function (e) {
@@ -262,12 +277,22 @@
 
                 // 2. UI Success Transition (Always runs)
                 setTimeout(() => {
+                    // Fire Confetti
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    }
+
                     form.style.opacity = '0';
                     form.style.transform = 'translateY(10px)';
 
                     setTimeout(() => {
                         form.classList.add('hidden');
                         successMessage.classList.remove('hidden');
+                        successMessage.classList.add('flex'); // Ensure flex display
 
                         // Trigger reflow
                         void successMessage.offsetWidth;
