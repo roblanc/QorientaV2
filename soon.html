@@ -216,7 +216,7 @@
                 supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             }
         } catch (e) {
-            console.error('Supabase init failed:', e);
+            console.warn('Supabase init warning:', e);
         }
 
         const form = document.getElementById('mystery-form');
@@ -225,32 +225,42 @@
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+
                 const emailInput = form.querySelector('[name="email"]');
                 const email = emailInput ? emailInput.value.trim() : '';
 
                 if (!email) return;
 
+                // UI Loading State
                 const btn = form.querySelector('button');
                 if (btn) {
+                    // Preserve width to avoid layout shift
+                    const width = btn.offsetWidth;
+                    btn.style.width = width + 'px';
+                    btn.style.justifyContent = 'center';
                     btn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
                     btn.disabled = true;
                 }
 
-                // 1. Save to Supabase (fire and forget)
-                if (supabase) {
-                    supabase.from('leads').insert({
-                        email: email,
-                        source: 'mystery_landing_illustration',
-                        audience_type: 'unknown',
-                        name: 'Guest'
-                    }).then(({ error }) => {
-                        if (error) console.error('Error saving lead:', error);
-                    }).catch(err => {
-                        console.error('Lead save exception:', err);
-                    });
+                // 1. Attempt Save to Supabase (Safe Mode)
+                try {
+                    if (supabase) {
+                        supabase.from('leads').insert({
+                            email: email,
+                            source: 'mystery_landing_illustration',
+                            audience_type: 'unknown',
+                            name: 'Guest'
+                        }).then(() => {
+                            // Success silent
+                        }).catch(err => {
+                            console.warn('Lead save background error:', err);
+                        });
+                    }
+                } catch (err) {
+                    console.warn('Supabase synchronous error:', err);
                 }
 
-                // 2. UI Transition (immediate or slight delay for feel)
+                // 2. UI Success Transition (Always runs)
                 setTimeout(() => {
                     form.style.opacity = '0';
                     form.style.transform = 'translateY(10px)';
@@ -265,7 +275,7 @@
                         successMessage.style.opacity = '1';
                         successMessage.style.transform = 'scale(1)';
                     }, 300);
-                }, 600);
+                }, 800);
             });
         }
     </script>
