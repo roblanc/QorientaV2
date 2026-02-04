@@ -65,12 +65,12 @@ function renderAudienceToggle(containerId) {
             <button data-audience-toggle="student"
                 class="px-4 py-2 rounded-lg transition-all duration-200 ${current === 'student' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
                 onclick="setAudience('student')">
-                Elevi & Parinti
+                Elevi & Părinți
             </button>
             <button data-audience-toggle="adult"
                 class="px-4 py-2 rounded-lg transition-all duration-200 ${current === 'adult' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
                 onclick="setAudience('adult')">
-                Reconversie Profesionala
+                Reconversie Profesională
             </button>
         </div>
     `;
