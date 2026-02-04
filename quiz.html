@@ -191,7 +191,7 @@
           <span class="material-symbols-rounded">arrow_back_ios_new</span>
         </a>
         <div id="quiz-intro-logo" class="flex items-center gap-1 text-primary font-bold text-lg">
-          <span class="material-symbols-rounded">explore</span>
+          <img src="assets/logos/generated/child_bear/child_book_1.png" class="w-6 h-6 object-contain mr-1">
           <span>QOrienta</span>
         </div>
         <div class="w-10"></div> <!-- Spacer -->
@@ -448,8 +448,9 @@
           <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 group">
               <div id="logo-icon-wrapper"
-                class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
-                <span class="material-symbols-rounded">explore</span>
+                class="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
+                <img src="assets/logos/generated/child_bear/child_book_1.png"
+                  class="w-full h-full object-contain filter drop-shadow-sm">
               </div>
               <!-- <img src="assets/logos/logo.png" class="h-10 w-auto" alt="QOrienta Logo"> -->
               <span class="font-display font-bold text-xl text-primary">QOrienta</span>
@@ -658,21 +659,29 @@
   <script src="assets/js/theme.js"></script>
   <script>
       (function () {
-        const savedLogo = localStorage.getItem('qorienta_selected_logo');
+        const defaultLogo = 'assets/logos/generated/child_bear/child_book_1.png';
+        const savedLogo = localStorage.getItem('qorienta_selected_logo') || defaultLogo;
         if (savedLogo) {
+          // Update Intro Logo
           const quizLogo = document.getElementById('quiz-intro-logo');
           if (quizLogo) {
-            // This is a flex container with text. The icon is the first child span.
-            // Let's replace the icon span with the image.
-            // Original: <span class="material-symbols-rounded">explore</span>
             const iconSpan = quizLogo.querySelector('.material-symbols-rounded');
+            const existingImg = quizLogo.querySelector('img');
             if (iconSpan) {
-              // We need to make the image fit nicely with the text.
               const img = document.createElement('img');
               img.src = savedLogo;
-              img.className = 'w-6 h-6 object-contain mr-1'; // Adjust size to match text
+              img.className = 'w-6 h-6 object-contain mr-1';
               quizLogo.replaceChild(img, iconSpan);
+            } else if (existingImg) {
+              existingImg.src = savedLogo;
             }
+          }
+
+          // Update Results Logo (if container exists)
+          const resultNavLogo = document.getElementById('logo-icon-wrapper');
+          if (resultNavLogo) {
+            resultNavLogo.className = 'w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110';
+            resultNavLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
           }
         }
       })();

@@ -52,8 +52,9 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 group">
                 <div id="logo-icon-wrapper"
-                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
-                    <span class="material-symbols-rounded">explore</span>
+                    class="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
+                    <img src="assets/logos/generated/child_bear/child_book_1.png"
+                        class="w-full h-full object-contain filter drop-shadow-sm">
                 </div>
                 <span class="font-display font-bold text-xl text-primary">QOrienta</span>
             </a>
@@ -123,12 +124,13 @@
 
     <script>
             (function () {
-                const savedLogo = localStorage.getItem('qorienta_selected_logo');
+                const defaultLogo = 'assets/logos/generated/child_bear/child_book_1.png';
+                const savedLogo = localStorage.getItem('qorienta_selected_logo') || defaultLogo;
                 if (savedLogo) {
                     const navLogo = document.getElementById('logo-icon-wrapper');
                     if (navLogo) {
-                        navLogo.className = 'w-10 h-10 flex items-center justify-center';
-                        navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain">`;
+                        navLogo.className = 'w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110';
+                        navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                     }
                 }
                 // Init Theme Toggle

@@ -130,8 +130,9 @@
             <!-- Logo -->
             <a href="index.html" class="flex items-center gap-2 group">
                 <div id="logo-icon-wrapper"
-                    class="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
-                    <span class="material-symbols-rounded">explore</span>
+                    class="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
+                    <img src="assets/logos/generated/child_bear/child_book_1.png"
+                        class="w-full h-full object-contain filter drop-shadow-sm">
                 </div>
                 <div class="flex flex-col">
                     <span
@@ -544,8 +545,9 @@
             <div class="col-span-1 md:col-span-1">
                 <a href="index.html" class="flex items-center gap-2 mb-6">
                     <div id="footer-logo-icon-wrapper"
-                        class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
-                        <span class="material-symbols-rounded text-sm">explore</span>
+                        class="w-8 h-8 flex items-center justify-center cursor-default select-none">
+                        <img src="assets/logos/generated/child_bear/child_book_1.png"
+                            class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
                     <span class="font-display font-bold text-lg text-slate-800">QOrienta</span>
                 </a>
@@ -626,16 +628,17 @@
         if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
 
         (function () {
-            const savedLogo = localStorage.getItem('qorienta_selected_logo');
+            const defaultLogo = 'assets/logos/generated/child_bear/child_book_1.png';
+            const savedLogo = localStorage.getItem('qorienta_selected_logo') || defaultLogo;
             if (savedLogo) {
                 const navLogo = document.getElementById('logo-icon-wrapper');
                 if (navLogo) {
-                    navLogo.className = 'w-10 h-10 flex items-center justify-center';
-                    navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain">`;
+                    navLogo.className = 'w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110';
+                    navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                 }
                 const footerLogo = document.getElementById('footer-logo-icon-wrapper');
                 if (footerLogo) {
-                    footerLogo.className = 'w-8 h-8 flex items-center justify-center';
+                    footerLogo.className = 'w-8 h-8 flex items-center justify-center cursor-default select-none';
                     footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
                 }
             }
