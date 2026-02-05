@@ -157,7 +157,5 @@ function renderThemeToggle(containerId) {
     const saved = getSavedTheme();
     applyTheme(saved);
 
-    if (!localStorage.getItem('qorienta_selected_logo')) {
-        localStorage.setItem('qorienta_selected_logo', 'assets/logos/generated/child_bear/child_bear_2.png');
-    }
+    // Logo default logic removed to prevent persistent override. Default is handled by HTML.
 })();

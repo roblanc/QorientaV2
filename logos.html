@@ -141,7 +141,7 @@
                 <div class="flex flex-col">
                     <span id="header-logo-text"
                         class="text-xl md:text-2xl font-bold text-primary transition-colors duration-300 leading-none">QOrienta</span>
-                    
+
                 </div>
             </a>
 
@@ -840,7 +840,7 @@
                 var imgEl = img ? img.querySelector('.aspect-square img') : null;
                 if (imgEl) {
                     var logoPath = imgEl.getAttribute('src');
-                    localStorage.setItem('qorienta_selected_logo', logoPath);
+                    sessionStorage.setItem('qorienta_selected_logo', logoPath);
                     updateHeaderLogo(logoPath);
                     showToastMessage('Logo Setat pe Site!');
                 }
@@ -955,7 +955,7 @@
             if (!confirm('Sigur vrei să resetezi clasamentul local?')) return;
             votes = {};
             localStorage.removeItem('qorienta_votes_v2');
-            localStorage.removeItem('qorienta_selected_logo');
+            sessionStorage.removeItem('qorienta_selected_logo');
             renderLeaderboard();
             var hc = document.getElementById('header-logo-container');
             if (hc) { hc.classList.add('hidden'); hc.innerHTML = ''; }
@@ -1007,7 +1007,7 @@
         // --- INIT ---
         (function () {
             // 1. Logo salvat
-            var savedLogo = localStorage.getItem('qorienta_selected_logo');
+            var savedLogo = sessionStorage.getItem('qorienta_selected_logo');
             if (savedLogo) updateHeaderLogo(savedLogo);
 
             // 2. Renderizează imediat cu date locale
