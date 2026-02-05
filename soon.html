@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700;8..60,800&display=swap"
         rel="stylesheet" />
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
@@ -26,8 +26,8 @@
                         "azure": "#3b82f6", /* Matched to illustration water */
                     },
                     fontFamily: {
-                        "display": ["Outfit", "sans-serif"],
-                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "display": ["Source Serif 4", "serif"],
+                        "body": ["Inter", "sans-serif"],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -131,26 +131,18 @@
     </style>
 </head>
 
-<body class="font-body min-h-screen flex flex-col items-center justify-center relative px-4">
+<body class="font-body min-h-screen flex flex-col items-center relative px-4 py-12">
 
     <div class="ambient-glow"></div>
 
-    <main class="w-full max-w-2xl text-center flex flex-col items-center gap-6">
+    <main class="w-full max-w-2xl text-center flex flex-col items-center gap-6 my-auto">
 
         <!-- Logo Text Minimal -->
         <!-- Logo Removed -->
 
         <!-- Illustration -->
 
-        <div class="w-full max-w-[250px] sm:max-w-[400px] md:max-w-[500px] aspect-auto mb-4 fade-in-up animate-float"
-            style="animation-delay: 0.2s;">
 
-            <!-- Using the uploaded image -->
-
-            <img src="assets/journey_illustration_v2_transparent.png" alt="Journey to Purpose"
-                class="w-full h-full object-contain drop-shadow-sm">
-
-        </div>
 
         <!-- Text Content -->
 
@@ -206,6 +198,13 @@
                 <span class="material-symbols-rounded">arrow_back</span>
                 Înapoi
             </button>
+        </div>
+
+        <!-- Image Moved to Bottom -->
+        <div class="w-full max-w-[250px] sm:max-w-[400px] md:max-w-[500px] aspect-auto mt-8 fade-in-up animate-float"
+            style="animation-delay: 0.8s;">
+            <img src="assets/journey_illustration_v2_transparent.png" alt="Journey to Purpose"
+                class="w-full h-full object-contain drop-shadow-sm">
         </div>
 
     </main>
