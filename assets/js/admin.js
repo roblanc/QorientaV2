@@ -51,11 +51,17 @@ async function handleLogin(e) {
 
         if (error) throw error;
 
+        // Alert success to verify we got here
+        alert('Login success: ' + data.user.email);
+
         showDashboard(data.user);
 
     } catch (err) {
         console.error('Login failed:', err);
-        errorMsg.textContent = 'Email sau parolă incorectă';
+        // Explicit alert for the user to see what's wrong
+        alert('Login failed: ' + (err.message || JSON.stringify(err)));
+
+        errorMsg.textContent = 'Eroare: ' + (err.message || 'Email sau parolă incorectă');
         errorMsg.classList.remove('hidden');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Intră în cont';
