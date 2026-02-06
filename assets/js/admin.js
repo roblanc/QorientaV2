@@ -58,10 +58,20 @@ async function handleLogin(e) {
 
     } catch (err) {
         console.error('Login failed:', err);
-        // Explicit alert for the user to see what's wrong
-        alert('Login failed: ' + (err.message || JSON.stringify(err)));
 
-        errorMsg.textContent = 'Eroare: ' + (err.message || 'Email sau parolă incorectă');
+        let message = 'A apărut o eroare la conectare.';
+
+        // Check for specific Supabase error message
+        if (err.message && (err.message.includes('Invalid login credentials') || err.message.includes('invalid_grant'))) {
+            message = 'Email sau parolă incorectă. Te rugăm să verifici datele.';
+        } else if (err.message) {
+            message = 'Eroare: ' + err.message;
+        }
+
+        // Show alert
+        alert(message);
+
+        errorMsg.textContent = message;
         errorMsg.classList.remove('hidden');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Intră în cont';
