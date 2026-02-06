@@ -8,7 +8,10 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 let supabase;
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialize function
+async function initAdmin() {
+    console.log('Initializing admin...');
+
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     // Check current session
@@ -23,7 +26,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Handle Login
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
+        console.log('Attaching login form listener...');
         loginForm.addEventListener('submit', handleLogin);
+    } else {
+        console.error('Login form not found!');
     }
 
     // Handle Logout
@@ -31,7 +37,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', handleLogout);
     }
-});
+}
+
+// Run initialization - handle both cases (DOM ready or already complete)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAdmin);
+} else {
+    // DOM already loaded, run immediately
+    initAdmin();
+}
 
 async function handleLogin(e) {
     e.preventDefault();
