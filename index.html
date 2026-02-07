@@ -895,22 +895,50 @@
             // Live Logo Preview Script
             (function () {
                 const defaultLogo = 'assets/logos/generated/child_bear/child_book_1.png';
-                const savedLogo = localStorage.getItem('qorienta_selected_logo') || defaultLogo;
-                if (savedLogo) {
+                const savedLogo = sessionStorage.getItem('qorienta_selected_logo') || localStorage.getItem('qorienta_selected_logo') || defaultLogo;
+
+                function setLogo(logoPath) {
                     // Update Navbar Logo
                     const navLogo = document.getElementById('logo-icon-wrapper');
                     if (navLogo) {
-                        navLogo.className = 'w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110';
-                        navLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                        navLogo.className = 'w-12 h-12 md:w-10 md:h-10 flex items-center justify-center transition-transform group-hover:scale-110';
+                        const img = new Image();
+                        img.onload = function () {
+                            navLogo.innerHTML = `<img src="${logoPath}" class="w-full h-full object-contain filter drop-shadow-sm" alt="QOrienta Logo">`;
+                        };
+                        img.onerror = function () {
+                            // Fallback to default if image fails to load
+                            console.warn('Logo failed to load:', logoPath, '- using default');
+                            if (logoPath !== defaultLogo) {
+                                navLogo.innerHTML = `<img src="${defaultLogo}" class="w-full h-full object-contain filter drop-shadow-sm" alt="QOrienta Logo">`;
+                                // Clear invalid logo from storage
+                                sessionStorage.removeItem('qorienta_selected_logo');
+                                localStorage.removeItem('qorienta_selected_logo');
+                            } else {
+                                // Even default failed, show text fallback
+                                navLogo.innerHTML = `<span class="text-primary font-bold text-xl">Q</span>`;
+                            }
+                        };
+                        img.src = logoPath;
                     }
 
                     // Update Footer Logo
                     const footerLogo = document.getElementById('footer-logo-icon-wrapper');
                     if (footerLogo) {
                         footerLogo.className = 'w-8 h-8 flex items-center justify-center cursor-default select-none';
-                        footerLogo.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain filter drop-shadow-sm">`;
+                        const footerImg = new Image();
+                        footerImg.onload = function () {
+                            footerLogo.innerHTML = `<img src="${logoPath}" class="w-full h-full object-contain filter drop-shadow-sm" alt="QOrienta Logo">`;
+                        };
+                        footerImg.onerror = function () {
+                            footerLogo.innerHTML = `<img src="${defaultLogo}" class="w-full h-full object-contain filter drop-shadow-sm" alt="QOrienta Logo">`;
+                        };
+                        footerImg.src = logoPath;
                     }
                 }
+
+                setLogo(savedLogo);
+
 
                 // Init Theme Toggle
                 if (typeof renderThemeToggle === 'function') {
