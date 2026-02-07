@@ -24,17 +24,9 @@ function esc(str) {
 }
 
 // --- Initialization ---
-async function initAdmin() {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    const { data: { session } } = await supabase.auth.getSession();
-
-    if (session) {
-        showDashboard(session.user);
-    } else {
-        showLogin();
-    }
-
+// Attach event listeners FIRST (synchronous), then do async Supabase work.
+// This ensures the form always responds, even if Supabase is slow/down.
+function setupListeners() {
     const loginForm = document.getElementById('login-form');
     if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
@@ -42,9 +34,29 @@ async function initAdmin() {
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 }
 
+async function initAdmin() {
+    try {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (session) {
+            showDashboard(session.user);
+        } else {
+            showLogin();
+        }
+    } catch (err) {
+        console.error('Supabase init error:', err);
+        showLogin();
+    }
+}
+
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAdmin);
+    document.addEventListener('DOMContentLoaded', () => {
+        setupListeners();
+        initAdmin();
+    });
 } else {
+    setupListeners();
     initAdmin();
 }
 
@@ -57,6 +69,10 @@ async function handleLogin(e) {
     const submitBtn = e.target.querySelector('button');
 
     try {
+        if (!supabase) {
+            throw new Error('Conexiunea la server nu este disponibilă. Reîncarcă pagina și încearcă din nou.');
+        }
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Se verifică...';
 
@@ -76,7 +92,7 @@ async function handleLogin(e) {
         if (err.message && (err.message.includes('Invalid login credentials') || err.message.includes('invalid_grant'))) {
             message = 'Email sau parolă incorectă. Te rugăm să verifici datele.';
         } else if (err.message) {
-            message = 'Eroare: ' + err.message;
+            message = err.message;
         }
 
         errorMsg.textContent = message;
