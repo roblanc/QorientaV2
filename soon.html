@@ -181,7 +181,7 @@
                 <input type="email" name="email" placeholder="Adresa ta de email..." required
                     class="seamless-input placeholder:text-slate-400 focus:ring-0">
 
-                <button type="button" id="submit-btn" class="seamless-btn flex items-center gap-2">
+                <button type="submit" id="submit-btn" class="seamless-btn flex items-center gap-2">
 
                     Rezervă loc <span class="material-symbols-rounded text-sm">arrow_forward</span>
 
@@ -246,9 +246,8 @@
         if (form) {
             const submitBtn = document.getElementById('submit-btn');
 
-            if (submitBtn) {
-                submitBtn.addEventListener('click', function (e) {
-                    e.preventDefault(); // Just in case
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent native form submission
 
                     const emailInput = form.querySelector('[name="email"]');
                     const email = emailInput ? emailInput.value.trim() : '';
@@ -310,7 +309,6 @@
                         }, 300);
                     }, 800);
                 });
-            }
         }
     </script>
 </body>
