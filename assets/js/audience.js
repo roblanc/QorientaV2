@@ -61,14 +61,14 @@ function renderAudienceToggle(containerId) {
     const current = getAudience();
 
     container.innerHTML = `
-        <div class="inline-flex items-center bg-slate-100 rounded-xl p-1 gap-1 text-sm">
+        <div class="inline-flex items-center bg-slate-100 rounded-xl p-1 gap-1 text-sm overflow-x-auto no-scrollbar max-w-[95vw]">
             <button data-audience-toggle="student"
-                class="px-4 py-2 rounded-lg transition-all duration-200 ${current === 'student' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
+                class="px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${current === 'student' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
                 onclick="setAudience('student')">
                 Elevi & Părinți
             </button>
             <button data-audience-toggle="adult"
-                class="px-4 py-2 rounded-lg transition-all duration-200 ${current === 'adult' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
+                class="px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${current === 'adult' ? 'bg-white shadow-sm text-primary font-bold' : 'text-slate-500'}"
                 onclick="setAudience('adult')">
                 Reconversie Profesională
             </button>
