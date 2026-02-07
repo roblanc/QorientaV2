@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Test - ZT Formom & Outfit</title>
+    <link rel="stylesheet" href="assets/fonts/formom.css">
+    <link rel="stylesheet" href="assets/fonts/outfit.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #faf5ff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .formom {
+            font-family: 'ZT Formom', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #6d28d9;
+            margin-bottom: 20px;
+        }
+
+        .outfit {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f3e8ff;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-family: monospace;
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; font-family: monospace; color: #64748b;">🔤 Font Integration Test</h1>
+
+        <div class="test-section">
+            <div class="label">ZT Formom (Headings)</div>
+            <div class="formom">
+                Găsește-ți Nordul Profesional
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div class="label">Outfit (Body Text)</div>
+            <div class="outfit">
+                Descoperă-ți potențialul maxim cu platformă noastră de orientare profesională.
+                Ajutăm studenții și profesioniștii să își găsească drumul către cariera ideală
+                prin teste personalizate, consiliere specializată și resurse educaționale de calitate.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div class="label">Font Weights - Outfit</div>
+            <div style="font-family: 'Outfit', sans-serif;">
+                <p style="font-weight: 400;">Regular (400) - Outfit Normal</p>
+                <p style="font-weight: 500;">Medium (500) - Outfit Medium</p>
+                <p style="font-weight: 600;">SemiBold (600) - Outfit SemiBold</p>
+                <p style="font-weight: 700;">Bold (700) - Outfit Bold</p>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div class="label">Font Styles - ZT Formom</div>
+            <div style="font-family: 'ZT Formom', serif; font-size: 24px;">
+                <p style="font-style: normal;">Normal - ZT Formom Regular</p>
+                <p style="font-style: italic;">Italic - ZT Formom Italic</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #e0e7ff; border-radius: 8px; text-align: center;">
+            <p style="font-family: 'Outfit', sans-serif; margin: 0; color: #4c1d95;">
+                ✅ If you see elegant serif for headings and clean sans-serif for body text, fonts are working!
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
