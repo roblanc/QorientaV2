@@ -186,6 +186,8 @@
     <style>
         .font-display {
             font-family: 'Hedvig Letters Serif', serif !important;
+            letter-spacing: -0.01em;
+            /* Subtle adjustment, serif fonts often need slightly less tight spacing than sans-serif */
         }
     </style>
     <link rel="stylesheet" href="assets/fonts/formom.css">
@@ -213,7 +215,7 @@
                 </div>
                 <div class="flex flex-col justify-center">
                     <span
-                        class="font-display font-bold text-2xl tracking-tight text-primary transition-colors leading-none">QOrienta</span>
+                        class="font-display font-bold text-2xl  text-primary transition-colors leading-none">QOrienta</span>
                 </div>
             </a>
 
@@ -267,7 +269,7 @@
             <div data-audience="student"
                 class="lg:col-span-4 flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
                 <h1
-                    class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight transition-all duration-app">
+                    class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900  transition-all duration-app">
                     Găsește-ți <br />
                     <span class="text-gradient">Nordul Profesional.</span>
                 </h1>
@@ -343,8 +345,7 @@
             <!-- ADULT Hero -->
             <div data-audience="adult"
                 class="hidden lg:col-span-4 flex flex-col gap-8 relative z-10 text-center lg:text-left items-center lg:items-start">
-                <h1
-                    class="font-display text-3xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 tracking-tight">
+                <h1 class="font-display text-3xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900 ">
                     Redescoperă&#8209;ți <br />
                     <span class="text-gradient">Direcția Profesională.</span>
                 </h1>
@@ -795,11 +796,10 @@
                 <div class="absolute -bottom-32 -right-32 w-64 h-64 bg-accent-pink/50 rounded-full blur-3xl"></div>
 
                 <div class="relative z-10 flex flex-col items-center gap-8">
-                    <h2 class="font-display text-4xl sm:text-5xl font-bold text-white">Ești gata să îți <br>construiești
-                        viitorul?</h2>
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-normal leading-tight">
+                        Ești gata să îți <br>construiești viitorul?</h2>
                     <p class="text-indigo-100 max-w-xl text-lg">Începe chiar acum cu testul nostru gratuit de orientare
-                        în
-                        carieră. Nu necesită cont pentru a începe.</p>
+                        cu ajutorul specialiștilor. Nu necesită cont.</p>
                     <a href="quiz.html"
                         class="h-16 px-10 rounded-full bg-white text-primary flex items-center justify-center font-bold text-xl hover:scale-105 hover:shadow-xl transition-all">
                         Începe Acum <span class="material-symbols-rounded ml-2">arrow_forward</span>
