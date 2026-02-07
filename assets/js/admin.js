@@ -188,6 +188,11 @@ function renderLeadsPage() {
             <td class="py-3 px-4 text-sm text-slate-600">${esc(lead.created_at ? new Date(lead.created_at).toLocaleDateString('ro-RO') : '-')}</td>
             <td class="py-3 px-4 text-sm font-medium text-slate-900">${esc(lead.name) || '<span class="text-slate-300">—</span>'}</td>
             <td class="py-3 px-4 text-sm text-slate-600">${esc(lead.email)}</td>
+            <td class="py-3 px-4 text-sm text-slate-600 capitalize">
+                <span class="px-2 py-0.5 rounded-full ${lead.audience_type === 'adult' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold uppercase">
+                    ${esc(lead.audience_type) || 'student'}
+                </span>
+            </td>
             <td class="py-3 px-4 text-sm text-slate-600 capitalize">${esc(lead.quiz_result) || '<span class="text-slate-300">—</span>'}</td>
             <td class="py-3 px-4"><span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">${esc(lead.source)}</span></td>
         </tr>
@@ -296,11 +301,12 @@ function exportCSV(type) {
     let rows, filename, headers;
 
     if (type === 'leads') {
-        headers = ['Data', 'Nume', 'Email', 'Rezultat Quiz', 'Sursa'];
+        headers = ['Data', 'Nume', 'Email', 'Audiență', 'Rezultat Quiz', 'Sursa'];
         rows = allLeads.map(l => [
             l.created_at ? new Date(l.created_at).toLocaleDateString('ro-RO') : '',
             l.name || '',
             l.email || '',
+            l.audience_type || 'student',
             l.quiz_result || '',
             l.source || ''
         ]);
