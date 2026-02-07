@@ -37,16 +37,22 @@ function setupListeners() {
 async function initAdmin() {
     try {
         supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data: { session } } = await supabase.auth.getSession();
 
+        // --- BYPASS AUTH FOR DEVELOPMENT ---
+        console.log("Admin: Auth bypassed for development.");
+        showDashboard({ email: 'guest@admin.dev' });
+
+        /* Original Auth Logic:
+        const { data: { session } } = await supabase.auth.getSession();
         if (session) {
             showDashboard(session.user);
         } else {
             showLogin();
         }
+        */
     } catch (err) {
         console.error('Supabase init error:', err);
-        showLogin();
+        showDashboard({ email: 'error@admin.dev' });
     }
 }
 
