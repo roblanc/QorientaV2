@@ -128,12 +128,56 @@
                 transform: translateY(0);
             }
         }
-    </style>    <link rel="stylesheet" href="assets/fonts/outfit.css">
+    </style>
+    <link rel="stylesheet" href="assets/fonts/outfit.css">
 
 
     <style>
         .font-display {
             font-family: 'Hedvig Letters Serif', serif !important;
+        }
+
+        /* Animated Border Effect */
+        .btn-animated {
+            position: relative;
+            z-index: 10;
+            overflow: visible !important;
+        }
+
+        .btn-animated::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(60deg, #6d28d9, #d4a853, #3b82f6, #ec4899, #6d28d9);
+            background-size: 300% 300%;
+            z-index: -1;
+            border-radius: inherit;
+            animation: animatedgradient 4s ease alternate infinite;
+            filter: blur(1px);
+            opacity: 0.7;
+            transition: opacity 0.3s, filter 0.3s;
+        }
+
+        .btn-animated:hover::before {
+            opacity: 1;
+            filter: blur(2px);
+        }
+
+        @keyframes animatedgradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
     </style>
 </head>
@@ -155,8 +199,7 @@
 
         <div class="space-y-4 max-w-lg mx-auto fade-in-up" style="animation-delay: 0.4s;">
 
-            <h1
-                class="text-3xl md:text-5xl font-display font-bold text-slate-900  flex flex-col items-center">
+            <h1 class="text-3xl md:text-5xl font-display font-bold text-slate-900  flex flex-col items-center">
 
                 <span class="text-[51px] md:text-[68px]">În curând</span>
 
@@ -181,7 +224,7 @@
                 <input type="email" name="email" placeholder="Adresa ta de email..." required
                     class="seamless-input placeholder:text-slate-400 focus:ring-0">
 
-                <button type="submit" id="submit-btn" class="seamless-btn flex items-center gap-2">
+                <button type="submit" id="submit-btn" class="seamless-btn flex items-center gap-2 btn-animated">
 
                     Rezervă loc <span class="material-symbols-rounded text-sm">arrow_forward</span>
 
@@ -249,66 +292,65 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault(); // Prevent native form submission
 
-                    const emailInput = form.querySelector('[name="email"]');
-                    const email = emailInput ? emailInput.value.trim() : '';
+                const emailInput = form.querySelector('[name="email"]');
+                const email = emailInput ? emailInput.value.trim() : '';
 
-                    if (!email) {
-                        alert('Te rugăm să introduci o adresă de email validă.');
-                        return;
+                if (!email) {
+                    alert('Te rugăm să introduci o adresă de email validă.');
+                    return;
+                }
+
+                // UI Loading State
+                const width = submitBtn.offsetWidth;
+                submitBtn.style.width = width + 'px';
+                submitBtn.style.justifyContent = 'center';
+                submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
+                submitBtn.disabled = true;
+
+                // 2. UI Success Transition (Always runs)
+                const triggerSuccess = () => {
+                    // Fire Confetti
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
                     }
 
-                    // UI Loading State
-                    const width = submitBtn.offsetWidth;
-                    submitBtn.style.width = width + 'px';
-                    submitBtn.style.justifyContent = 'center';
-                    submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">refresh</span>';
-                    submitBtn.disabled = true;
+                    form.style.opacity = '0';
+                    form.style.transform = 'translateY(10px)';
 
-                    // 1. Attempt Save to Supabase (Safe Mode)
-                    try {
-                        if (supabase) {
-                            supabase.from('leads').insert({
-                                email: email,
-                                source: 'mystery_landing_illustration',
-                                audience_type: 'unknown',
-                                name: 'Guest'
-                            }).then(() => {
-                                // Success silent
-                            }).catch(err => {
-                                console.warn('Lead save background error:', err);
-                            });
-                        }
-                    } catch (err) {
-                        console.warn('Supabase synchronous error:', err);
-                    }
-
-                    // 2. UI Success Transition (Always runs)
                     setTimeout(() => {
-                        // Fire Confetti
-                        if (typeof confetti === 'function') {
-                            confetti({
-                                particleCount: 100,
-                                spread: 70,
-                                origin: { y: 0.6 }
-                            });
-                        }
+                        form.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
+                        successMessage.classList.add('flex'); // Ensure flex display
 
-                        form.style.opacity = '0';
-                        form.style.transform = 'translateY(10px)';
+                        // Trigger reflow
+                        void successMessage.offsetWidth;
 
-                        setTimeout(() => {
-                            form.classList.add('hidden');
-                            successMessage.classList.remove('hidden');
-                            successMessage.classList.add('flex'); // Ensure flex display
+                        successMessage.style.opacity = '1';
+                        successMessage.style.transform = 'scale(1)';
+                    }, 300);
+                };
 
-                            // Trigger reflow
-                            void successMessage.offsetWidth;
-
-                            successMessage.style.opacity = '1';
-                            successMessage.style.transform = 'scale(1)';
-                        }, 300);
-                    }, 800);
-                });
+                // 1. Attempt Save to Supabase (Safe Mode)
+                if (supabase) {
+                    supabase.from('leads').insert({
+                        email: email,
+                        source: 'mystery_landing_illustration',
+                        audience_type: 'unknown',
+                        name: 'Guest'
+                    }).then(() => {
+                        triggerSuccess();
+                    }).catch(err => {
+                        console.warn('Lead save background error:', err);
+                        triggerSuccess(); // Still show success UI
+                    });
+                } else {
+                    triggerSuccess();
+                }
+            });
         }
     </script>
 </body>

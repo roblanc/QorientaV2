@@ -189,6 +189,49 @@
             letter-spacing: -0.01em;
             /* Subtle adjustment, serif fonts often need slightly less tight spacing than sans-serif */
         }
+
+        /* Animated Border Effect */
+        .btn-animated {
+            position: relative;
+            z-index: 10;
+            overflow: visible !important;
+        }
+
+        .btn-animated::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(60deg, #6d28d9, #d4a853, #3b82f6, #ec4899, #6d28d9);
+            background-size: 300% 300%;
+            z-index: -1;
+            border-radius: inherit;
+            animation: animatedgradient 4s ease alternate infinite;
+            filter: blur(1px);
+            opacity: 0.7;
+            transition: opacity 0.3s, filter 0.3s;
+        }
+
+        .btn-animated:hover::before {
+            opacity: 1;
+            filter: blur(2px);
+        }
+
+        @keyframes animatedgradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
     <link rel="stylesheet" href="assets/fonts/formom.css">
 
@@ -242,7 +285,7 @@
                 <div id="nav-theme-toggle" class="relative"></div>
 
                 <a href="quiz.html"
-                    class="hidden lg:inline-flex bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    class="hidden lg:inline-flex bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all btn-animated">
                     Începe Gratuit
                 </a>
 
@@ -290,7 +333,7 @@
                             <input type="email" name="lead-email" placeholder="Email-ul tău" required
                                 class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
                             <button type="submit"
-                                class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all btn-animated">
                                 Descarcă Ghidul Gratuit
                             </button>
                         </form>
@@ -801,7 +844,7 @@
                     <p class="text-indigo-100 max-w-xl text-lg">Începe chiar acum cu testul nostru gratuit de orientare
                         cu ajutorul specialiștilor. Nu necesită cont.</p>
                     <a href="quiz.html"
-                        class="h-16 px-10 rounded-full bg-white text-primary flex items-center justify-center font-bold text-xl hover:scale-105 hover:shadow-xl transition-all">
+                        class="h-16 px-10 rounded-full bg-white text-primary flex items-center justify-center font-bold text-xl hover:scale-105 hover:shadow-xl transition-all btn-animated">
                         Începe Acum <span class="material-symbols-rounded ml-2">arrow_forward</span>
                     </a>
                 </div>
