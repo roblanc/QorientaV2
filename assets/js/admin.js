@@ -110,8 +110,15 @@ async function handleLogin(e) {
 }
 
 async function handleLogout() {
-    await supabase.auth.signOut();
-    location.reload();
+    try {
+        if (supabase) await supabase.auth.signOut();
+    } catch (e) {
+        console.error("Logout error", e);
+    }
+    // Hard reset
+    localStorage.removeItem('sb-' + SUPABASE_URL.split('//')[1].split('.')[0] + '-auth-token'); // Try to remove specific token
+    localStorage.clear();
+    window.location.href = window.location.pathname; // Reload page
 }
 
 
