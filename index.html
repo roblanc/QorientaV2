@@ -1407,8 +1407,8 @@
                 const data = audience === 'adult' ? suggestionsAdult : suggestionsStudent;
                 suggestionsContainer.innerHTML = data.map(item => `
                     <button onclick="quickQuery('${item.query}')" 
-                        class="group flex items-center gap-3 bg-white border border-slate-200 hover:border-primary/40 hover:shadow-md px-5 py-4 rounded-2xl text-sm font-medium text-slate-700 transition-all duration-200">
-                        <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-primary/10 text-slate-500 group-hover:text-primary flex items-center justify-center transition-colors shrink-0">
+                        class="group flex items-center gap-3 bg-slate-50 hover:bg-white border border-slate-200/60 hover:border-primary/40 hover:shadow-md px-5 py-4 rounded-2xl text-sm font-medium text-slate-700 transition-all duration-200">
+                        <span class="w-8 h-8 rounded-xl bg-white group-hover:bg-primary/10 text-slate-500 group-hover:text-primary flex items-center justify-center transition-colors shrink-0 shadow-sm">
                             <span class="material-symbols-rounded text-lg">${item.icon}</span>
                         </span>
                         <span class="text-left">${item.label}</span>
