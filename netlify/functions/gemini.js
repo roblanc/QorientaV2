@@ -34,12 +34,25 @@ exports.handler = async function (event, context) {
                 contents: [{
                     parts: [{
                         text: `Ești un expert în piața muncii din România și Europa. Utilizatorul întreabă: "${query}". 
-            Te rog să returnezi un răspuns în format HTML (fără tag-ul html/body, doar div-uri/p-uri) care să conțină:
-            1. Un "Salariu Estimat" (format bold, mare).
-            2. O secțiune de "Cerere în piață" (High/Medium/Low).
-            3. 3 "Abilități cheie" cu bullet points.
-            4. O scurtă concluzie de un rând. 
-            Folosește clase Tailwind pentru styling (text-slate-800, list-disc, etc). Fii concis și profesional în limba română.`
+            Returnează un răspuns în format HTML MINIMAL și CURAT (fără carduri, fără border-uri, fără fundal colorat).
+            Folosește acest format exact:
+            
+            <h4 class="text-lg font-bold text-slate-800 mb-3 text-center">[Titlu scurt al răspunsului]</h4>
+            <p class="text-3xl md:text-4xl font-black text-primary text-center mb-6">[Salariu estimat sau număr principal]</p>
+            <div class="space-y-4 text-sm text-slate-600">
+              <p><span class="font-semibold text-slate-800">Cerere în piață:</span> [High/Medie/Low cu explicație scurtă de 5-10 cuvinte]</p>
+              <div>
+                <p class="font-semibold text-slate-800 mb-2">Abilități cheie:</p>
+                <ul class="list-disc list-inside space-y-1 text-slate-600">
+                  <li>[Abilitate 1]</li>
+                  <li>[Abilitate 2]</li>
+                  <li>[Abilitate 3]</li>
+                </ul>
+              </div>
+              <p class="text-slate-500 italic pt-2 border-t border-slate-100">[Concluzie de un rând]</p>
+            </div>
+            
+            NU folosi div-uri cu border, shadow, rounded, bg-color. Păstrează designul curat și minimal. Răspunde în limba română.`
                     }]
                 }]
             })
