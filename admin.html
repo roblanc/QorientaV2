@@ -78,12 +78,54 @@
                     <span class="font-display font-bold text-xl text-primary">QOrienta Dashboard</span>
                 </div>
                 <div class="flex items-center gap-4">
+                    <button onclick="showAddUserModal()"
+                        class="hidden md:flex items-center gap-1 text-sm font-bold text-primary hover:text-purple-700 bg-purple-50 px-3 py-1.5 rounded-lg transition-colors">
+                        <span class="material-symbols-rounded text-lg">person_add</span>
+                        Adaugă Admin
+                    </button>
+                    <div class="h-6 w-px bg-slate-200 hidden md:block"></div>
                     <span id="user-email" class="text-sm text-slate-500 hidden md:inline"></span>
                     <button id="logout-btn"
                         class="text-sm font-bold text-red-600 hover:text-red-700">Deconectare</button>
                 </div>
             </div>
         </header>
+
+        <!-- Add User Modal -->
+        <div id="add-user-modal"
+            class="hidden fixed inset-0 z-[60] bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 animate-[fadeIn_0.2s_ease-out]">
+                <h3 class="font-display font-bold text-xl text-slate-900 mb-2">Adaugă Admin Nou</h3>
+                <p class="text-sm text-slate-500 mb-6">Creează un cont nou pentru un membru al echipei.</p>
+
+                <form id="add-user-form" class="space-y-4">
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</label>
+                        <input type="email" id="new-user-email" required placeholder="coleg@qorienta.ro"
+                            class="w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary py-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Parolă
+                            Inițială</label>
+                        <input type="text" id="new-user-password" required value="Qorienta2024!"
+                            class="w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary py-2.5 text-sm bg-slate-50">
+                        <p class="text-[10px] text-slate-400 mt-1">Poți schimba parola default.</p>
+                    </div>
+                    <div id="add-user-error" class="hidden text-red-500 text-xs"></div>
+                    <div id="add-user-success" class="hidden text-green-600 text-xs font-bold">Utilizator creat cu
+                        succes!</div>
+
+                    <div class="flex gap-3 pt-2">
+                        <button type="button" onclick="hideAddUserModal()"
+                            class="flex-1 py-2.5 rounded-xl border border-slate-200 font-bold text-slate-600 text-sm hover:bg-slate-50">Anulează</button>
+                        <button type="submit"
+                            class="flex-1 py-2.5 rounded-xl bg-primary text-white font-bold text-sm hover:bg-purple-700 shadow-md shadow-purple-500/20">Creează
+                            Cont</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- Content -->
         <main class="flex-grow p-6">
