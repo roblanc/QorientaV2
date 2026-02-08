@@ -44,20 +44,24 @@ function saveLead(name, email, source) {
     localStorage.setItem(LEAD_CAPTURED_KEY, 'true');
 
     // 2. Save to Supabase (fire and forget)
-    if (typeof window.supabase !== 'undefined' && LEAD_SUPABASE_URL && LEAD_SUPABASE_KEY) {
-        try {
-            const sb = window.supabase.createClient(LEAD_SUPABASE_URL, LEAD_SUPABASE_KEY);
-            sb.from('leads').insert({
-                name: name || '',
+    // Ensure Supabase client is available globally or initialize locally
+    if (typeof window.supabase !== 'undefined') { // Check if library loaded
+        const sb = window.supabase.createClient(LEAD_SUPABASE_URL, LEAD_SUPABASE_KEY);
+
+        sb.from('leads').insert([
+            {
+                name: name,
                 email: email,
                 audience_type: audience,
                 source: source || 'hero'
-            }).then(({ error }) => {
-                if (error) console.warn('Lead save to Supabase failed:', error);
-            });
-        } catch (e) {
-            console.warn('Supabase lead save error:', e);
-        }
+            }
+        ]).then(response => {
+            if (response.error) {
+                console.error('Lead save to Supabase failed:', response.error);
+            } else {
+                console.log('Lead saved to Supabase successfully');
+            }
+        });
     }
 
     // 3. Trigger Download
@@ -74,25 +78,36 @@ function initLeadCaptureForm(formId) {
 
         const nameInput = form.querySelector('[name="lead-name"]');
         const emailInput = form.querySelector('[name="lead-email"]');
+
         const name = nameInput ? nameInput.value.trim() : '';
         const email = emailInput ? emailInput.value.trim() : '';
 
-        if (!email) return;
+        if (!email) {
+            alert('Te rugăm să introduci o adresă de email validă.');
+            return;
+        }
 
+        // Determine audience from form ID or global state if available
+        let audience = 'student';
+        if (formId.includes('adult')) {
+            audience = 'adult';
+        } else if (document.getElementById('audience-toggle') && document.getElementById('audience-toggle').checked) {
+            audience = 'adult';
+        }
+
+        // Call the save function
         saveLead(name, email, 'hero');
 
-        // Show success state correctly for both forms
-        const isAdult = formId.includes('adult');
+        // UI Feedback
+        const isAdult = audience === 'adult';
         const successId = isAdult ? 'lead-capture-success-adult' : 'lead-capture-success';
-        const formContainerId = isAdult ? 'lead-capture-form-adult' : 'lead-capture-form';
 
+        // Hide form, show success
+        form.parentElement.classList.add('hidden'); // Hide the glass-card container
         const successEl = document.getElementById(successId);
-        const formContainer = document.getElementById(formContainerId);
-
-        if (formContainer) formContainer.classList.add('hidden');
         if (successEl) successEl.classList.remove('hidden');
 
-        // Redirect to quiz after 3 seconds
+        // Redirect
         setTimeout(() => {
             window.location.href = isAdult ? 'quiz.html?type=adult' : 'quiz.html';
         }, 3000);
