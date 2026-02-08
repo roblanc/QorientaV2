@@ -33,8 +33,7 @@ function setupListeners() {
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
-    const addUserForm = document.getElementById('add-user-form');
-    if (addUserForm) addUserForm.addEventListener('submit', handleAddUser);
+
 }
 
 async function initAdmin() {
@@ -115,63 +114,7 @@ async function handleLogout() {
     location.reload();
 }
 
-// --- Add User Logic ---
-window.showAddUserModal = function () {
-    document.getElementById('add-user-modal').classList.remove('hidden');
-    document.getElementById('new-user-email').focus();
-}
 
-window.hideAddUserModal = function () {
-    document.getElementById('add-user-modal').classList.add('hidden');
-    document.getElementById('add-user-error').classList.add('hidden');
-    document.getElementById('add-user-success').classList.add('hidden');
-    document.getElementById('add-user-form').reset();
-}
-
-async function handleAddUser(e) {
-    e.preventDefault();
-    const email = document.getElementById('new-user-email').value;
-    const password = document.getElementById('new-user-password').value;
-    const errorEl = document.getElementById('add-user-error');
-    const successEl = document.getElementById('add-user-success');
-    const btn = e.target.querySelector('button[type="submit"]');
-
-    errorEl.classList.add('hidden');
-    successEl.classList.add('hidden');
-    btn.disabled = true;
-    btn.textContent = 'Se creează...';
-
-    try {
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-        });
-
-        if (error) throw error;
-
-        // Success
-        successEl.textContent = `Utilizator creat! Email de confirmare trimis la ${email}.`;
-        successEl.classList.remove('hidden');
-
-        // Auto close after 2 seconds
-        setTimeout(() => {
-            hideAddUserModal();
-            btn.disabled = false;
-            btn.textContent = 'Creează Cont';
-        }, 3000);
-
-    } catch (err) {
-        console.error('Add user error:', err);
-        let msg = 'Eroare la crearea contului.';
-        if (err.message.includes('Password should be')) msg = 'Parola este prea slabă (min 6 caractere).';
-        if (err.message.includes('rate limit')) msg = 'Prea multe încercări. Așteaptă puțin.';
-
-        errorEl.textContent = msg;
-        errorEl.classList.remove('hidden');
-        btn.disabled = false;
-        btn.textContent = 'Creează Cont';
-    }
-}
 
 function showLogin() {
     document.getElementById('login-section').classList.remove('hidden');
