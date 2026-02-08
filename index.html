@@ -1464,8 +1464,9 @@
 
                 // Show loading state (Hide header, show lottie)
                 document.getElementById('ai-header').classList.add('hidden');
-                spinner.classList.remove('hidden'); // We can keep spinner or rely on progress bar
 
+                // Progress Bar Simulation
+                let progressValue = 0;
                 responseContent.innerHTML = `
                     <div class="flex flex-col items-center justify-center py-4 gap-4">
                         <lottie-player 
@@ -1476,10 +1477,19 @@
                             loop 
                             autoplay>
                         </lottie-player>
-                        <progress class="progress progress-primary w-64"></progress>
+                        <progress id="ai-progress-bar" class="progress progress-primary w-64" value="0" max="100"></progress>
                         <p class="text-xs text-slate-400 font-medium animate-pulse">Analizăm perspectivele tale de viitor...</p>
                     </div>
                 `;
+
+                // Animate Progress Bar
+                const progressBar = document.getElementById('ai-progress-bar');
+                const progressInterval = setInterval(() => {
+                    if (progressValue < 90) {
+                        progressValue += Math.random() * 10;
+                        if (progressBar) progressBar.value = progressValue;
+                    }
+                }, 300);
 
                 try {
                     // Call our Netlify function proxy
@@ -1488,6 +1498,10 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ query: query })
                     });
+
+
+                    clearInterval(progressInterval);
+                    if (progressBar) progressBar.value = 100;
 
                     const data = await response.json();
 
@@ -1510,6 +1524,8 @@
 
                     responseContent.innerHTML = cleanHtml;
                 } catch (error) {
+                    clearInterval(progressInterval); // Ensure interval stops on error too
+
                     console.error("Gemini Error:", error);
                     // Show header even on error
                     document.getElementById('ai-header').classList.remove('hidden');
