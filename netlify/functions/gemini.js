@@ -24,8 +24,8 @@ exports.handler = async function (event, context) {
             };
         }
 
-        // Call Google Gemini API (Using gemini-1.5-flash as it is the current standard)
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        // Call Google Gemini API (Correct endpoint for 1.5 flash)
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
