@@ -30,8 +30,7 @@ function setupListeners() {
     const loginForm = document.getElementById('login-form');
     if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+
 
 
 }
@@ -120,6 +119,7 @@ async function handleLogout() {
     localStorage.clear();
     window.location.href = window.location.pathname; // Reload page
 }
+window.handleLogout = handleLogout;
 
 
 
