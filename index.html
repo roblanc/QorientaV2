@@ -281,7 +281,7 @@
             }
         }
     </style>
-    </head>
+</head>
 
 <body
     class="font-body antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden flex flex-col min-h-screen">
@@ -850,29 +850,28 @@
                     </div>
                 </div>
 
-                <!-- Wide Bottom Card (Insights) -->
-                <!-- Wide Bottom Card (Insights) - Refactored: Title/Input on background, Results in card -->
+                <!-- Wide Bottom Card (Insights) - Centered Layout -->
                 <div id="ai-insights-section"
-                    class="flex flex-col lg:flex-row items-center justify-between gap-12 relative group z-10">
+                    class="flex flex-col items-center justify-center gap-12 relative group z-10 max-w-3xl mx-auto">
                     <div
-                        class="absolute -left-12 top-1/2 -translate-y-1/2 w-80 h-80 bg-accent-cyan/10 blur-[90px] rounded-full opacity-50">
+                        class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-80 h-80 bg-accent-cyan/10 blur-[90px] rounded-full opacity-50">
                     </div>
 
-                    <div class="flex-1 text-center lg:text-left relative z-10">
-                        <div class="flex items-center justify-center lg:justify-start gap-4 mb-4">
+                    <div class="w-full text-center relative z-10">
+                        <div class="flex items-center justify-center gap-4 mb-4">
                             <div
                                 class="w-12 h-12 rounded-2xl bg-accent-cyan/10 flex items-center justify-center text-accent-cyan">
                                 <span class="material-symbols-rounded text-2xl">trending_up</span>
                             </div>
                             <h3 class="font-display text-3xl font-bold text-slate-900">Insight-uri din Piața Muncii</h3>
                         </div>
-                        <p class="text-slate-500 text-lg max-w-xl mb-8 leading-relaxed">
+                        <p class="text-slate-500 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
                             Pe baza profilului tău, AI-ul QOrienta îți arată salarii medii, șanse de angajare și
                             tendințe reale din piața muncii – pentru domeniile care ți se potrivesc.
                         </p>
 
                         <!-- AI Interaction Bar -->
-                        <div class="flex flex-col gap-6 w-full max-w-lg mx-auto lg:mx-0">
+                        <div class="flex flex-col gap-6 w-full max-w-lg mx-auto">
                             <div
                                 class="join w-full shadow-sm border border-slate-200 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
                                 <input id="ai-market-query" type="text"
@@ -885,15 +884,14 @@
                             </div>
 
                             <!-- Smart Suggestion Chips (Pattern Style) -->
-                            <div id="ai-suggestions-container"
-                                class="flex flex-wrap gap-2 justify-center lg:justify-start">
+                            <div id="ai-suggestions-container" class="flex flex-wrap gap-2 justify-center">
                                 <!-- Chips will be injected here by JS -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Results / Stats Side: This part is in the "cadran" -->
-                    <div class="w-full lg:w-[450px] relative z-10">
+                    <!-- AI Results Panel (shown after query) -->
+                    <div class="w-full max-w-xl relative z-10">
                         <div id="ai-results-panel"
                             class="hidden opacity-0 translate-y-4 transition-all duration-500 bg-white p-8 md:p-10 rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/50 relative overflow-hidden">
                             <div id="ai-header" class="flex items-center justify-between mb-8">
@@ -910,21 +908,6 @@
                                     <div class="h-4 bg-slate-100 rounded w-3/4 animate-pulse"></div>
                                     <div class="h-4 bg-slate-100 rounded w-1/2 animate-pulse"></div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Default View Stats (Initial visible state on right) -->
-                        <div id="default-stats-panel"
-                            class="flex gap-6 justify-center lg:justify-end transition-all duration-500">
-                            <div
-                                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 w-36 md:w-44 text-center hover:-translate-y-2 transition-transform duration-500 shadow-lg shadow-slate-200/40">
-                                <p class="text-4xl font-black text-slate-900 mb-1">98%</p>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Succes</p>
-                            </div>
-                            <div
-                                class="bg-white p-8 rounded-[2.5rem] border border-slate-100 w-36 md:w-44 text-center hover:-translate-y-2 transition-transform delay-75 duration-500 shadow-lg shadow-slate-200/40">
-                                <p class="text-4xl font-black text-slate-900 mb-1">50+</p>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Industrii</p>
                             </div>
                         </div>
                     </div>
@@ -1391,7 +1374,6 @@
             const marketBtn = document.getElementById('ai-market-btn');
             const marketInput = document.getElementById('ai-market-query');
             const resultsPanel = document.getElementById('ai-results-panel');
-            const defaultStats = document.getElementById('default-stats-panel');
             const responseContent = document.getElementById('ai-response-content');
             const spinner = document.getElementById('ai-loading-spinner');
             const suggestionsContainer = document.getElementById('ai-suggestions-container');
@@ -1445,8 +1427,7 @@
                 marketBtn.disabled = true;
                 marketInput.disabled = true;
 
-                // Show results panel, hide default stats
-                defaultStats.classList.add('hidden');
+                // Show results panel
                 resultsPanel.classList.remove('hidden');
                 setTimeout(() => {
                     resultsPanel.classList.remove('opacity-0', 'translate-y-4');
