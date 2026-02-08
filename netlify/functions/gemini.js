@@ -6,7 +6,7 @@ exports.handler = async function (event, context) {
 
     const API_KEY = process.env.GEMINI_API_KEY;
     if (!API_KEY) {
-        return { statusCode: 500, body: "Missing API Key" };
+        return { statusCode: 500, body: JSON.stringify({ error: "Missing API Key" }) };
     }
 
     try {
