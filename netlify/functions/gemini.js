@@ -26,8 +26,8 @@ exports.handler = async function (event, context) {
             };
         }
 
-        // Call Google Gemini API (Using standard gemini-1.5-flash)
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        // Call Google Gemini API (Using stable gemini-pro)
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
