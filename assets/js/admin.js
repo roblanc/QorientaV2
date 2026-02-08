@@ -109,15 +109,22 @@ async function handleLogin(e) {
 }
 
 async function handleLogout() {
+    console.log("Logout initiated...");
     try {
         if (supabase) await supabase.auth.signOut();
     } catch (e) {
         console.error("Logout error", e);
     }
-    // Hard reset
-    localStorage.removeItem('sb-' + SUPABASE_URL.split('//')[1].split('.')[0] + '-auth-token'); // Try to remove specific token
+    // Hard reset all storage
     localStorage.clear();
-    window.location.href = window.location.pathname; // Reload page
+    sessionStorage.clear();
+
+    // Force UI update immediately
+    document.getElementById('dashboard-section').classList.add('hidden');
+    document.getElementById('login-section').classList.remove('hidden');
+
+    // Reload page to ensure clean state
+    window.location.reload();
 }
 window.handleLogout = handleLogout;
 
