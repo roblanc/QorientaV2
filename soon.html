@@ -244,18 +244,27 @@
 
         <!-- Success Message -->
         <div id="success-message"
-            class="hidden mt-6 flex-col items-center gap-4 text-center transform scale-95 opacity-0 transition-all duration-500">
+            class="hidden mt-6 flex-col items-center gap-6 text-center transform scale-95 opacity-0 transition-all duration-500">
+            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                <span class="material-symbols-rounded text-green-600 text-3xl">celebration</span>
+            </div>
+            <div class="space-y-2">
+                <h2 class="font-display font-bold text-2xl text-slate-900">Mulțumim!</h2>
+                <p class="text-slate-500 text-sm leading-relaxed max-w-sm">
+                    Locul tău e rezervat. Te vom anunța printre primii când lansăm platforma.
+                </p>
+            </div>
             <div
-                class="inline-flex items-center gap-2 px-6 py-3 bg-green-50 text-green-700 rounded-full text-sm font-bold border border-green-100">
-                <span class="material-symbols-rounded">check_circle</span>
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-50 text-green-700 rounded-full text-sm font-bold border border-green-100">
+                <span class="material-symbols-rounded text-base">check_circle</span>
                 Ești pe listă!
             </div>
 
-            <button id="reset-btn"
+            <a href="index.html"
                 class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors flex items-center gap-1 mt-2">
-                <span class="material-symbols-rounded">arrow_back</span>
-                Înapoi
-            </button>
+                <span class="material-symbols-rounded text-base">arrow_back</span>
+                Înapoi la site
+            </a>
         </div>
 
         <!-- Image Moved to Bottom -->
@@ -275,10 +284,10 @@
         const SUPABASE_URL = 'https://uwnwqwmdvudftjyysyww.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3bndxd21kdnVkZnRqeXlzeXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MDc0MTUsImV4cCI6MjA4NTI4MzQxNX0.ykoaJs5068mfy9fgG81vxusxQX8VeFsbMQMJbn1Gjzs';
 
-        let supabase = null;
+        let sb = null;
         try {
             if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             }
         } catch (e) {
             console.warn('Supabase init warning:', e);
@@ -343,8 +352,8 @@
                 };
 
                 // 1. Attempt Save to Supabase (Safe Mode)
-                if (supabase) {
-                    supabase.from('leads').insert({
+                if (sb) {
+                    sb.from('leads').insert({
                         email: email,
                         source: 'mystery_landing_illustration',
                         audience_type: 'unknown',
