@@ -1426,7 +1426,17 @@
 
             function quickQuery(text) {
                 marketInput.value = text;
-                handleMarketSearch();
+
+                // Visual feedback - flash the input to show text was added
+                marketInput.classList.add('ring-2', 'ring-primary', 'ring-offset-2');
+                setTimeout(() => {
+                    marketInput.classList.remove('ring-2', 'ring-primary', 'ring-offset-2');
+                }, 400);
+
+                // Small delay so user can see the text before submit
+                setTimeout(() => {
+                    handleMarketSearch();
+                }, 200);
             }
 
             async function handleMarketSearch() {
@@ -1441,25 +1451,23 @@
                 resultsPanel.classList.remove('hidden');
                 setTimeout(() => {
                     resultsPanel.classList.remove('opacity-0', 'translate-y-4');
+
+                    // Scroll to results panel so loading is visible (especially on mobile)
+                    setTimeout(() => {
+                        resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
                 }, 50);
 
-                // Show loading state (Hide header, show lottie)
+                // Show loading state (Hide header, show compact loading)
                 document.getElementById('ai-header').classList.add('hidden');
 
-                // Progress Bar Simulation
+                // Compact Loading State - better for mobile visibility
                 let progressValue = 0;
                 responseContent.innerHTML = `
-                    <div class="flex flex-col items-center justify-center py-4 gap-4">
-                        <lottie-player 
-                            src="https://assets10.lottiefiles.com/packages/lf20_m6cuL6.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 150px; height: 150px;" 
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                        <progress id="ai-progress-bar" class="progress progress-primary w-64" value="0" max="100"></progress>
-                        <p class="text-xs text-slate-400 font-medium animate-pulse">Analizăm perspectivele tale de viitor...</p>
+                    <div class="flex flex-col items-center justify-center py-6 gap-3">
+                        <div class="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
+                        <p class="text-sm text-slate-600 font-medium">Analizăm piața muncii...</p>
+                        <progress id="ai-progress-bar" class="progress progress-primary w-48 h-2" value="0" max="100"></progress>
                     </div>
                 `;
 
