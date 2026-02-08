@@ -875,36 +875,28 @@
                             </div>
                             <h3 class="font-display text-3xl font-bold text-slate-900">Insight-uri din Piața Muncii</h3>
                         </div>
-                        <p class="text-slate-500 text-lg max-w-xl mb-8">
-                            Nicio decizie fără date. Întreabă AI-ul despre salariile medii, rata de angajare și
-                            tendințele reale pentru domeniul tău de interes.
+                        <p class="text-slate-500 text-lg max-w-xl mb-8 leading-relaxed">
+                            Pe baza profilului tău, AI-ul QOrienta îți arată salarii medii, șanse de angajare și
+                            tendințe reale din piața muncii – pentru domeniile care ți se potrivesc.
                         </p>
 
                         <!-- AI Interaction Bar -->
-                        <div class="flex flex-col gap-4 w-full max-w-lg mx-auto lg:mx-0">
+                        <div class="flex flex-col gap-6 w-full max-w-lg mx-auto lg:mx-0">
                             <div
                                 class="join w-full shadow-sm border border-slate-200 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
                                 <input id="ai-market-query" type="text"
-                                    placeholder="Ex: Salarii UI/UX Designer în România..."
-                                    class="input join-item w-full border-none focus:outline-none bg-white text-slate-700" />
+                                    placeholder="Întreabă despre salarii, șanse de angajare sau trenduri..."
+                                    class="input join-item w-full border-none focus:outline-none bg-white text-slate-700 placeholder:text-slate-400" />
                                 <button id="ai-market-btn"
                                     class="btn btn-primary join-item px-8 border-none normal-case font-bold">
                                     Întreabă AI
                                 </button>
                             </div>
 
-                            <!-- Quick Tags -->
-                            <div class="flex flex-wrap gap-2">
-                                <button onclick="quickQuery('Salarii în IT 2026')"
-                                    class="badge badge-outline border-slate-200 text-slate-500 py-3 px-4 hover:border-primary hover:text-primary transition-all cursor-pointer bg-white/50">Salarii
-                                    IT</button>
-                                <button onclick="quickQuery('Viitorul în Marketing Digital')"
-                                    class="badge badge-outline border-slate-200 text-slate-500 py-3 px-4 hover:border-primary hover:text-primary transition-all cursor-pointer bg-white/50">Marketing</button>
-                                <button onclick="quickQuery('Joburi remote în Europa')"
-                                    class="badge badge-outline border-slate-200 text-slate-500 py-3 px-4 hover:border-primary hover:text-primary transition-all cursor-pointer bg-white/50">Remote</button>
-                                <button onclick="quickQuery('Cea mai căutată meserie 2025')"
-                                    class="badge badge-outline border-slate-200 text-slate-500 py-3 px-4 hover:border-primary hover:text-primary transition-all cursor-pointer bg-white/50">Top
-                                    2025</button>
+                            <!-- Smart Suggestion Chips (Pattern Style) -->
+                            <div id="ai-suggestions-container"
+                                class="flex flex-wrap gap-2 justify-center lg:justify-start">
+                                <!-- Chips will be injected here by JS -->
                             </div>
                         </div>
                     </div>
@@ -1411,6 +1403,43 @@
             const defaultStats = document.getElementById('default-stats-panel');
             const responseContent = document.getElementById('ai-response-content');
             const spinner = document.getElementById('ai-loading-spinner');
+            const suggestionsContainer = document.getElementById('ai-suggestions-container');
+
+            // Smart Suggestions Data (Pattern Style)
+            const suggestionsStudent = [
+                { icon: "architecture", label: "Salarii Junior Arhitect", query: "Ce salarii de început au arhitecții în România?" },
+                { icon: "psychology", label: "Șanse Angajare Psihologie", query: "Ce șanse de angajare am în psihologie după facultate?" },
+                { icon: "laptop_mac", label: "Cele mai bune orașe IT", query: "În ce orașe sunt cele mai multe joburi pentru ingineri software junior?" },
+                { icon: "healing", label: "Top Alternative Medicină", query: "Ce alternative am la Medicina, cu profilul meu, dar cu studii mai scurte?" }
+            ];
+
+            const suggestionsAdult = [
+                { icon: "attach_money", label: "Salariu PM Mid-Level", query: "Cât câștigă un project manager mid-level în România?" },
+                { icon: "trending_up", label: "Risc vs Stabilitate Marketing", query: "Cât de riscant e să intru în marketing digital în prezent?" },
+                { icon: "public", label: "Joburi Remote 2026", query: "În ce domenii e cea mai mare cerere de joburi remote?" },
+                { icon: "swap_horiz", label: "Reconversie din Finanțe", query: "Dacă trec din finanțe în data analysis, care e diferența de salariu?" }
+            ];
+
+            function renderSuggestions(audience) {
+                const data = audience === 'adult' ? suggestionsAdult : suggestionsStudent;
+                suggestionsContainer.innerHTML = data.map(item => `
+                    <button onclick="quickQuery('${item.query}')" 
+                        class="group flex items-center gap-2 bg-white/50 border border-slate-200 hover:border-primary/50 hover:bg-white pl-2 pr-3 py-1.5 rounded-full text-xs font-medium text-slate-600 transition-all hover:-translate-y-0.5 shadow-sm">
+                        <span class="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-primary/10 text-slate-500 group-hover:text-primary flex items-center justify-center transition-colors">
+                            <span class="material-symbols-rounded text-[14px]">${item.icon}</span>
+                        </span>
+                        <span>${item.label}</span>
+                    </button>
+                `).join('');
+            }
+
+            // Init Suggestions
+            renderSuggestions('student');
+
+            // Listen for Audience Toggle (if available)
+            document.addEventListener('audienceChanged', (e) => {
+                renderSuggestions(e.detail.audience); // 'student' or 'adult'
+            });
 
             function quickQuery(text) {
                 marketInput.value = text;
