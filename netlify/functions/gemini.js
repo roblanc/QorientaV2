@@ -26,8 +26,8 @@ exports.handler = async function (event, context) {
             };
         }
 
-        // Call Google Gemini API (Using stable gemini-pro)
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+        // Call Google Gemini API (Try gemini-1.5-flash first)
+        let response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -45,10 +45,27 @@ exports.handler = async function (event, context) {
             })
         });
 
-        const data = await response.json();
+        let data = await response.json();
+
+        // If 1.5-flash fails (e.g. model not found), try fallback to gemini-pro
+        if (data.error) {
+            console.log("Gemini 1.5 Flash failed, trying fallback to gemini-pro...", data.error);
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: `Ești un expert în piața muncii. Răspunde scurt la: "${query}". Format HTML simplu cu Tailwind.`
+                        }]
+                    }]
+                })
+            });
+            data = await response.json();
+        }
 
         if (data.error) {
-            return { statusCode: 502, body: JSON.stringify({ error: { message: data.error.message || "Gemini API Error" } }) };
+            return { statusCode: 502, body: JSON.stringify({ error: { message: data.error.message || "Gemini API Error (All models failed)" } }) };
         }
 
         return {
