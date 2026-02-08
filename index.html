@@ -1435,10 +1435,9 @@
                 // Show spinner
                 spinner.classList.remove('hidden');
                 responseContent.innerHTML = `
-                    <div class="flex flex-col gap-4">
-                        <div class="h-4 bg-slate-100 rounded w-full animate-pulse"></div>
-                        <div class="h-4 bg-slate-100 rounded w-5/6 animate-pulse"></div>
-                        <div class="h-4 bg-slate-100 rounded w-4/6 animate-pulse"></div>
+                    <div class="flex flex-col items-center justify-center py-8 gap-3">
+                        <progress class="progress progress-primary w-full max-w-xs"></progress>
+                        <p class="text-xs text-slate-400 font-medium animate-pulse">Analizăm piața muncii...</p>
                     </div>
                 `;
 
