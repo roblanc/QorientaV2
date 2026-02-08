@@ -26,7 +26,7 @@ exports.handler = async function (event, context) {
             };
         }
 
-        // Call Google Gemini API (Try gemini-2.5-flash as seen in dashboard, using v1beta)
+        // Call Google Gemini API - using gemini-2.5-flash (stable)
         let response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -60,16 +60,16 @@ exports.handler = async function (event, context) {
 
         let data = await response.json();
 
-        // Fallback to gemini-1.5-flash if 2.5 fails
+        // Fallback to gemini-2.5-flash-lite if primary fails
         if (data.error) {
-            console.log("Gemini 2.5 Flash failed, trying fallback to gemini-1.5-flash...", data.error);
-            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+            console.log("Gemini 2.5 Flash failed, trying fallback to gemini-2.5-flash-lite...", data.error);
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     contents: [{
                         parts: [{
-                            text: `Ești un expert în piața muncii. Răspunde scurt la: "${query}". Format HTML simplu cu Tailwind.`
+                            text: `Ești un expert în piața muncii. Răspunde scurt la: "${query}". Format HTML simplu cu clase Tailwind pentru text (text-slate-800, font-bold, etc). Fără carduri sau borduri.`
                         }]
                     }]
                 })
