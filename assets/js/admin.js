@@ -26,15 +26,7 @@ function esc(str) {
 // --- Initialization ---
 // Attach event listeners FIRST (synchronous), then do async Supabase work.
 // This ensures the form always responds, even if Supabase is slow/down.
-function setupListeners() {
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) loginForm.addEventListener('submit', handleLogin);
-
-
-
-
-}
-
+// --- Initialization ---
 async function initAdmin() {
     try {
         // Initialize Supabase
@@ -43,70 +35,29 @@ async function initAdmin() {
         // Check for existing session
         const { data: { session } } = await supabase.auth.getSession();
 
-        if (session) {
-            console.log("Admin: Session found.", session.user.email);
-            showDashboard(session.user);
-        } else {
-            console.log("Admin: No session, showing login.");
-            showLogin();
+        if (!session) {
+            console.log("Admin: No session, redirecting to login.");
+            window.location.href = 'login.html';
+            return;
         }
+
+        console.log("Admin: Session found.", session.user.email);
+        showDashboard(session.user);
     } catch (err) {
         console.error('Supabase init error:', err);
-        showLogin();
+        window.location.href = 'login.html';
     }
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        setupListeners();
-        initAdmin();
-    });
+    document.addEventListener('DOMContentLoaded', initAdmin);
 } else {
-    setupListeners();
     initAdmin();
 }
 
 // --- Auth ---
-async function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorMsg = document.getElementById('login-error');
-    const submitBtn = e.target.querySelector('button');
-
-    try {
-        if (!supabase) {
-            throw new Error('Conexiunea la server nu este disponibilă. Reîncarcă pagina și încearcă din nou.');
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Se verifică...';
-
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        });
-
-        if (error) throw error;
-
-        showDashboard(data.user);
-
-    } catch (err) {
-        console.error('Login failed:', err);
-
-        let message = 'A apărut o eroare la conectare.';
-        if (err.message && (err.message.includes('Invalid login credentials') || err.message.includes('invalid_grant'))) {
-            message = 'Email sau parolă incorectă. Te rugăm să verifici datele.';
-        } else if (err.message) {
-            message = err.message;
-        }
-
-        errorMsg.textContent = message;
-        errorMsg.classList.remove('hidden');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Intră în cont';
-    }
-}
+// Login logic is now handled in login.html inline script or separate file
+// We only keep Logout here
 
 async function handleLogout() {
     console.log("Logout initiated...");
@@ -119,37 +70,17 @@ async function handleLogout() {
     localStorage.clear();
     sessionStorage.clear();
 
-    // Force UI update immediately
-    document.getElementById('dashboard-section').classList.add('hidden');
-    document.getElementById('login-section').classList.remove('hidden');
-
-    // Reload page to ensure clean state
-    window.location.reload();
+    // Redirect to login
+    window.location.href = 'login.html';
 }
 window.handleLogout = handleLogout;
-
-function forceLogout() {
-    console.log("Forcing logout...");
-    localStorage.clear();
-    sessionStorage.clear();
-    document.cookie.split(";").forEach(function (c) {
-        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-    window.location.reload();
-}
-window.forceLogout = forceLogout;
-
-
-
-function showLogin() {
-    document.getElementById('login-section').classList.remove('hidden');
-    document.getElementById('dashboard-section').classList.add('hidden');
-}
+window.forceLogout = handleLogout; // Alias for safety
 
 function showDashboard(user) {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('dashboard-section').classList.remove('hidden');
-    document.getElementById('user-email').textContent = user.email;
+    // Only dashboard logic remains
+    // Remove login section toggles as they don't exist in new admin.html structure
+    const userEmailEl = document.getElementById('user-email');
+    if (userEmailEl) userEmailEl.textContent = user.email;
 
     loadLeads();
     loadMessages();
