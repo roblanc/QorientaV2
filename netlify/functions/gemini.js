@@ -5,6 +5,8 @@ exports.handler = async function (event, context) {
     }
 
     const API_KEY = process.env.GEMINI_API_KEY;
+    console.log("Function invoked. Checking credentials..."); // Force redeploy to pick up new env vars
+
     if (!API_KEY) {
         // Return error in the format frontend expects (data.error.message)
         return {
