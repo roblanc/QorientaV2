@@ -1,5 +1,5 @@
 /**
- * Lead Capture for QOrienta
+ * Lead Capture for Orienta
  * Captează email + nume din hero, oferă ebook gratuit,
  * apoi redirectionează spre quiz.
  */

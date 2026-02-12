@@ -1,7 +1,6 @@
 /**
- * Global Theme Manager for QOrienta v2
- * 5 teme complete — fiecare controleaza intregul site:
- * primary, accent, background, gradients, aurora blobs.
+ * Global Theme Manager for Orienta v2.
+ * Prioritate client: Royal, Midnight, Ocean.
  */
 
 const themes = {
@@ -73,6 +72,7 @@ const themes = {
 };
 
 const THEME_KEY = 'qorienta_theme_v2';
+const THEME_ORDER = ['Royal', 'Midnight', 'Ocean', 'Sunset', 'Forest'];
 
 function applyTheme(themeName) {
     const theme = themes[themeName] || themes['Royal'];
@@ -116,7 +116,7 @@ function renderThemeToggle(containerId) {
 
     const currentTheme = getSavedTheme();
 
-    Object.keys(themes).forEach(name => {
+    THEME_ORDER.filter(name => themes[name]).forEach(name => {
         const t = themes[name];
         const option = document.createElement('button');
         const isActive = name === currentTheme;

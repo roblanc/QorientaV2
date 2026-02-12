@@ -1,5 +1,5 @@
 /**
- * Audience Segmentation for QOrienta
+ * Audience Segmentation for Orienta
  * Toggle intre "student" (elevi + parinti) si "adult" (reconversie profesionala).
  * Persistat in localStorage, poate fi setat si via URL param: ?audience=adult
  */

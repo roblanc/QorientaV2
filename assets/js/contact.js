@@ -1,5 +1,5 @@
 /**
- * Contact Form Logic for QOrienta
+ * Contact Form Logic for Orienta
  * Sends messages to Supabase 'messages' table
  */
 
