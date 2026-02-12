@@ -238,49 +238,6 @@
 
 
 
-        <!-- Section 6: Explorer Extracted (From Upload) -->
-        <div class="mb-20">
-            <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #3: Explorer
-                Extracted (From Upload)</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 hover:opacity-100 transition-opacity"
-                id="extracted-logos-grid">
-                <!-- JS Populated -->
-            </div>
-            <script>
-                const extractedGrid = document.getElementById('extracted-logos-grid');
-                extractedGrid.className = "grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 hover:opacity-100 transition-opacity";
-                const rejectedIds = [1, 2, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
-                for (let i = 1; i <= 20; i++) {
-                    if (rejectedIds.includes(i)) continue;
-
-                    const div = document.createElement('div');
-                    div.className = "group bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-2xl hover:hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500 transition-all relative overflow-hidden flex flex-col justify-between h-full";
-
-                    div.innerHTML = `
-                        <div onclick="setSiteLogo('explorer_extracted_${i}', this)" class="cursor-pointer">
-                            <div class="aspect-square flex items-center justify-center mb-4">
-                                <img src="assets/logos/generated/extracted/extracted_logo_${i}.png"
-                                    class="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <div class="text-center">
-                                <span class="text-xs font-bold text-slate-500">Extracted #${i}</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex flex-col items-center gap-2 w-full">
-                            <button onclick="voteFor('explorer_extracted_${i}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg mb-1">
-                                Votează
-                            </button>
-                            <button onclick="setSiteLogo('explorer_extracted_${i}', this)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl text-center text-xs font-bold transition-all">
-                                Setează Logo
-                            </button>
-                        </div>
-                    `;
-                    extractedGrid.appendChild(div);
-                }
-            </script>
-        </div>
-
         <!-- Section 7: Child & Bear (New Generated Concepts) -->
         <div class="mb-20">
             <h2 class="text-xl font-bold text-emerald-900 mb-6 border-b border-emerald-100 pb-2">Concept #4: Child &
