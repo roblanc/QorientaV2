@@ -137,8 +137,8 @@
 
   <style>
     .font-display {
-            font-family: 'Fraunces', serif !important;
-        }
+      font-family: 'Fraunces', serif !important;
+    }
 
     /* Animated Border Effect */
     .btn-animated {
@@ -193,9 +193,58 @@
     <div class="aurora-blob-2 animate-float" style="animation-delay: -3s;"></div>
   </div>
 
-  <!-- Navigation (Hidden on Intro) -->
+  <!-- Standard Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div id="logo-icon-wrapper"
+          class="w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-110">
+          <img src="assets/logos/generated/child_bear/child_book_1.png"
+            class="w-full h-full object-contain filter drop-shadow-sm">
+        </div>
+        <div class="flex flex-col justify-center">
+          <span class="font-display font-bold text-2xl  text-primary transition-colors leading-none">Orienta</span>
+          <span class="text-[10px] md:text-xs text-slate-500 font-medium tracking-wide">Drumul. Căutările.
+            Orientarea.</span>
+        </div>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex gap-8 items-center">
+        <a href="index.html" class="text-sm font-bold text-primary transition-colors">Acasă</a>
+        <a href="about.html" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Despre
+          noi</a>
+        <a href="team.html" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Echipă</a>
+        <a href="pricing.html" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Pachete</a>
+        <a href="quiz.html" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Test
+          vocațional demo</a>
+        <a href="index.html#ce-spun-oamenii"
+          class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Ce
+          spun oamenii?</a>
+      </div>
+
+      <!-- CTA & Mobile Button -->
+      <div class="flex items-center gap-4">
+        <!-- Theme Switcher removed as per client request <div id="nav-theme-toggle" class="relative"></div> -->
+
+        <a href="quiz.html"
+          class="hidden lg:inline-flex bg-primary text-white px-6 py-2.5 rounded-full font-display font-bold text-sm hover:scale-105 hover:shadow-lg hover:shadow-primary/30 transition-all btn-animated">
+          Începe Gratuit
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn"
+          class="lg:hidden w-10 h-10 flex items-center justify-center text-primary hover:text-primary-light transition-colors">
+          <span class="material-symbols-rounded text-3xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Quiz Sub-Navigation (Hidden on Intro) -->
   <nav id="quiz-nav"
-    class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-50 transition-all duration-300 hidden">
+    class="fixed top-20 w-full z-40 bg-white/95 backdrop-blur-md border-b border-slate-50 transition-all duration-300 hidden">
     <div class="max-w-xl mx-auto px-4 h-14 flex items-center justify-between relative">
 
       <!-- Back Button -->
@@ -211,12 +260,14 @@
           class="text-xs font-bold text-primary tracking-widest uppercase opacity-80">Personalitate</span>
       </div>
 
-      <!-- Settings / Home Icon -->
-      <a href="index.html"
-        class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-primary transition-colors"
-        title="Înapoi la meniul principal">
-        <span class="material-symbols-rounded">home</span>
-      </a>
+      <!-- Spacer to balance Back Button -->
+      <!-- <div class="w-10"></div> -->
+      <!-- Actually, remove home button completely and let justify-between handle it or add spacer if needed -->
+      <!-- Original structure was flex items-center justify-between. The Back btn is first. The Title is absolute centered. The Home btn was last. -->
+      <!-- So we need an invisible element to balance if it's flex, but since title is absolute, we don't need to balance it for centering. -->
+      <!-- But justify-between puts space between children. If only one child (back btn), it's at start. -->
+      <!-- We can just leave it empty or remove the flex justification logic if not needed, but safe to add spacer -->
+      <div class="w-10"></div>
     </div>
 
     <!-- Progress Steps (SmartyMe Style) -->
@@ -679,7 +730,8 @@
             <div class="flex items-center gap-2 mb-2">
               <span class="text-xl">⭐⭐⭐⭐⭐</span>
             </div>
-            <p class="text-slate-600 text-sm italic mb-2">"Specialiștii sunt extraordinari! Am primit sfaturi practice și
+            <p class="text-slate-600 text-sm italic mb-2">"Specialiștii sunt extraordinari! Am primit sfaturi practice
+              și
               aplicabile imediat."</p>
             <p class="text-slate-400 text-xs">— Andrei P., Angajat</p>
           </div>
@@ -733,6 +785,48 @@
       })();
   </script>
   <script src="assets/js/theme.js"></script>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-[9999] bg-white transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center gap-8">
+    <button id="close-menu-btn" class="absolute top-6 right-6 p-2 text-slate-500 hover:text-red-500">
+      <span class="material-symbols-rounded text-4xl">close</span>
+    </button>
+    <a href="index.html" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Acasă</a>
+    <a href="about.html" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Despre noi</a>
+    <a href="team.html" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Echipă</a>
+    <a href="pricing.html" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Pachete</a>
+    <a href="quiz.html" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Test vocațional demo</a>
+    <a href="index.html#ce-spun-oamenii" class="text-2xl font-bold text-slate-800 hover:text-primary transition-colors"
+      onclick="toggleMobileMenu()">Ce spun oamenii?</a>
+    <div class="h-px w-24 bg-slate-200 my-2"></div>
+    <a href="quiz.html"
+      class="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg shadow-primary/30 hover:scale-105 transition-transform">Începe
+      Gratuit</a>
+  </div>
+
+  <script>
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function toggleMobileMenu() {
+      if (mobileMenu) {
+        mobileMenu.classList.toggle('translate-x-full');
+        const isOpen = !mobileMenu.classList.contains('translate-x-full');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+  </script>
 </body>
 
 </html>
